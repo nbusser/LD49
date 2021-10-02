@@ -32,7 +32,7 @@ func _ready():
 	generate_line(secondary_buffer, secondary_line)
 	secondary_generated = true
 	primary_length = primary_buffer.curve.get_baked_length()
-	x_in_buffer = 0
+	x_in_buffer = 2000
 	next_buffer_offset = 1
 
 
