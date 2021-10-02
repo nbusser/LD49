@@ -9,7 +9,7 @@ var secondary_generated: bool
 
 var next_buffer_offset
 var x_in_buffer
-
+var speed = 100
 
 func _ready():
 	primary_wave.init($WaveGenerator.generate_buffer())
@@ -38,7 +38,7 @@ func player_move_checks():
 
 func _process(delta):
 	$Player.position = Vector2(primary_wave.interpolate_baked(x_in_buffer))
-	x_in_buffer += 40*delta
+	x_in_buffer += speed*delta
 	player_move_checks()
 	
 	var closest = primary_wave.curve.get_closest_point($Player.position + Vector2(35, 0) - primary_wave.global_position)
