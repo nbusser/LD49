@@ -6,12 +6,19 @@ onready var world = get_parent()
 onready var cannon = $cannon
 onready var cannon_sprite = $cannon/cannon
 onready var projectile_origin = $cannon/projectile_origin
+onready var sails = [$ship/sail, $ship/sail2, $ship/sail3, $ship/sail4, $ship/sail5]
+onready var flag = $ship/flag
 
 var can_shoot = true
 const SHOOT_COOLDOWN = 0.3
 
+export var sail_color = Color("dbdbdb")
+export var flag_color = Color("dbc954")
+
 func _ready():
-	pass
+	for sail in sails:
+		sail.color = sail_color
+	flag.color = flag_color
 
 func _input(event):
 	if event.is_action_pressed("shoot"):
