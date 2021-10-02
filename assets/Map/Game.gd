@@ -34,14 +34,11 @@ func _ready():
 	primary_length = primary_buffer.curve.get_baked_length()
 	x_in_buffer = 0
 	next_buffer_offset = 1
-	$Sprite.position.y = 400
-	$Sprite.position.x =0
-	print(Globals.buffer_size.x)
 
 
 func player_move_checks():
 	if (!secondary_generated):
-		if (($Player.position.x - (next_buffer_offset-1)*Globals.buffer_size.x) > sight_loss_distance):
+		if (($Player.position.x - (next_buffer_offset-1)*Globals.buffer_size.x) > 2*sight_loss_distance):
 			secondary_generated = true
 			secondary_buffer = $WaveGenerator.generate_buffer()
 			secondary_line.position.x = next_buffer_offset*Globals.buffer_size.x
