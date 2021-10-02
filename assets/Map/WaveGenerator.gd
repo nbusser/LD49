@@ -2,6 +2,7 @@ extends Node2D
 
 onready var previous_buffer_last_point = (2/3)*Globals.buffer_size
 var next_y = 0
+var next_buffer_second_point = Vector2(100, 460)
 
 
 func _ready():
@@ -45,12 +46,12 @@ func generate_buffer():
 	var curve = path.curve
 	
 	curve.clear_points()
-	var init_control = get_control(previous_buffer_last_point - Vector2(Globals.buffer_size.x, 0), Vector2(0, 0))
+	var init_control = get_control(previous_buffer_last_point - Vector2(Globals.buffer_size.x, 0), next_buffer_second_point)
 	curve.add_point(Vector2(0, next_y), -init_control, init_control)
-	curve.add_point(Vector2(get_shift_x(), next_y))
+	curve.add_point(next_buffer_second_point)
 	
-	# 0.92: avoid generating the last point too close to the border
-	while curve.get_point_position(curve.get_point_count() - 1).x < 0.92*Globals.buffer_size.x:
+	# 0.96: avoid generating the last point too close to the border
+	while curve.get_point_position(curve.get_point_count() - 1).x < 0.96*Globals.buffer_size.x:
 		add_point(curve)
 	
 	previous_buffer_last_point = curve.get_point_position(curve.get_point_count() - 1)
@@ -61,5 +62,7 @@ func generate_buffer():
 	curve.set_point_out(curve.get_point_count() - 1, control)
 	
 	curve.add_point(Vector2(Globals.buffer_size.x, next_y))
+	
+	next_buffer_second_point = Vector2(get_shift_x(), next_y + get_shift_y())
 	
 	return path
