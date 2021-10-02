@@ -45,4 +45,7 @@ func _process(delta):
 	var rot = closest.angle_to_point($Player.position - primary_wave.global_position)
 	rot = max(-1.0, rot)
 	rot = min(1.0, rot)
-	$Player.rotation = lerp($Player.rotation, rot, 5*delta)
+	$Player/ship.rotation = lerp($Player/ship.rotation, rot, 5*delta)
+	
+	# TODO: if tempête, caméra bourrée en faisant
+	# $Player.rotation = lerp($Player.rotation, rot, 5*delta)
