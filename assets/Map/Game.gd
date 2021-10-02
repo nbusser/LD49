@@ -1,55 +1,48 @@
 extends Node2D
 
-onready var Wave = preload("res://assets/Map/Wave.tscn")
-var player_speed = 250
-var x_in_buffer = 0
 
-var current_point_index
-onready var max_screen_width = get_viewport_rect().size.x * Globals.MAX_UNZOOM
-var waves = []
+onready var sight_loss_distance = 0.5*get_viewport_rect().size.x*Globals.MAX_UNZOOM
+
+onready var primary_wave = $Wave0
+onready var secondary_wave = $Wave1
+var secondary_generated: bool
+
+var next_buffer_offset
+var x_in_buffer
+
 
 func _ready():
-	var current_wave = Wave.instance()
-	current_wave.init($WaveGenerator.generate_buffer())
-	$Waves.add_child(current_wave)
-	
-	var i = 0
-	var baked = current_wave.get_node("WavePath").curve.get_baked_points()
-	while baked[i].x < $Player.position.x:
-		i += 1
-	current_point_index = i
-	
-	var future_wave = Wave.instance()
-	future_wave.init($WaveGenerator.generate_buffer())
-	future_wave.position.x = current_wave.get_last_point().x
-	$Waves.add_child(future_wave)
+	primary_wave.init($WaveGenerator.generate_buffer())
+	secondary_wave.init($WaveGenerator.generate_buffer())
+	secondary_wave.position.x = Globals.buffer_size.x
+	secondary_generated = true
+	x_in_buffer = 2000
+	next_buffer_offset = 1
 
-	waves.append(null)
-	waves.append(current_wave)
-	waves.append(future_wave)
-	
-func _process(delta):
-	$Player.position = waves[1].interpolate_baked(x_in_buffer)
-	x_in_buffer += delta*player_speed
-	
-	if x_in_buffer >= waves[1].curve.get_baked_length():
-		discard_old_wave()
+
+func player_move_checks():
+	if (!secondary_generated):
+		if (($Player.position.x - (next_buffer_offset-1)*Globals.buffer_size.x) > 2*sight_loss_distance):
+			secondary_generated = true
+			secondary_wave.init($WaveGenerator.generate_buffer())
+			secondary_wave.position.x = next_buffer_offset*Globals.buffer_size.x
+	elif (x_in_buffer > primary_wave.get_len()):
+		next_buffer_offset += 1
+		secondary_generated = false
 		x_in_buffer = 0
 		
-	var closest = waves[1].curve.get_closest_point($Player.position + Vector2(35, 0) - waves[1].global_position)
-	var rot = closest.angle_to_point($Player.position - waves[1].global_position)
+		var tmp_wave = primary_wave
+		primary_wave = secondary_wave
+		secondary_wave = tmp_wave
+
+
+func _process(delta):
+	$Player.position = Vector2(primary_wave.interpolate_baked(x_in_buffer))
+	x_in_buffer += 8
+	player_move_checks()
+	
+	var closest = primary_wave.curve.get_closest_point($Player.position + Vector2(35, 0) - primary_wave.global_position)
+	var rot = closest.angle_to_point($Player.position - primary_wave.global_position)
 	rot = max(-1.0, rot)
 	rot = min(1.0, rot)
-	$Player.rotation = lerp($Player.rotation, rot, 0.001)
-
-func discard_old_wave():
-	var old_wave = waves.pop_front()
-	if old_wave != null:
-		$Waves.remove_child(old_wave)
-		
-	var future_wave = Wave.instance()
-	future_wave.init($WaveGenerator.generate_buffer())
-	future_wave.position.x = waves[1].get_last_point().x
-	$Waves.add_child(future_wave)
-	
-	waves.append(future_wave)
+	$Player.rotation = lerp($Player.rotation, rot, 0.5*delta)
