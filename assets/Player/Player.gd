@@ -14,7 +14,7 @@ var shot_loading = false
 var shot_start_time
 const SHOOT_COOLDOWN = 0.5
 
-const DEFAULT_SPEED = 100
+const DEFAULT_SPEED = 800
 var speed = DEFAULT_SPEED
 
 export var sail_color = Color("dbdbdb")
@@ -100,9 +100,7 @@ func shoot():
 	# TODO Vector2(speed, 0) not ok
 	var shoot_velocity = shoot_dir * 500 * (0.5 + clamp(loading_time, 0, 3.0)/3) + Vector2(speed, 0)
 	var projectile = Projectile.instance()
-	projectile.global_transform.origin = shoot_origin
-	projectile.linear_velocity = shoot_velocity
-	world.emit_signal("spawn_cannonball", projectile)
+	world.emit_signal("spawn_cannonball", projectile, shoot_origin, shoot_velocity)
 	
 	$Camera2D.add_trauma(0.5)
 	

@@ -1,6 +1,6 @@
 extends Node2D
 
-signal spawn_cannonball(projectile)
+signal spawn_cannonball(projectile, shoot_origin, shoot_velocity)
 
 onready var sight_loss_distance = 1.2*get_viewport_rect().size.x*Globals.MAX_UNZOOM
 
@@ -46,11 +46,14 @@ func _process(delta):
 	rot = clamp(rot, -1.0, 1.0)
 	$Player/ship.rotation = lerp($Player/ship.rotation, rot, 10*delta)
 	
+	
 	# TODO: if tempête, caméra bourrée en faisant
 	# $Player.rotation = lerp($Player.rotation, rot, 5*delta)
 
 
-func _on_Map_spawn_cannonball(projectile):
+func _on_Map_spawn_cannonball(projectile, shoot_origin, shoot_velocity):
 	$Projectiles.add_child(projectile)
+	projectile.global_transform.origin = shoot_origin
+	projectile.linear_velocity = shoot_velocity
 	yield(get_tree().create_timer(45), "timeout")
 	projectile.queue_free()

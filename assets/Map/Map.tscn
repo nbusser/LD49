@@ -19,5 +19,3 @@ script = ExtResource( 3 )
 [node name="Projectiles" type="Node2D" parent="."]
 
 [connection signal="spawn_cannonball" from="." to="." method="_on_Map_spawn_cannonball"]
-
-[editable path="Wave0"]
