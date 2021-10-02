@@ -1,11 +1,9 @@
 extends Node2D
 
-onready var curve = $WavePath.curve
 onready var buffer_size = 1.5 * get_viewport_rect().size * Globals.MAX_UNZOOM
 
 onready var previous_buffer_last_point = (2/3)*buffer_size
 var next_y = 0
-
 
 func _ready():
 	pass
@@ -20,13 +18,12 @@ func get_control(previous, new):
 func get_shift_x():
 	return 100
 
-
 func get_shift_y():
 	return (randi()%200-100)
 
 
 # TODO constraint waves
-func add_point():
+func add_point(curve):
 	var points_count = curve.get_point_count()
 	var previous = curve.get_point_position(points_count - 2)
 	var current = curve.get_point_position(points_count - 1)
@@ -42,6 +39,8 @@ func add_point():
 
 
 func generate_buffer():
+	var curve = Curve2D.new()
+
 	curve.clear_points()
 	var init_control = get_control(previous_buffer_last_point - Vector2(buffer_size.x, 0), Vector2(0, 0))
 	curve.add_point(Vector2(0, next_y), -init_control, init_control)
@@ -49,7 +48,7 @@ func generate_buffer():
 	
 	# 0.96: avoid generating the last point too close to the border
 	while curve.get_point_position(curve.get_point_count() - 1).x < 0.9*buffer_size.x:
-		add_point()
+		add_point(curve)
 
 	previous_buffer_last_point = curve.get_point_position(curve.get_point_count() - 1)
 	next_y = previous_buffer_last_point.y + get_shift_y()
@@ -58,4 +57,4 @@ func generate_buffer():
 	curve.set_point_in(curve.get_point_count() - 1, -control)
 	curve.set_point_out(curve.get_point_count() - 1, control)
 		
-	return curve.get_baked_points()
+	return curve

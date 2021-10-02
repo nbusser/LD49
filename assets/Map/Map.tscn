@@ -11,4 +11,4 @@ script = ExtResource( 3 )
 
 [node name="WaveGenerator" parent="." instance=ExtResource( 1 )]
 
-[node name="WaveLines" type="Node2D" parent="."]
+[node name="Waves" type="Node2D" parent="."]

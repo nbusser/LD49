@@ -1,24 +1,54 @@
 extends Node2D
 
+onready var Wave = preload("res://assets/Map/Wave.tscn")
 var player_speed = 10
 
 var current_point_index
-var current_buffer_wave
 onready var max_screen_width = get_viewport_rect().size.x * Globals.MAX_UNZOOM
-
-var buffers = []
-var buffer_line_dict = {}
+var waves = []
 
 func _ready():
-	var buffer = $WaveGenerator.generate_buffer()
-	self.create_wave_line(buffer)
-	buffers.append(buffer)
-
-func create_wave_line(buffer):
-	var line_buffer = Line2D.new()
-	buffer_line_dict[buffer] = line_buffer
-	$WaveLines.add_child(line_buffer)
+	var current_wave = Wave.instance()
+	current_wave.init($WaveGenerator.generate_buffer())
+	$Waves.add_child(current_wave)
 	
-	for p in buffer:
-		line_buffer.add_point(p)
+	var i = 0
+	var baked = current_wave.get_node("WavePath").curve.get_baked_points()
+	while baked[i].x < $Player.position.x:
+		i += 1
+	current_point_index = i
+	
+	var future_wave = Wave.instance()
+	future_wave.init($WaveGenerator.generate_buffer())
+	future_wave.position.x = current_wave.get_last_point().x
+	$Waves.add_child(future_wave)
 
+	waves.append(null)
+	waves.append(current_wave)
+	waves.append(future_wave)
+	
+func _process(delta):
+	movePlayer(delta)
+
+func discard_old_wave():
+	var old_wave = waves.pop_front()
+	if old_wave != null:
+		$Waves.remove_child(old_wave)
+		
+	var future_wave = Wave.instance()
+	future_wave.init($WaveGenerator.generate_buffer())
+	future_wave.position.x = waves[1].get_last_point().x
+	$Waves.add_child(future_wave)
+	
+	waves.append(future_wave)
+
+func movePlayer(delta):
+	var point_to_go = waves[1].get_point(current_point_index)
+	$Player.position = point_to_go
+
+	if abs($Player.position.x - point_to_go.x) < 0.05:
+		current_point_index += 1
+		
+		if current_point_index >= waves[1].get_len_points():
+			discard_old_wave()
+			current_point_index = 0
