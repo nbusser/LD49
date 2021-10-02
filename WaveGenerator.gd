@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var curve = $WavePath.curve
-onready var buffer_size = 1.5 * get_viewport_rect().size
+onready var buffer_size = 1.5 * get_viewport_rect().size * Globals.MAX_UNZOOM
 
 onready var previous_buffer_last_point = (2/3)*buffer_size
 var next_y = 0 # TODO: utiliser
