@@ -1,7 +1,7 @@
 extends Node2D
 
 
-onready var sight_loss_distance = get_viewport_rect().size.x*Globals.MAX_UNZOOM
+onready var sight_loss_distance = 1.2*get_viewport_rect().size.x*Globals.MAX_UNZOOM
 
 onready var primary_wave = $Wave0
 onready var secondary_wave = $Wave1
