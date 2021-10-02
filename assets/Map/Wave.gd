@@ -5,8 +5,13 @@ var curve: Curve2D
 func init(curve):
 	$WavePath.curve = curve
 	$WaveLine.clear_points()
-	for p in $WavePath.curve.get_baked_points():
+	var baked = $WavePath.curve.get_baked_points()
+	for p in baked:
 		$WaveLine.add_point(p)
+	baked.push_back(Vector2(Globals.buffer_size.x, 2000))
+	baked.push_back(Vector2(0, 2000))
+	baked.push_back(Vector2(0, baked[0].y))
+	$Polygon2D.set_polygon(baked)
 	self.curve = curve
 
 func get_last_point():

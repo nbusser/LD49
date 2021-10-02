@@ -3,7 +3,7 @@ extends Node2D
 onready var previous_buffer_last_point = (2/3)*Globals.buffer_size
 
 var next_y = 0
-var next_buffer_second_point = Vector2(200, 460)
+var next_buffer_second_point = Vector2(300, 460)
 
 func _ready():
 	pass
@@ -16,7 +16,7 @@ func get_control(previous, new):
 
 
 func get_shift_x():
-	return 200
+	return 300
 
 
 func get_shift_y():
