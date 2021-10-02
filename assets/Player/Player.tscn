@@ -61,6 +61,5 @@ scale = Vector2( 0.820261, 0.59334 )
 
 [node name="flag" parent="ship" instance=ExtResource( 4 )]
 position = Vector2( -68.3741, -526.036 )
-scale = Vector2( 1, 1 )
 
 [node name="tween" type="Tween" parent="."]

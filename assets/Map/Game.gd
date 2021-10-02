@@ -37,7 +37,7 @@ func _process(delta):
 		x_in_buffer = 0
 		
 	var closest = waves[1].curve.get_closest_point($Player.position + Vector2(35, 0) - waves[1].global_position)
-	var rot = closest.angle_to_point($Player.position)
+	var rot = closest.angle_to_point($Player.position - waves[1].global_position)
 	rot = max(-1.0, rot)
 	rot = min(1.0, rot)
 	$Player.rotation = lerp($Player.rotation, rot, 0.01)
