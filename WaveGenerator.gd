@@ -51,13 +51,12 @@ func add_point():
 
 func generate_buffer():
 	curve.clear_points()
-	var init0_control = get_control(previous_buffer_last_point - Vector2(buffer_size.x, 0), Vector2(0, 0))
-	var init_y = previous_buffer_last_point.y + get_shift_y()
-	curve.add_point(Vector2(0, init_y), -init0_control, init0_control)
-	curve.add_point(Vector2(get_shift_x(), init_y + get_shift_y()))
+	var init_control = get_control(previous_buffer_last_point - Vector2(buffer_size.x, 0), Vector2(0, 0))
+	curve.add_point(Vector2(0, next_y), -init_control, init_control)
+	curve.add_point(Vector2(get_shift_x(), next_y))
 	
 	# 0.96: avoid generating the last point too close to the border
-	while curve.get_point_position(curve.get_point_count() - 1).x < 0.96*buffer_size.x:
+	while curve.get_point_position(curve.get_point_count() - 1).x < 0.9*buffer_size.x:
 		add_point()
 
 	previous_buffer_last_point = curve.get_point_position(curve.get_point_count() - 1)
