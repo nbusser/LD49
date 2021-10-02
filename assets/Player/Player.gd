@@ -96,6 +96,8 @@ func shoot():
 	projectile.global_transform.origin = shoot_origin
 	projectile.linear_velocity = shoot_velocity
 	
+	$Camera2D.add_trauma(0.5)
+	
 	animate_cannon()
 	
 	can_shoot = false
