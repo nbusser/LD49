@@ -62,4 +62,3 @@ func _process(_delta):
 	$Player.position = Vector2((next_buffer_offset-1)*Globals.buffer_size.x, 0) + primary_buffer.curve.interpolate_baked(x_in_buffer)
 	x_in_buffer += 8
 	player_move_checks()
-	print($Player.position.x)
