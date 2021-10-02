@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/Map/Map.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/Shaders/sky.gdshader" type="Shader" id=2]
+[ext_resource path="res://assets/Game/Background.gd" type="Script" id=3]
+[ext_resource path="res://assets/Map/cloud.svg" type="Texture" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/day_color = Vector3( 0.4, 0.6, 1 )
+shader_param/night_color = Vector3( 0.1, 0.05, 0.3 )
+shader_param/time = 0.5
+
+[sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 2
+emission_box_extents = Vector3( 0, 100, 0 )
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 148.29
+initial_velocity_random = 0.35
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 22.4
+angle_random = 1.0
+scale = 0.5
+scale_random = 1.0
+
+[node name="Node" type="Node"]
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSlider" type="HSlider" parent="Background"]
+margin_left = 9.52438
+margin_top = 559.559
+margin_right = 206.524
+margin_bottom = 592.559
+max_value = 1.0
+step = 0.0
+value = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particles2D" type="Particles2D" parent="Background"]
+position = Vector2( 1237.3, 101.107 )
+amount = 10
+lifetime = 20.0
+speed_scale = 0.4
+visibility_rect = Rect2( -800, -100, 200, 200 )
+process_material = SubResource( 2 )
+texture = ExtResource( 4 )
+
+[node name="Map" parent="." instance=ExtResource( 1 )]
+
+[connection signal="value_changed" from="Background/HSlider" to="Background" method="_on_HSlider_value_changed"]
