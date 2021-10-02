@@ -12,7 +12,7 @@ onready var flag = $ship/flag
 var can_shoot = true
 var shot_loading = false
 var shot_start_time
-const SHOOT_COOLDOWN = 1.0
+const SHOOT_COOLDOWN = 0.5
 
 const DEFAULT_SPEED = 100
 var speed = DEFAULT_SPEED
@@ -110,7 +110,7 @@ func shoot():
 	animate_cannon()
 	
 	can_shoot = false
-	$ShotCooldown.start(1.0 - clamp(loading_time, 0.0, 1.0))
+	$ShotCooldown.start(SHOOT_COOLDOWN - clamp(loading_time, 0.0, SHOOT_COOLDOWN))
 
 func animate_cannon():
 	$Tween.interpolate_property(cannon_sprite, "position",
