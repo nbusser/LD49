@@ -10,12 +10,22 @@ position = Vector2( 0, -274.086 )
 current = true
 zoom = Vector2( 1.5, 1.5 )
 
+[node name="Background" type="ColorRect" parent="Camera2D"]
+margin_left = -768.0
+margin_top = -450.0
+margin_right = 768.0
+margin_bottom = 450.0
+color = Color( 0.439216, 0.627451, 0.796078, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="cannon" type="Sprite" parent="."]
-position = Vector2( 86.5508, -77.057 )
+position = Vector2( 86.5508, -61.057 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 2 )
 
 [node name="ship" type="Sprite" parent="."]
-position = Vector2( 0, -110.568 )
+position = Vector2( 0, -94.568 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 1 )
