@@ -14,13 +14,18 @@ func _ready():
 
 
 func _on_PointSpawner_timeout():
-	var last_point_pos = $WavePath.curve.get_point_position($WavePath.curve.get_point_count() - 1)
-	var last_point_in = $WavePath.curve.get_point_in($WavePath.curve.get_point_count() - 1)
-	var last_point_out = $WavePath.curve.get_point_out($WavePath.curve.get_point_count() - 1)
+	var points_count = $WavePath.curve.get_point_count()
+	var last_point_pos = $WavePath.curve.get_point_position(points_count - 1)
+	var pos = last_point_pos + Vector2(100, randi()%300-150)
 	
-	var pos = last_point_pos + Vector2(35, randi()%50-25)
+	# Insert new point (out of sight)
+	$WavePath.curve.add_point(pos)
 	
-	print(last_point_in)
+	# Adjust controls of the previous point
+	var before_pos = $WavePath.curve.get_point_position(points_count - 2)
+	var angle = (pos - before_pos).angle()
+	var strength = 25 + randi()%50
+	$WavePath.curve.set_point_in(points_count - 1, Vector2(-strength * cos(angle), -strength * sin(angle)))
+	$WavePath.curve.set_point_out(points_count - 1, Vector2(strength * cos(angle), strength * sin(angle)))
 	
-	$WavePath.curve.add_point(pos, last_point_in + Vector2(randi()%20 - 10, randi()%20 - 10), last_point_out + Vector2(randi()%20 - 10, randi()%20 - 10))
 	generate_line()

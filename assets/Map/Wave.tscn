@@ -4,20 +4,21 @@
 
 [sub_resource type="Curve2D" id=1]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 7.46457, 25.5605, -10.0908, 99.2258, 10.0908, -99.2258, 124.333, -38.8667, 0, 0, 0, 0, 273.414, -1.40903, -63.9081, -65.5899, 63.9081, 65.5899, 492.916, -2.1582, -29.4433, -14.8422, 29.4433, 14.8422, 547.604, -96.5515, -69.5653, -2.56637, 69.5653, 2.56637, 649.137, 23.2964, 18.4997, -87.4532, -18.4997, 87.4532, 881.181, -40.9207, 67.2717, -84.0896, -67.2717, 84.0896, 975.129, 10.2152, 0, 0, 0, 0, 1031.02, 47.0806 )
+"points": PoolVector2Array( 0, 0, 0, 0, 7.46457, 25.5605, 0, 0, 0, 0, 124.333, -38.8667 )
 }
 
 [node name="Wave" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="WavePath" type="Path2D" parent="."]
-position = Vector2( 0, 416 )
 curve = SubResource( 1 )
 
 [node name="WaveLine" type="Line2D" parent="."]
-position = Vector2( 0, 400 )
+position = Vector2( 0, 600 )
+points = PoolVector2Array( 451.195, -204.461 )
 
 [node name="PointSpawner" type="Timer" parent="."]
+wait_time = 0.25
 autostart = true
 
 [connection signal="timeout" from="PointSpawner" to="." method="_on_PointSpawner_timeout"]
