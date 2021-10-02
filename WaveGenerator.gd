@@ -6,17 +6,9 @@ onready var buffer_size = 1.5 * get_viewport_rect().size
 onready var previous_buffer_last_point = (2/3)*buffer_size
 var next_y = 0
 
-func generate_line():
-	$WaveLine.clear_points()
-	var points = curve.get_baked_points()
-	for p in points:
-		$WaveLine.add_point(p)
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	generate_buffer()
-	generate_line()
+	pass
 
 
 func get_control(previous, new):
