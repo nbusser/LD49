@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var Wave = preload("res://assets/Map/Wave.tscn")
-var player_speed = 1000
+var player_speed = 250
 var x_in_buffer = 0
 
 var current_point_index
@@ -35,6 +35,12 @@ func _process(delta):
 	if x_in_buffer >= waves[1].curve.get_baked_length():
 		discard_old_wave()
 		x_in_buffer = 0
+		
+	var closest = waves[1].curve.get_closest_point($Player.position + Vector2(35, 0) - waves[1].global_position)
+	var rot = closest.angle_to_point($Player.position)
+	rot = max(-1.0, rot)
+	rot = min(1.0, rot)
+	$Player.rotation = lerp($Player.rotation, rot, 0.01)
 
 func discard_old_wave():
 	var old_wave = waves.pop_front()

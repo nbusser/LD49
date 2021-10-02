@@ -60,5 +60,7 @@ func generate_buffer():
 	var control = get_control(previous_buffer_last_point, Vector2(buffer_size.x, next_y))
 	curve.set_point_in(curve.get_point_count() - 1, -control)
 	curve.set_point_out(curve.get_point_count() - 1, control)
-		
+	
+	curve.add_point(Vector2(buffer_size.x, next_y))
+	
 	return curve
