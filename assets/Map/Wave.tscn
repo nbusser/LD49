@@ -15,9 +15,13 @@ curve = SubResource( 1 )
 
 [node name="WaveLine" type="Line2D" parent="."]
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+space_override = 4
+linear_damp = 2.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+modulate = Color( 0.0666667, 0.0941176, 0.74902, 1 )
+self_modulate = Color( 0.0666667, 0.172549, 0.647059, 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Area2D"]
 color = Color( 0.121569, 0.168627, 0.666667, 1 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
