@@ -98,7 +98,7 @@ func shoot():
 	var shoot_dir = Vector2.RIGHT.rotated(cannon.global_rotation)
 	var loading_time = (OS.get_system_time_msecs() - shot_start_time)/1000.0
 	# TODO Vector2(speed, 0) not ok
-	var shoot_velocity = shoot_dir * 500 * (clamp(loading_time, 0.5, 3.0)/3) + Vector2(speed, 0)
+	var shoot_velocity = shoot_dir * 500 * (0.5 + clamp(loading_time, 0, 3.0)/3) + Vector2(speed, 0)
 	print (loading_time)
 	var projectile = Projectile.instance()
 	world.add_child(projectile)
