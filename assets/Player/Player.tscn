@@ -61,3 +61,7 @@ position = Vector2( -21.5268, -203.771 )
 scale = Vector2( 3, 10 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="ShotCooldown" type="Timer" parent="."]
+
+[connection signal="timeout" from="ShotCooldown" to="." method="_on_ShotCooldown_timeout"]

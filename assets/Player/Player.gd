@@ -10,7 +10,7 @@ onready var sails = [$ship/sail, $ship/sail2, $ship/sail3, $ship/sail4, $ship/sa
 onready var flag = $ship/flag
 
 var can_shoot = true
-const SHOOT_COOLDOWN = 0.3
+const SHOOT_COOLDOWN = 1.0
 
 const DEFAULT_SPEED = 100
 var speed = DEFAULT_SPEED
@@ -46,9 +46,9 @@ func cancel_animations():
 	$Tween.start()
 
 func _input(event):
-	if event.is_action_pressed("shoot"):
+	if event.is_action_pressed("shoot") && can_shoot:
 		shoot()
-		
+	
 	if event.is_action_pressed("Accelerate") and not is_sailing():
 		$Tween.stop_all()
 		
@@ -97,9 +97,16 @@ func shoot():
 	projectile.linear_velocity = shoot_velocity
 	
 	animate_cannon()
+	
+	can_shoot = false
+	$ShotCooldown.start()
 
 func animate_cannon():
-	$tween.interpolate_property(cannon_sprite, "position",
+	$Tween.interpolate_property(cannon_sprite, "position",
 		Vector2(-10, 0), Vector2(0, 0), SHOOT_COOLDOWN,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$tween.start()
+	$Tween.start()
+
+
+func _on_ShotCooldown_timeout():
+	can_shoot = true
