@@ -19,11 +19,6 @@ smoothing_enabled = true
 
 [node name="ship" type="Node2D" parent="."]
 
-[node name="hull" type="Sprite" parent="ship"]
-position = Vector2( 0, -94.568 )
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 1 )
-
 [node name="cannon" type="Node2D" parent="ship"]
 position = Vector2( 86.5508, -61.057 )
 rotation = -0.291666
@@ -34,6 +29,11 @@ texture = ExtResource( 2 )
 
 [node name="projectile_origin" type="Node2D" parent="ship/cannon"]
 position = Vector2( 106.298, 0 )
+
+[node name="hull" type="Sprite" parent="ship"]
+position = Vector2( 0, -94.568 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 1 )
 
 [node name="sail" parent="ship" instance=ExtResource( 7 )]
 position = Vector2( 10.6335, -82.2213 )
