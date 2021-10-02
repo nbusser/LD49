@@ -1,5 +1,6 @@
 extends Node2D
 
+signal spawn_cannonball(projectile)
 
 onready var sight_loss_distance = 1.2*get_viewport_rect().size.x*Globals.MAX_UNZOOM
 
@@ -47,3 +48,9 @@ func _process(delta):
 	
 	# TODO: if tempête, caméra bourrée en faisant
 	# $Player.rotation = lerp($Player.rotation, rot, 5*delta)
+
+
+func _on_Map_spawn_cannonball(projectile):
+	$Projectiles.add_child(projectile)
+	yield(get_tree().create_timer(45), "timeout")
+	projectile.queue_free()
