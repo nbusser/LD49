@@ -10,16 +10,13 @@
 script = ExtResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 0, -274.086 )
+position = Vector2( 0, -173.027 )
 current = true
-zoom = Vector2( 1.5, 1.5 )
 smoothing_enabled = true
 
 [node name="tween" type="Tween" parent="."]
 
 [node name="ship" type="Node2D" parent="."]
-position = Vector2( 0, -5 )
-scale = Vector2( 0.2, 0.2 )
 
 [node name="hull" type="Sprite" parent="ship"]
 position = Vector2( 0, -94.568 )
