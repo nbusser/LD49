@@ -1,7 +1,8 @@
 extends Node2D
 
 onready var Wave = preload("res://assets/Map/Wave.tscn")
-var player_speed = 10
+var player_speed = 1000
+var x_in_buffer = 0
 
 var current_point_index
 onready var max_screen_width = get_viewport_rect().size.x * Globals.MAX_UNZOOM
@@ -28,7 +29,14 @@ func _ready():
 	waves.append(future_wave)
 	
 func _process(delta):
-	movePlayer(delta)
+	#movePlayer(delta)
+	
+	$Player.position = waves[1].interpolate_baked(x_in_buffer)
+	x_in_buffer += delta*player_speed
+	
+	if x_in_buffer >= waves[1].curve.get_baked_length():
+		discard_old_wave()
+		x_in_buffer = 0
 
 func discard_old_wave():
 	var old_wave = waves.pop_front()
@@ -42,7 +50,7 @@ func discard_old_wave():
 	
 	waves.append(future_wave)
 
-func movePlayer(delta):
+func movePlayer(delta):	
 	var point_to_go = waves[1].get_point(current_point_index)
 	$Player.position = point_to_go
 
