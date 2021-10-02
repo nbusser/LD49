@@ -40,7 +40,6 @@ func add_point(curve):
 	curve.set_point_out(points_count - 1, control)
 
 
-
 func generate_buffer():
 	var path = Path2D.new()
 	var curve = path.curve

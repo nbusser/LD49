@@ -34,6 +34,9 @@ func _ready():
 	primary_length = primary_buffer.curve.get_baked_length()
 	x_in_buffer = 0
 	next_buffer_offset = 1
+	$Sprite.position.y = 400
+	$Sprite.position.x =0
+	print(Globals.buffer_size.x)
 
 
 func player_move_checks():
@@ -62,3 +65,4 @@ func _process(_delta):
 	$Player.position = Vector2((next_buffer_offset-1)*Globals.buffer_size.x, 0) + primary_buffer.curve.interpolate_baked(x_in_buffer)
 	x_in_buffer += 8
 	player_move_checks()
+	print($Player.position.x)
