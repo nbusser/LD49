@@ -40,7 +40,7 @@ func _process(delta):
 	var rot = closest.angle_to_point($Player.position - waves[1].global_position)
 	rot = max(-1.0, rot)
 	rot = min(1.0, rot)
-	$Player.rotation = lerp($Player.rotation, rot, 0.01)
+	$Player.rotation = lerp($Player.rotation, rot, 0.001)
 
 func discard_old_wave():
 	var old_wave = waves.pop_front()
