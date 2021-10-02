@@ -29,8 +29,6 @@ func _ready():
 	waves.append(future_wave)
 	
 func _process(delta):
-	#movePlayer(delta)
-	
 	$Player.position = waves[1].interpolate_baked(x_in_buffer)
 	x_in_buffer += delta*player_speed
 	
@@ -49,14 +47,3 @@ func discard_old_wave():
 	$Waves.add_child(future_wave)
 	
 	waves.append(future_wave)
-
-func movePlayer(delta):	
-	var point_to_go = waves[1].get_point(current_point_index)
-	$Player.position = point_to_go
-
-	if abs($Player.position.x - point_to_go.x) < 0.05:
-		current_point_index += 1
-		
-		if current_point_index >= waves[1].get_len_points():
-			discard_old_wave()
-			current_point_index = 0
