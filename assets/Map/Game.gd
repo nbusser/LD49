@@ -38,11 +38,11 @@ func player_move_checks():
 
 func _process(delta):
 	$Player.position = Vector2(primary_wave.interpolate_baked(x_in_buffer))
-	x_in_buffer += 8
+	x_in_buffer += 40*delta
 	player_move_checks()
 	
 	var closest = primary_wave.curve.get_closest_point($Player.position + Vector2(35, 0) - primary_wave.global_position)
 	var rot = closest.angle_to_point($Player.position - primary_wave.global_position)
 	rot = max(-1.0, rot)
 	rot = min(1.0, rot)
-	$Player.rotation = lerp($Player.rotation, rot, 0.5*delta)
+	$Player.rotation = lerp($Player.rotation, rot, 5*delta)

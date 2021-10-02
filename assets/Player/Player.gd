@@ -3,9 +3,9 @@ extends Node2D
 onready var Projectile = preload("res://assets/Projectile/Projectile.tscn")
 
 onready var world = get_parent()
-onready var cannon = $cannon
-onready var cannon_sprite = $cannon/cannon
-onready var projectile_origin = $cannon/projectile_origin
+onready var cannon = $ship/cannon
+onready var cannon_sprite = $ship/cannon/cannon
+onready var projectile_origin = $ship/cannon/projectile_origin
 onready var sails = [$ship/sail, $ship/sail2, $ship/sail3, $ship/sail4, $ship/sail5]
 onready var flag = $ship/flag
 
