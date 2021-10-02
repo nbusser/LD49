@@ -24,11 +24,12 @@ __meta__ = {
 
 [node name="cannon" type="Sprite" parent="."]
 position = Vector2( 86.5508, -61.057 )
+rotation = -0.291666
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 2 )
 
 [node name="projectile_origin" type="Node2D" parent="cannon"]
-position = Vector2( 99.2188, -50.3968 )
+position = Vector2( 106.298, -1.13835 )
 
 [node name="ship" type="Sprite" parent="."]
 position = Vector2( 0, -94.568 )
