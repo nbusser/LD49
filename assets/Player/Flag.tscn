@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/Shaders/wind_cloth.gdshader" type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/time_factor = 4.0
+shader_param/amplitude = Vector2( 5, 5 )
+shader_param/anchor_threshold = -40.0
+shader_param/division = Vector2( 10, 50 )
+
+[node name="Flag" type="Polygon2D"]
+material = SubResource( 1 )
+color = Color( 0.858824, 0.788235, 0.329412, 1 )
+polygon = PoolVector2Array( -41.6812, -21.1316, -25.8677, -28.036, -6.49066, -31.3769, 8.4319, -28.9269, 20.0136, -24.9179, 34.4907, -25.1406, 45.6269, -29.8178, 45.4042, 23.6361, 34.9361, 27.8679, 20.6817, 29.4269, 6.42737, 26.7542, -9.16335, 23.1906, -24.7541, 25.1952, -41.4584, 32.5451 )
