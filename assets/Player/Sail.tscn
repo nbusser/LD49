@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/Shaders/wind_cloth.gdshader" type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/time_factor = 4.0
+shader_param/amplitude = Vector2( 10, 5 )
+shader_param/anchor_threshold = -150.0
+shader_param/division = Vector2( 100, 500 )
+
+[node name="Sail" type="Polygon2D"]
+material = SubResource( 1 )
+color = Color( 0.86, 0.86, 0.86, 1 )
+polygon = PoolVector2Array( 19.2807, -222.784, 77.0214, -199.476, 115.482, -160.022, 141.649, -104.124, 152.959, -40.5208, 141.99, 15.8972, 109.439, 60.7957, 67.3464, 95.592, 9.5396, 131.511, -58.5898, 176.633, -152.512, 228.533, -107.405, 142.319, -78.0124, 74.2651, -63.4204, 4.67244, -55.995, -64.9233, -69.0327, -131.707, -107.758, -184.462, -152.512, -228.611, -59.8526, -228.99 )
