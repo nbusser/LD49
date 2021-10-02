@@ -27,7 +27,7 @@ func _input(event):
 func shoot():
 	var shoot_origin = projectile_origin.global_position
 	var shoot_dir = Vector2.RIGHT.rotated(cannon.global_rotation)
-	var shoot_velocity = shoot_dir * 300
+	var shoot_velocity = shoot_dir * 400
 	var projectile = Projectile.instance()
 	world.add_child(projectile)
 	projectile.global_transform.origin = shoot_origin

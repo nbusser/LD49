@@ -16,13 +16,13 @@ func _ready():
 	secondary_wave.init($WaveGenerator.generate_buffer())
 	secondary_wave.position.x = Globals.buffer_size.x
 	secondary_generated = true
-	x_in_buffer = 2000
+	x_in_buffer = 4000
 	next_buffer_offset = 1
 
 
 func player_move_checks():
 	if (!secondary_generated):
-		if (($Player.position.x - (next_buffer_offset-1)*Globals.buffer_size.x) > sight_loss_distance):
+		if (($Player.position.x - (next_buffer_offset-1)*Globals.buffer_size.x) > 2*sight_loss_distance):
 			secondary_generated = true
 			secondary_wave.init($WaveGenerator.generate_buffer())
 			secondary_wave.position.x = next_buffer_offset*Globals.buffer_size.x

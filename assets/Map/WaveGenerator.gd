@@ -3,7 +3,7 @@ extends Node2D
 onready var previous_buffer_last_point = (2/3)*Globals.buffer_size
 
 var next_y = 0
-var next_buffer_second_point = Vector2(100, 460)
+var next_buffer_second_point = Vector2(200, 460)
 
 func _ready():
 	pass
@@ -11,16 +11,16 @@ func _ready():
 
 func get_control(previous, new):
 	var angle = (new - previous).angle()
-	var strength = 25 + randi()%50
+	var strength = 75 + randi()%20
 	return Vector2(strength * cos(angle), strength * sin(angle))
 
 
 func get_shift_x():
-	return 100
+	return 200
 
 
 func get_shift_y():
-	return (randi()%200-100)
+	return (randi()%500-250)
 
 
 func add_point(curve):
