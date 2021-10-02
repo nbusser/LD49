@@ -10,6 +10,8 @@ onready var sails = [$ship/sail, $ship/sail2, $ship/sail3, $ship/sail4, $ship/sa
 onready var flag = $ship/flag
 
 var can_shoot = true
+var shot_loading = false
+var shot_start_time
 const SHOOT_COOLDOWN = 1.0
 
 const DEFAULT_SPEED = 100
@@ -46,7 +48,11 @@ func cancel_animations():
 	$Tween.start()
 
 func _input(event):
-	if event.is_action_pressed("shoot") && can_shoot:
+	if event.is_action_pressed("shoot") && can_shoot && !shot_loading:
+		shot_loading = true
+		shot_start_time = OS.get_system_time_msecs()
+	if event.is_action_released("shoot") && shot_loading:
+		shot_loading = false
 		shoot()
 	
 	if event.is_action_pressed("Accelerate") and not is_sailing():
@@ -90,7 +96,10 @@ func _input(event):
 func shoot():
 	var shoot_origin = projectile_origin.global_position
 	var shoot_dir = Vector2.RIGHT.rotated(cannon.global_rotation)
-	var shoot_velocity = shoot_dir * 500
+	var loading_time = (OS.get_system_time_msecs() - shot_start_time)/1000.0
+	# TODO Vector2(speed, 0) not ok
+	var shoot_velocity = shoot_dir * 500 * (clamp(loading_time, 0.5, 3.0)/3) + Vector2(speed, 0)
+	print (loading_time)
 	var projectile = Projectile.instance()
 	world.add_child(projectile)
 	projectile.global_transform.origin = shoot_origin
@@ -99,7 +108,7 @@ func shoot():
 	animate_cannon()
 	
 	can_shoot = false
-	$ShotCooldown.start()
+	$ShotCooldown.start(1.0 - clamp(loading_time, 0.0, 1.0))
 
 func animate_cannon():
 	$Tween.interpolate_property(cannon_sprite, "position",
