@@ -1,5 +1,8 @@
 extends Node2D
 
+signal start_charging_cannon
+signal stop_charging_cannon
+
 onready var Projectile = preload("res://assets/Projectile/Projectile.tscn")
 
 onready var world = get_parent()
@@ -51,9 +54,11 @@ func _input(event):
 	if event.is_action_pressed("shoot") && can_shoot && !shot_loading:
 		shot_loading = true
 		shot_start_time = OS.get_system_time_msecs()
+		emit_signal("start_charging_cannon")
 	if event.is_action_released("shoot") && shot_loading:
 		shot_loading = false
 		shoot()
+		emit_signal("stop_charging_cannon")
 	
 	if event.is_action_pressed("Accelerate") and not is_sailing():
 		$Tween.stop_all()
@@ -98,7 +103,7 @@ func shoot():
 	var shoot_dir = Vector2.RIGHT.rotated(cannon.global_rotation)
 	var loading_time = (OS.get_system_time_msecs() - shot_start_time)/1000.0
 	# TODO Vector2(speed, 0) not ok
-	var shoot_velocity = shoot_dir * 500 * (0.5 + clamp(loading_time, 0, 3.0)/3) + Vector2(speed, 0)
+	var shoot_velocity = shoot_dir * 500 * (0.5 + clamp(loading_time, 0, Globals.MAX_CANNON_CHARGING_TIME)/3) + Vector2(speed, 0)
 	var projectile = Projectile.instance()
 	world.emit_signal("spawn_cannonball", projectile, shoot_origin, shoot_velocity)
 	
