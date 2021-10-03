@@ -111,7 +111,8 @@ func _process(delta):
 			closest = malfrat.current_wave.curve.get_closest_point(malfrat.position + Vector2(35, 0) - malfrat.current_wave.global_position)
 			rot = closest.angle_to_point(malfrat.position - malfrat.current_wave.global_position)
 			rot = clamp(rot, -1.0, 1.0)
-			malfrat.rotation = lerp(malfrat.rotation, rot, 6*delta)
+			var malfrat_ship = malfrat.get_node("ship")
+			malfrat_ship.rotation = lerp(malfrat_ship.rotation, rot, 6*delta)
 			
 			malfrat.position = Vector2(malfrat.current_wave.interpolate_baked(malfrat.x_in_buffer))
 			malfrat.x_in_buffer += malfrat.speed*delta
