@@ -21,13 +21,12 @@ func get_highest_point_between(enemy: Node2D):
 	var i = 0
 	while i < len(baked) and baked[i].x < $Player.position.x - primary_wave.global_position.x:
 		i += 1
-		
+
 	while i < len(baked) and baked[i].x < enemy.position.x - primary_wave.global_position.x:
 		var point = baked[i] + primary_wave.global_position
 		if point.y < lowest.y:
 			lowest = point
 			lowest.y -= parabolic_offset
-			$Test.position = lowest
 		i += 1
 		
 	if enemy.current_wave == secondary_wave:
@@ -36,33 +35,9 @@ func get_highest_point_between(enemy: Node2D):
 			if point.y < lowest.y:
 				lowest = point
 				lowest.y -= parabolic_offset
-				$Test.position = lowest
 		i += 1
 
 	return lowest
-	
-#	var lowest = INF
-#	var baked = primary_wave.get_baked_points()
-#	var i = 0
-#	while i < len(baked) and baked[i].x < $Player.position.x - primary_wave.global_position.x:
-#		i += 1
-#
-#	while i < len(baked) and baked[i].x < enemy.position.x - primary_wave.global_position.x:
-#		lowest = min(baked[i].y, lowest)
-#		$Test.position = Vector2(300, 400)
-#		#baked[i] - primary_wave.global_position
-#		i += 1
-#
-#	if enemy.current_wave == secondary_wave:
-#		baked = secondary_wave.get_baked_points()
-#		i = 0
-#		while i < len(baked) and baked[i].x < enemy.position.x - secondary_wave.global_position.x:
-#			lowest = min(baked[i].y, lowest)
-#			$Test.position = Vector2(300, 400)
-#			#$Test.position = baked[i] - secondary_wave.global_position
-#			i += 1
-#
-#	return lowest
 
 func _ready():
 	primary_wave.init($WaveGenerator.generate_buffer())

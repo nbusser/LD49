@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/Map/WaveGenerator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Map/Game.gd" type="Script" id=3]
 [ext_resource path="res://assets/Map/Wave.tscn" type="PackedScene" id=4]
-[ext_resource path="res://icon.png" type="Texture" id=5]
 
 [node name="Map" type="Node2D"]
 script = ExtResource( 3 )
@@ -24,10 +23,6 @@ one_shot = true
 autostart = true
 
 [node name="Malfrats" type="Node2D" parent="."]
-
-[node name="Test" type="Sprite" parent="."]
-z_index = 9
-texture = ExtResource( 5 )
 
 [connection signal="spawn_cannonball" from="." to="." method="_on_Map_spawn_cannonball"]
 [connection signal="timeout" from="SpawnMalfratTimer" to="." method="_on_SpawnMalfratTimer_timeout"]
