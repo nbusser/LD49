@@ -37,7 +37,7 @@ func init(curve):
 		set_splash_amount(i, Globals.current_weather)
 
 func _ready():
-	get_viewport().get_node("Game").connect("update_weather", self, "_on_Game_update_weather")
+	get_tree().get_root().get_node("Game").connect("update_weather", self, "_on_Game_update_weather")
 
 func get_baked_points():
 	return $WavePath.curve.get_baked_points()
