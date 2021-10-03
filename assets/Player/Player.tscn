@@ -18,6 +18,7 @@ smoothing_enabled = true
 script = ExtResource( 5 )
 
 [node name="ship" type="Node2D" parent="."]
+scale = Vector2( 0.8, 0.8 )
 
 [node name="cannon" type="Node2D" parent="ship"]
 position = Vector2( 86.5508, -61.057 )
