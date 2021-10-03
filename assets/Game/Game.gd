@@ -26,7 +26,7 @@ func update_weather(value):
 	bg_shader.set_shader_param("weather", value)
 	rain.lifetime = 1 + (1 - value) * 10
 	rain.emitting = value > 0.0
-	var lightness = 1 - 0.7 * value
+	var lightness = 1 - 0.8 * value
 	clouds.modulate = Color(lightness, lightness, lightness)
 	emit_signal("update_weather", value)
 
