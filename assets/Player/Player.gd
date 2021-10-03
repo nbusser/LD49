@@ -14,6 +14,7 @@ var can_shoot = true
 var shot_loading = false
 var shot_start_time
 const SHOOT_COOLDOWN = 0.5
+var shot_pressed = false
 
 var speed = Globals.PLAYER_DEFAULT_SPEED
 
@@ -42,6 +43,10 @@ func cancel_animations():
 	$Tween.start()
 
 func _input(event):
+	if event.is_action_pressed("shoot"):
+		shot_pressed = true
+	if event.is_action_released("shoot"):
+		shot_pressed = false
 	if event.is_action_pressed("shoot") && can_shoot && !shot_loading:
 		shot_loading = true
 		shot_start_time = OS.get_system_time_msecs()
@@ -123,3 +128,7 @@ func animate_cannon(loading_time):
 
 func _on_ShotCooldown_timeout():
 	can_shoot = true
+	if shot_pressed:
+		shot_loading = true
+		shot_start_time = OS.get_system_time_msecs()
+		emit_signal("start_charging_cannon")
