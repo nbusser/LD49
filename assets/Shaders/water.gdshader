@@ -5,10 +5,14 @@ uniform float amplitude = 10.0;
 const float PI = 3.14159;
 uniform int mul = 10;
 uniform float width = 1.0;
+uniform float offset = 0.0;
 
 void vertex() {
 	float x = VERTEX.x / width;
 	float y = VERTEX.y;
-	float tmp = cos(435.0 + TIME * time_factor + x * PI * float(mul));
-	VERTEX.y += tmp * amplitude + 0.5 * amplitude * cos(435.0 + TIME * time_factor + VERTEX.x * PI * float(mul));
+	float m_0 = -amplitude / 2.0;
+	float m_1 = cos(offset + TIME * time_factor + x * PI * float(mul)) * amplitude;
+	float m_2 = cos(offset + TIME * time_factor + x * PI * float(mul) * 10.0) * amplitude / 2.0;
+	float m_3 = cos(offset + TIME * time_factor + x * PI * float(mul) * 50.0) * amplitude / 5.0;
+	VERTEX.y += m_0 + m_1 + m_2 + m_3;
 }
