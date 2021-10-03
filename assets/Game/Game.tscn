@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/Map/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Shaders/sky.gdshader" type="Shader" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/Map/cloud.svg" type="Texture" id=4]
 [ext_resource path="res://assets/Shaders/clouds.gdshader" type="Shader" id=5]
 [ext_resource path="res://assets/UI/HUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/Game/Level.gd" type="Script" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -34,7 +35,8 @@ angle_random = 1.0
 scale = 2.0
 scale_random = 1.0
 
-[node name="Node" type="Node"]
+[node name="Level" type="Node"]
+script = ExtResource( 7 )
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
@@ -72,9 +74,16 @@ local_coords = false
 process_material = SubResource( 3 )
 texture = ExtResource( 4 )
 
-[node name="HUD" parent="Background" instance=ExtResource( 6 )]
-mouse_filter = 2
-
 [node name="Map" parent="." instance=ExtResource( 1 )]
 
+[node name="CutsceneHint" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="HudLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="HudLayer" instance=ExtResource( 6 )]
+mouse_filter = 2
+
 [connection signal="value_changed" from="Background/HSlider" to="Background" method="_on_HSlider_value_changed"]
+[connection signal="timeout" from="CutsceneHint" to="." method="_on_CutsceneHint_timeout"]

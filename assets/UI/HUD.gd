@@ -1,10 +1,11 @@
 extends Control
 
-onready var player: Node2D = get_viewport().get_node("Node/Map/Player")
+onready var player: Node2D = get_viewport().get_node("Level/Map/Player")
 
 func _ready():
 	player.connect("start_charging_cannon", self, "start")
 	player.connect("stop_charging_cannon", self, "stop")
+	$CenterContainer/Hint.modulate = Color(1, 1, 1, 0)
 
 func start():
 	$Tween.stop_all()
@@ -20,4 +21,15 @@ func stop():
 	$CannonChargingBar.value, 0,
 	0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()
+
+func show_hint():
+	$Tween.interpolate_property($CenterContainer/Hint, "modulate",
+	$CenterContainer/Hint.modulate, Color(1, 1, 1, 1), 3, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()
+	
+func hide_hint():
+	$Tween.stop($CenterContainer/Hint, "modulate")
+	$Tween.interpolate_property($CenterContainer/Hint, "modulate",
+	$CenterContainer/Hint.modulate, Color(1, 1, 1, 0), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.start()

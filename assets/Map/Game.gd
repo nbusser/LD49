@@ -21,8 +21,6 @@ func _ready():
 	x_in_buffer = 4000
 	next_buffer_offset = 1
 	
-	# $Player.go_cutscene_mode()
-	
 func spawn_enemy():
 	var malfrat = Malfrat.instance()
 	malfrat.position = Vector2($Player.position.x + sight_loss_distance * 2 + 450, 416)

@@ -67,9 +67,6 @@ func update_velocity(v):
 	velocity = v
 
 func _input(event):
-	if in_cutscene and event.is_action_pressed("FlagUp"):
-		flag_up()
-	
 	if not can_control():
 		return
 
