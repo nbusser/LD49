@@ -88,7 +88,7 @@ func shoot():
 	projectile.collision_layer = 2
 	projectile.collision_mask = 2
 	var shoot_velocity = Vector2(50, 50)
-	get_parent().get_parent().emit_signal("spawn_cannonball", projectile, player.global_position, shoot_velocity)
+	get_parent().get_parent().emit_signal("spawn_cannonball", projectile, position, shoot_velocity)
 
 func _on_ShootCooldownTimer_timeout():
 	$PrepareShoot.start()

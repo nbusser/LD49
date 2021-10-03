@@ -191,7 +191,7 @@ func _on_Tween_tween_completed(object, key):
 		# Step 4: ship has finished to sink-rotate, go sink
 		elif object == $ship and key == ":rotation":
 			$Tween.interpolate_property($ship, "position",
-			$ship.position, Vector2($ship.position.x, $ship.position.y + 200), 1.5,
+			$ship.position, Vector2($ship.position.x, $ship.position.y + 300), 1.0,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			$Tween.start()
 
