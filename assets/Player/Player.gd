@@ -20,20 +20,21 @@ const SHOOT_COOLDOWN = 0.5
 var speed = Globals.PLAYER_DEFAULT_SPEED
 
 var health = Globals.PLAYER_MAX_HEALTH
+var is_dying = false
 
 export var sail_color = Color("dbdbdb")
 export var flag_color = Color("dbc954")
-
-func _ready():
-	for sail in sails:
-		sail.color = sail_color
-	flag.color = flag_color
 
 var accelerating = false
 var decelerating = false
 
 const DURATION_ACCELERATE = 2
 const DURATION_DECELERATE = 2
+
+func _ready():
+	for sail in sails:
+		sail.color = sail_color
+	flag.color = flag_color
 
 func is_sailing():
 	return accelerating or decelerating
@@ -52,6 +53,9 @@ func cancel_animations():
 	$Tween.start()
 
 func _input(event):
+	if is_dying:
+		return
+
 	if event.is_action_pressed("shoot") && can_shoot && !shot_loading:
 		shot_loading = true
 		shot_start_time = OS.get_system_time_msecs()
@@ -133,3 +137,28 @@ func animate_cannon(loading_time):
 
 func _on_ShotCooldown_timeout():
 	can_shoot = true
+
+func _on_Hitbox_body_entered(body):
+	if not is_dying:
+		self.health -= 1
+		if self.health <= 0:
+			self.die()
+			
+func _on_DyingAnimationTimer_timeout():
+	$Tween.interpolate_property(self, "position",
+	self.position, Vector2(self.position.x, self.position.y + 1000), 4,
+	Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()
+
+func die():
+	is_dying = true
+
+	$Tween.interpolate_property(self, "rotation",
+	self.rotation, 1, 1,
+	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+func _on_Tween_tween_completed(object, key):
+	if is_dying:
+		pass
+		# TODO animation

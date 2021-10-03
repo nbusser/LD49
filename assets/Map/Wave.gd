@@ -30,6 +30,9 @@ func init(curve):
 	$Area2D/CollisionPolygon2D.disabled = false
 	self.curve = curve
 
+func get_baked_points():
+	return $WavePath.curve.get_baked_points()
+
 func get_last_point():
 	return self.get_point(-1)
 

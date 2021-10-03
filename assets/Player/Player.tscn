@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/Player/ship.svg" type="Texture" id=1]
 [ext_resource path="res://assets/Player/cannon.svg" type="Texture" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://assets/Player/Flag.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Player/Camera2D.gd" type="Script" id=5]
 [ext_resource path="res://assets/Player/Sail.tscn" type="PackedScene" id=7]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 32.3551
+height = 182.044
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 3 )
@@ -64,4 +68,15 @@ scale = Vector2( 3, 10 )
 
 [node name="ShotCooldown" type="Timer" parent="."]
 
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -1.49832, -16.4814 )
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="timeout" from="ShotCooldown" to="." method="_on_ShotCooldown_timeout"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
