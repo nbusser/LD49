@@ -46,7 +46,7 @@ func cancel_animations():
 	$Tween.start()
 	
 	$Tween.interpolate_property($Camera2D, "zoom",
-	$Camera2D.zoom, $Camera2D.DEFAULT_ZOOM, 0.1,
+	$Camera2D.zoom, $Camera2D.DEFAULT_ZOOM, 0.15,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
 	$Tween.start()
 
@@ -102,24 +102,30 @@ func shoot():
 	var shoot_origin = projectile_origin.global_position
 	var shoot_dir = Vector2.RIGHT.rotated(cannon.global_rotation)
 	var loading_time = (OS.get_system_time_msecs() - shot_start_time)/1000.0
+	loading_time = clamp(loading_time, 0, Globals.MAX_CANNON_CHARGING_TIME)
+	
 	# TODO Vector2(speed, 0) not ok
-	var shoot_velocity = shoot_dir * 700 * (0.5 + clamp(loading_time, 0, Globals.MAX_CANNON_CHARGING_TIME)/Globals.MAX_CANNON_CHARGING_TIME) + Vector2(speed, 0)
+	var shoot_velocity = shoot_dir * 700 * (0.5 + loading_time/Globals.MAX_CANNON_CHARGING_TIME) + Vector2(speed, 0)
 	var projectile = Projectile.instance()
 	world.emit_signal("spawn_cannonball", projectile, shoot_origin, shoot_velocity)
 	
-	var max_added_trauma = 0.2
-	var trauma_value = 0.5 + (loading_time*max_added_trauma)/Globals.MAX_CANNON_CHARGING_TIME
-	trauma_value = clamp(trauma_value, 0.5, 0.7)
+	var min_trauma = 0.4
+	var max_added_trauma = 0.3
+	var trauma_value = min_trauma + (loading_time*max_added_trauma)/Globals.MAX_CANNON_CHARGING_TIME
 	$Camera2D.add_trauma(trauma_value)
 	
-	animate_cannon()
+	animate_cannon(loading_time)
 	
 	can_shoot = false
 	$ShotCooldown.start(SHOOT_COOLDOWN - clamp(loading_time, 0.0, SHOOT_COOLDOWN))
 
-func animate_cannon():
+func animate_cannon(loading_time):
+	var min_recoil = 40
+	var max_added_recoil = 60
+	var recoil_value = min_recoil + (loading_time*max_added_recoil)/Globals.MAX_CANNON_CHARGING_TIME
+	
 	$Tween.interpolate_property(cannon_sprite, "position",
-		Vector2(-10, 0), Vector2(0, 0), SHOOT_COOLDOWN,
+		Vector2(-recoil_value, 0), Vector2(0, 0), SHOOT_COOLDOWN,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
