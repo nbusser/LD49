@@ -18,6 +18,8 @@ curve = SubResource( 1 )
 [node name="Area2D" type="Area2D" parent="."]
 space_override = 4
 linear_damp = 2.0
+monitoring = false
+monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 modulate = Color( 0.0666667, 0.0941176, 0.74902, 1 )

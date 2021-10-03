@@ -14,7 +14,7 @@ var shot_loading = false
 var shot_start_time
 const SHOOT_COOLDOWN = 0.5
 
-const DEFAULT_SPEED = 800
+const DEFAULT_SPEED = 100
 var speed = DEFAULT_SPEED
 
 export var sail_color = Color("dbdbdb")

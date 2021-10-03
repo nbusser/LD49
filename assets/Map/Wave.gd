@@ -3,16 +3,26 @@ extends Node2D
 var curve: Curve2D
 
 func init(curve):
+	$Area2D/CollisionPolygon2D.disabled = true
 	$WavePath.curve = curve
 	$WaveLine.clear_points()
+	# Cheap
 	var baked = $WavePath.curve.get_baked_points()
 	for p in baked:
 		$WaveLine.add_point(p)
 	baked.push_back(Vector2(Globals.buffer_size.x, 2000))
 	baked.push_back(Vector2(0, 2000))
 	baked.push_back(Vector2(0, baked[0].y))
-	$Area2D/CollisionPolygon2D.set_polygon(baked)
 	$Area2D/Polygon2D.set_polygon(baked)
+	
+	# Costly
+	$WavePath.curve.bake_interval = 50
+	baked = $WavePath.curve.get_baked_points()
+	baked.push_back(Vector2(Globals.buffer_size.x, 1000))
+	baked.push_back(Vector2(0, 1000))
+	baked.push_back(Vector2(0, baked[0].y))
+	$Area2D/CollisionPolygon2D.set_polygon(baked)
+	$Area2D/CollisionPolygon2D.disabled = false
 	self.curve = curve
 
 func get_last_point():
