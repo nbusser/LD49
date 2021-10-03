@@ -19,6 +19,9 @@ func init(curve):
 	$Background.position.x -= 0
 	$Background.z_index = 1
 	$Background2.z_index = 2
+	$Polygon2D.material.set_shader_param("width", Globals.buffer_size.x)
+	$Background.material.set_shader_param("width", Globals.buffer_size.x)
+	$Background2.material.set_shader_param("width", Globals.buffer_size.x)
 	
 	# Costly
 	$WavePath.curve.bake_interval = 50

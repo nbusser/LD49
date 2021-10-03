@@ -1,11 +1,33 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/Map/Wave.gd" type="Script" id=1]
+[ext_resource path="res://assets/Shaders/water.gdshader" type="Shader" id=3]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array(  )
 }
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 3 )
+shader_param/time_factor = 4.0
+shader_param/amplitude = 10.0
+shader_param/mul = 10
+shader_param/width = 1.0
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 3 )
+shader_param/time_factor = 4.0
+shader_param/amplitude = 10.0
+shader_param/mul = 10
+shader_param/width = 1.0
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 3 )
+shader_param/time_factor = 4.0
+shader_param/amplitude = 10.0
+shader_param/mul = 10
+shader_param/width = 1.0
 
 [node name="Wave" type="Node2D"]
 script = ExtResource( 1 )
@@ -14,12 +36,15 @@ script = ExtResource( 1 )
 curve = SubResource( 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+material = SubResource( 5 )
 color = Color( 0.121569, 0.168627, 0.666667, 1 )
 
 [node name="Background" type="Polygon2D" parent="."]
+material = SubResource( 3 )
 color = Color( 0.0705882, 0.109804, 0.568627, 1 )
 
 [node name="Background2" type="Polygon2D" parent="."]
+material = SubResource( 4 )
 color = Color( 0.0352941, 0.0588235, 0.294118, 1 )
 
 [node name="Area2D" type="Area2D" parent="."]

@@ -1,5 +1,4 @@
 shader_type canvas_item;
-render_mode unshaded;
 
 uniform float time_factor = 4;
 uniform vec2 amplitude = vec2(10.0, 5.0);
