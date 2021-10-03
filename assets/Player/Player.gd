@@ -47,7 +47,7 @@ func cancel_animations():
 	$Tween.start()
 	
 	$Tween.interpolate_property($Camera2D, "zoom",
-	$Camera2D.zoom, $Camera2D.DEFAULT_ZOOM, 0.15,
+	$Camera2D.zoom, $Camera2D.DEFAULT_ZOOM, 2.0,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
 	$Tween.start()
 
