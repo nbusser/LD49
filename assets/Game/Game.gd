@@ -11,6 +11,8 @@ onready var viewport_shader = $ViewportContainer.material
 
 var cutscene_mode = false
 
+onready var sail_shader = preload("res://assets/Shaders/sail_shader.tres")
+onready var flag_shader = preload("res://assets/Shaders/flag_shader.tres")
 
 func _ready():
 	update_time(time.value)
@@ -27,6 +29,8 @@ func update_weather(value):
 	Globals.current_weather = value
 	bg_shader.set_shader_param("weather", value)
 	viewport_shader.set_shader_param("weather", value)
+	sail_shader.set_shader_param("weather", value)
+	flag_shader.set_shader_param("weather", value)
 	rain.lifetime = 1 + (1 - value) * 10
 	rain.emitting = value > 0.0
 	var lightness = 1 - 0.8 * value
