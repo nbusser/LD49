@@ -21,8 +21,8 @@ func init(curve):
 	# Costly
 	$WavePath.curve.bake_interval = 50
 	baked = $WavePath.curve.get_baked_points()
-	baked.push_back(Vector2(Globals.buffer_size.x, 1000))
-	baked.push_back(Vector2(0, 1000))
+	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
+	baked.push_back(Vector2(0, 3000))
 	baked.push_back(Vector2(0, baked[0].y))
 	$Area2D/CollisionPolygon2D.set_polygon(baked)
 	$Area2D/CollisionPolygon2D.disabled = false
