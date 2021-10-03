@@ -9,5 +9,5 @@ uniform float width = 1.0;
 void vertex() {
 	float x = VERTEX.x / width;
 	float y = VERTEX.y;
-	VERTEX.y += cos(435.0 + TIME * time_factor + x * PI * float(mul)) * amplitude;
+	VERTEX.y += cos(897.0 + TIME * time_factor + x * PI * float(mul)) * amplitude;
 }
