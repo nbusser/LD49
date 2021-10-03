@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/end_colere_de_neptune.ogg-7e27bf25d1ced8a50ee6d7c4e959cc06.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/end_colere_de_neptune.ogg"
+dest_files=[ "res://.import/end_colere_de_neptune.ogg-7e27bf25d1ced8a50ee6d7c4e959cc06.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
