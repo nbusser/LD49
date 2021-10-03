@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/end_la_valse_des_flots.ogg-2c683f5fdc3548351e303226928810fd.oggstr"
+
+[deps]
+
+source_file="res://assets/Music/end_la_valse_des_flots.ogg"
+dest_files=[ "res://.import/end_la_valse_des_flots.ogg-2c683f5fdc3548351e303226928810fd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
