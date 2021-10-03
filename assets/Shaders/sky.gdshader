@@ -21,6 +21,6 @@ void fragment() {
 	vec3 day = mix(vec3(1), day_color, 1.0 - UV.y / 2.0);
 	vec3 night = mix(vec3(0), night_color, 1.0 - UV.y / 2.0);
 	c = mix(mix(day, night, time_sig), sunset_color, sunset_amount);
-	c = mix(c, bad_weather_color, weather / 2.0);
+	c = mix(c, bad_weather_color, weather / (2.0 * UV.y + 1.0));
 	COLOR.rgb = c;
 }
