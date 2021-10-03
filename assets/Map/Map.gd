@@ -13,31 +13,53 @@ var secondary_generated: bool
 var next_buffer_offset
 var x_in_buffer
 
-func get_highest_point_between(enemy: Node2D):
-	var parabolic_offset = 300
+func get_peaks_to_player(enemy: Node2D):
+	var bakeds# quelque chose à redire ?
+	var waves
+	if primary_wave.position.x < secondary_wave.position.x:
+		bakeds = [primary_wave.get_baked_points(), secondary_wave.get_baked_points()]
+		waves = [primary_wave, secondary_wave]
+	else:
+		bakeds = [secondary_wave.get_baked_points(), primary_wave.get_baked_points()]
+		waves = [secondary_wave, primary_wave]
 
-	var lowest = Vector2(0, INF)
-	var baked = primary_wave.get_baked_points()
+	var baked = bakeds[0]
+	var a_global = min($Player.position.x, enemy.position.x)
+	var b_global = max($Player.position.x, enemy.position.x)
+	var a = a_global - waves[0].global_position.x
+	var b = b_global - waves[0].global_position.x
+	
 	var i = 0
-	while i < len(baked) and baked[i].x < $Player.position.x - primary_wave.global_position.x:
-		i += 1
+	var baked_i =  0
+	while baked_i < 2 and baked[i].x < a:
+		while i < len(baked) and baked[i].x < a:
+			i += 1
+		if i >= len(baked):
+			baked_i += 1
+			baked = bakeds[baked_i]
+			i = 0
+			a = a_global - waves[baked_i].global_position.x
+			b = b_global - waves[baked_i].global_position.x
 
-	while i < len(baked) and baked[i].x < enemy.position.x - primary_wave.global_position.x:
-		var point = baked[i] + primary_wave.global_position
-		if point.y < lowest.y:
-			lowest = point
-			lowest.y -= parabolic_offset
-		i += 1
-		
-	if enemy.current_wave == secondary_wave:
-		while i < len(baked) and baked[i].x < enemy.position.x - secondary_wave.global_position.x:
-			var point = baked[i] + secondary_wave.global_position
-			if point.y < lowest.y:
-				lowest = point
-				lowest.y -= parabolic_offset
-		i += 1
+	var peaks = []
+	var prev_d = (baked[max(1, i)].y - baked[max(1, i) - 1].y) < 0
+	var leave = false
 
-	return lowest
+	while baked_i < 2 and !leave:
+		baked = bakeds[baked_i]
+		a = a_global - waves[baked_i].global_position.x
+		b = b_global - waves[baked_i].global_position.x
+		while i + 1 < len(baked) and baked[i].x < b:
+			var d = (baked[i + 1].y - baked[i].y) < 0
+			if prev_d and !d:
+				peaks.append(baked[i] + waves[baked_i].global_position)
+			prev_d = d
+			i += 1
+		leave = baked[i].x >= b
+		i = 0
+		baked_i += 1
+
+	return peaks
 
 func _ready():
 	primary_wave.init($WaveGenerator.generate_buffer())

@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/Projectile/Projectile.gd" type="Script" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 4.36042
+radius = 8.24356
 
 [sub_resource type="ParticlesMaterial" id=2]
 emission_shape = 1
@@ -14,7 +14,7 @@ flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 90.0
 gravity = Vector3( 0, 98, 0 )
-initial_velocity = 160.0
+initial_velocity = 120.0
 initial_velocity_random = 0.5
 angular_velocity = 300.0
 angular_velocity_random = 1.0
@@ -25,6 +25,7 @@ color = Color( 0.121569, 0.168627, 0.666667, 1 )
 
 [node name="Projectile" type="RigidBody2D"]
 z_index = -1
+mass = 5.0
 gravity_scale = 5.0
 script = ExtResource( 3 )
 
