@@ -4,6 +4,8 @@ signal spawn_cannonball(projectile, shoot_origin, shoot_velocity)
 
 onready var sight_loss_distance = 1.2*get_viewport_rect().size.x*Globals.MAX_UNZOOM
 
+onready var Malfrat = preload("res://assets/Ennemies/Malfrat/Malfrat.tscn")
+
 onready var primary_wave = $Wave0
 onready var secondary_wave = $Wave1
 var secondary_generated: bool
@@ -18,7 +20,19 @@ func _ready():
 	secondary_generated = true
 	x_in_buffer = 4000
 	next_buffer_offset = 1
+	
+func spawn_enemy():
+	var malfrat = Malfrat.instance()
+	malfrat.position = Vector2($Player.position.x + sight_loss_distance * 2 + 450, 416)
 
+	if malfrat.position.x - primary_wave.position.x < Globals.buffer_size.x:
+		malfrat.current_wave = primary_wave
+	else:
+		malfrat.current_wave = secondary_wave
+		
+	malfrat.x_in_buffer = malfrat.current_wave.curve.get_closest_point(malfrat.position - malfrat.current_wave.global_position).x
+
+	$Malfrats.add_child(malfrat)
 
 func player_move_checks():
 	if (!secondary_generated):
@@ -34,7 +48,11 @@ func player_move_checks():
 		var tmp_wave = primary_wave
 		primary_wave = secondary_wave
 		secondary_wave = tmp_wave
-
+		
+	for malfrat in $Malfrats.get_children():
+		if malfrat.x_in_buffer > primary_wave.get_len():
+			malfrat.current_wave = secondary_wave
+			malfrat.x_in_buffer = 0
 
 func _process(delta):
 	$Player.position = Vector2(primary_wave.interpolate_baked(x_in_buffer))
@@ -48,7 +66,13 @@ func _process(delta):
 	
 	# TODO: if tempête, caméra bourrée en faisant
 	# $Player.ship.rotation = lerp($Player.ship.rotation, rot, 5*delta)
-
+	
+	for malfrat in $Malfrats.get_children():
+		if abs(malfrat.position.x - $Player.position.x) < malfrat.MALFRAT_DANGER_DISTANCE:
+			malfrat.accelerate()
+		
+		malfrat.position = Vector2(malfrat.current_wave.interpolate_baked(malfrat.x_in_buffer))
+		malfrat.x_in_buffer += malfrat.speed*delta
 
 func _on_Map_spawn_cannonball(projectile, shoot_origin, shoot_velocity):
 	$Projectiles.add_child(projectile)
@@ -56,3 +80,6 @@ func _on_Map_spawn_cannonball(projectile, shoot_origin, shoot_velocity):
 	projectile.linear_velocity = shoot_velocity
 	yield(get_tree().create_timer(45), "timeout")
 	projectile.queue_free()
+
+func _on_SpawnMalfratTimer_timeout():
+	spawn_enemy()

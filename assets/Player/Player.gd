@@ -17,8 +17,9 @@ var shot_loading = false
 var shot_start_time
 const SHOOT_COOLDOWN = 0.5
 
-const DEFAULT_SPEED = 100
-var speed = DEFAULT_SPEED
+var speed = Globals.PLAYER_DEFAULT_SPEED
+
+var health = Globals.PLAYER_MAX_HEALTH
 
 export var sail_color = Color("dbdbdb")
 export var flag_color = Color("dbc954")
@@ -41,7 +42,7 @@ func cancel_animations():
 	$Tween.stop_all()
 
 	$Tween.interpolate_property(self, "speed",
-	speed, DEFAULT_SPEED, 0.1,
+	speed, Globals.PLAYER_DEFAULT_SPEED, 0.1,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
 	$Tween.start()
 	
@@ -64,7 +65,7 @@ func _input(event):
 		$Tween.stop_all()
 		
 		$Tween.interpolate_property(self, "speed",
-		self.speed, DEFAULT_SPEED*2.5, DURATION_ACCELERATE,
+		self.speed, Globals.PLAYER_MAXIMUM_SPEED, DURATION_ACCELERATE,
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$Tween.start()
 		
@@ -83,7 +84,7 @@ func _input(event):
 		$Tween.stop_all()
 		
 		$Tween.interpolate_property(self, "speed",
-		self.speed, DEFAULT_SPEED/2, DURATION_DECELERATE,
+		self.speed, Globals.PLAYER_MINIMUM_SPEED, DURATION_DECELERATE,
 		Tween.TRANS_LINEAR, Tween.EASE_OUT)
 		$Tween.start()
 		

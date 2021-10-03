@@ -18,4 +18,11 @@ script = ExtResource( 3 )
 
 [node name="Projectiles" type="Node2D" parent="."]
 
+[node name="SpawnMalfratTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Malfrats" type="Node2D" parent="."]
+
 [connection signal="spawn_cannonball" from="." to="." method="_on_Map_spawn_cannonball"]
+[connection signal="timeout" from="SpawnMalfratTimer" to="." method="_on_SpawnMalfratTimer_timeout"]
