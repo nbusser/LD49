@@ -27,10 +27,6 @@ shader_param/width = 1.0
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 2 )
-shader_param/time_factor = 4.0
-shader_param/amplitude = 10.0
-shader_param/mul = 10
-shader_param/width = 1.0
 
 [node name="Wave" type="Node2D"]
 script = ExtResource( 1 )
