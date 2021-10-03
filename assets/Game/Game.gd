@@ -21,7 +21,7 @@ func _ready():
 func update_time(value):
 	bg_shader.set_shader_param("time", value)
 	viewport_shader.set_shader_param("time", value)
-	clouds.modulate.a = 1 - 0.5 * value
+	clouds.modulate.a = 1 - 0.9 * Utils.sigmoid(value, 10)
 
 func update_weather(value):
 	Globals.current_weather = value
@@ -30,7 +30,7 @@ func update_weather(value):
 	rain.lifetime = 1 + (1 - value) * 10
 	rain.emitting = value > 0.0
 	var lightness = 1 - 0.8 * value
-	clouds.modulate = Color(lightness, lightness, lightness)
+	clouds.modulate = Color(lightness, lightness, lightness, clouds.modulate.a)
 	emit_signal("update_weather", value)
 
 func activate_cutscene():
