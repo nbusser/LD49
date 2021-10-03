@@ -100,13 +100,12 @@ func parabolic(x, trajectory_minima):
 	var h = trajectory_minima
 
 	var delta = (
-		pow(4 * h * b.x - 2 * b.x * b.y, 2)
-		+ (4 * pow(b.x, 2) * pow(b.y, 2))
+		4 * pow(h, 2) * pow(b.x, 2) - 4 * h * pow(b.x, 2) * b.y
 	)
-	
+
 	var a = (
-		(-4 * h * b.x + 2 * b.x * b.y - sqrt(delta))
-		/ (2 * pow(b.x, 3))
+		(-2 * h * b.x + b.x * b.y - sqrt(delta))
+		/ pow(b.x, 3)
 	)
 	
 	var a_prime = (b.y / b.x) - a * b.x
