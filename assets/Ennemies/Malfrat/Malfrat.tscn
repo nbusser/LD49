@@ -30,6 +30,24 @@ position = Vector2( -571.464, -6.34961 )
 [node name="Trajectory" type="Line2D" parent="Canon"]
 z_index = 5
 
+[node name="Yannicks" type="Node2D" parent="Canon"]
+z_index = 100
+
+[node name="Sprite" type="Sprite" parent="Canon/Yannicks"]
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="Canon/Yannicks"]
+texture = ExtResource( 2 )
+
+[node name="Sprite3" type="Sprite" parent="Canon/Yannicks"]
+texture = ExtResource( 2 )
+
+[node name="Sprite4" type="Sprite" parent="Canon/Yannicks"]
+texture = ExtResource( 2 )
+
+[node name="Sprite5" type="Sprite" parent="Canon/Yannicks"]
+texture = ExtResource( 2 )
+
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true

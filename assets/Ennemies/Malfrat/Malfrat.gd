@@ -93,27 +93,43 @@ func _on_PrepareShoot_timeout():
 	$ShootCooldownTimer.start()
 
 func parabolic(x, trajectory_minima):
-	# f(x) = (H/2(bx²))x²+(by/bx+H/(2bx))x 
-	var b = player.position - self.position
+	# f(x) = (-H/2(bx²))x²+(by/bx+H/(2bx))x 
+	var b = player.global_position - $Canon.global_position
+	b = -b
 	return (
-		(trajectory_minima/(2 * pow(b.x, 2)))
-		* pow(x, 2)
-		+ ((b.y/b.x) + trajectory_minima/(2*b.x))
-		* x
+		(
+			(-trajectory_minima/(2 * pow(b.x, 2))) 
+			* pow(x, 2)
+		)
+		+ (
+			((b.y/b.x) + trajectory_minima/(2*b.x))
+			* x
+		)
 	)
 
 func compute_trajectory():
 	var maximum = get_node("../../").get_highest_point_between(self)
-	maximum = 8000
-
-	var distance = player.global_position - global_position
+	maximum = abs(maximum.y - $Canon.global_position.y)
+	
+	var distance = $Canon.global_position - player.global_position
+	
+	print(parabolic(476, maximum))
+	print("yo")
+	print(distance)
+	print(maximum)
+	var i = 1
+	for y in $Canon/Yannicks.get_children():
+		y.position = Vector2(-(distance.x/i), parabolic(distance.x/i, maximum))
+		i += 1
+		print("y")
+		print(distance.x/i)
+		print(parabolic(distance.x/i, maximum))
 
 	$Canon/Trajectory.clear_points()
-	for x in range(abs(distance.x)):
-		print(parabolic(x, maximum))
+	for x in range(1500):
 		$Canon/Trajectory.add_point(
 			Vector2(
-				x - abs(distance.x),
-				parabolic(x, maximum) - abs(distance.y)
+				- x,# - abs(distance.x),
+				parabolic(x, maximum)
 				)
 		)
