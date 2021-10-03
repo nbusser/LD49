@@ -54,6 +54,11 @@ func _on_DyingAnimationTimer_timeout():
 
 func die():
 	is_dying = true
+	
+	$PrepareShoot.stop()
+	$RefreshBalistic.stop()
+	$ShootCooldownTimer.stop()
+	$Canon/Trajectory.clear_points()
 
 	$Tween.interpolate_property(self, "rotation",
 	self.rotation, 1, 1,
