@@ -55,9 +55,10 @@ offset = Vector2( -100, 600 )
 [node name="Area2D" type="Area2D" parent="."]
 space_override = 4
 linear_damp = 4.0
-monitoring = false
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 modulate = Color( 0.0666667, 0.0941176, 0.74902, 1 )
 self_modulate = Color( 0.0666667, 0.172549, 0.647059, 1 )
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_Area2D_body_shape_entered"]

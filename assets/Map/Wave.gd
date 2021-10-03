@@ -44,3 +44,8 @@ func get_len():
 
 func interpolate_baked(x_in_buffer):
 	return self.curve.interpolate_baked(x_in_buffer) + self.global_position
+
+
+func _on_Area2D_body_shape_entered(body_id, body, body_shape, local_shape):
+	if body.has_method("_on_hit_water"):
+		body._on_hit_water()
