@@ -22,6 +22,7 @@ func update_time(value):
 	clouds.modulate.a = 1 - 0.5 * value
 
 func update_weather(value):
+	Globals.current_weather = value
 	bg_shader.set_shader_param("weather", value)
 	rain.lifetime = 1 + (1 - value) * 10
 	rain.emitting = value > 0.0

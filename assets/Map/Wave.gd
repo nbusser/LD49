@@ -34,6 +34,7 @@ func init(curve):
 		waves[i].color = Color(colors[i])
 		splash_particles[i].modulate = Color(colors[i])
 		splash_particles[i].emitting = true
+		set_splash_amount(i, Globals.current_weather)
 
 func _ready():
 	get_viewport().get_node("Game").connect("update_weather", self, "_on_Game_update_weather")
