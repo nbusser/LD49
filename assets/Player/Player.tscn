@@ -19,5 +19,6 @@ script = ExtResource( 5 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="ShotCooldown" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="ShotCooldown" to="." method="_on_ShotCooldown_timeout"]

@@ -103,9 +103,11 @@ func shoot():
 	var shoot_origin = projectile_origin.global_position
 	var shoot_dir = Vector2.RIGHT.rotated(cannon.global_rotation)
 	var loading_time = (OS.get_system_time_msecs() - shot_start_time)/1000.0
+	print(loading_time)
+	print(OS.get_system_time_msecs() - shot_start_time)
 	loading_time = clamp(loading_time, 0, Globals.MAX_CANNON_CHARGING_TIME)
 	
-	var shoot_velocity = shoot_dir * 700 * (0.5 + loading_time/Globals.MAX_CANNON_CHARGING_TIME) + velocity
+	var shoot_velocity = velocity + shoot_dir * 500 * (0.5 + loading_time/Globals.MAX_CANNON_CHARGING_TIME)
 	var projectile = Projectile.instance()
 	world.emit_signal("spawn_cannonball", projectile, shoot_origin, shoot_velocity)
 	
