@@ -19,6 +19,7 @@ var shot_pressed = false
 var speed = Globals.PLAYER_DEFAULT_SPEED
 
 var health = Globals.PLAYER_MAX_HEALTH
+var is_dying = false
 
 var accelerating = false
 var decelerating = false
@@ -38,7 +39,7 @@ func go_cutscene_mode():
 	self.speed = Globals.PLAYER_MINIMUM_SPEED
 
 func can_control():
-	return not in_cutscene
+	return not in_cutscene and not is_dying
 
 func is_sailing():
 	return accelerating or decelerating
@@ -74,6 +75,7 @@ func _input(event):
 		shot_pressed = true
 	if event.is_action_released("shoot"):
 		shot_pressed = false
+	
 	if event.is_action_pressed("shoot") && can_shoot && !shot_loading:
 		shot_loading = true
 		shot_start_time = OS.get_system_time_msecs()
@@ -161,6 +163,7 @@ func _on_ShotCooldown_timeout():
 
 
 func _on_Tween_tween_completed(object, key):
+	# TODO: sink when dying
 	if object == $ship/flag:
 		var normal_zoom = Vector2(3.0, 3.0)
 		$Tween.interpolate_property($Camera2D, "zoom",
@@ -176,3 +179,23 @@ func _on_Tween_tween_completed(object, key):
 		in_cutscene = false
 		
 		self.speed = Globals.PLAYER_DEFAULT_SPEED
+
+func _on_Hitbox_body_entered(body):
+	if not is_dying:
+		self.health -= 1
+		if self.health <= 0:
+			self.die()
+			
+func _on_DyingAnimationTimer_timeout():
+	$Tween.interpolate_property(self, "position",
+	self.position, Vector2(self.position.x, self.position.y + 1000), 4,
+	Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()
+
+func die():
+	is_dying = true
+
+	$Tween.interpolate_property(self, "rotation",
+	self.rotation, 1, 1,
+	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()

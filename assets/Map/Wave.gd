@@ -38,6 +38,9 @@ func init(curve):
 func _ready():
 	get_viewport().get_node("Game").connect("update_weather", self, "_on_Game_update_weather")
 
+func get_baked_points():
+	return $WavePath.curve.get_baked_points()
+
 func get_last_point():
 	return self.get_point(-1)
 
