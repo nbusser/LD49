@@ -1,28 +1,27 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/Ennemies/Malfrat/Malfrat.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://assets/Ship/Ship2.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 569.823, 566.698 )
+extents = Vector2( 97.7363, 90.7822 )
 
 [node name="Malfrat" type="Node2D"]
 script = ExtResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 17.7197, 17.7197 )
-texture = ExtResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="HitboxPolygon" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 0, -75 )
 shape = SubResource( 1 )
 
 [node name="DyingAnimationTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="ship" parent="." instance=ExtResource( 2 )]
 
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

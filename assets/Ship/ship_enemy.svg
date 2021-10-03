@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1185"
+   height="1109.123"
+   viewBox="0 0 1185 1109.123"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="ship_enemy.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="0.64"
+     inkscape:cx="565.625"
+     inkscape:cy="512.5"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2371"
+       dotted="false"
+       empspacing="0"
+       spacingx="20"
+       spacingy="20"
+       originx="-0.54605"
+       originy="193.67661" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-318.20397,133.45831)">
+    <path
+       style="fill:#528bad;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m 605.70397,658.47721 72.5,57.1875 20,40 H 1018.204 l 260,-20 80,-20 100,-60 -140,160 H 578.20397 l -240,-140 38.4375,-17.1875 z"
+       id="path2924"
+       sodipodi:nodetypes="cccccccccccc" />
+    <rect
+       style="display:none;fill:#502d16;stroke:none;stroke-width:0.740344;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect4198"
+       width="39.207245"
+       height="522.59503"
+       x="477.65793"
+       y="177.62329" />
+    <rect
+       style="fill:#483737;stroke:none;stroke-width:0.904558;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect2289"
+       width="39.207245"
+       height="780.13757"
+       x="1158.9967"
+       y="40.527142" />
+    <rect
+       style="fill:#483737;stroke:none;stroke-width:0.950059;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect2372"
+       width="39.207245"
+       height="860.59503"
+       x="778.9967"
+       y="-39.93034" />
+    <rect
+       style="fill:#1a1a1a;stroke:none;stroke-width:0.148007;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect4353"
+       width="8.2713232"
+       height="99.003601"
+       x="795.87128"
+       y="-130.48819" />
+    <g
+       id="g4040"
+       transform="matrix(-1,0,0,1,1779.1531,-177.7355)">
+      <path
+         id="rect1899"
+         style="fill:#1a1a1a;stroke-width:2.76568;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+         d="m 1226.4873,769.95001 108.4888,-72.66896 46.9265,6.82246 18.2761,38.88122 -130.0421,55.02616 -30.2014,-1.24994 z"
+         sodipodi:nodetypes="ccccccc" />
+      <circle
+         style="fill:#333333;stroke:none;stroke-width:9.99999;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill;stop-color:#000000"
+         id="path1056"
+         cx="1347.7764"
+         cy="751.75519"
+         r="46.774574" />
+      <circle
+         style="fill:#1a1a1a;stroke:none;stroke-width:1.84555;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill;stop-color:#000000"
+         id="circle3947"
+         cx="1347.7764"
+         cy="751.75519"
+         r="8.6325073" />
+    </g>
+    <rect
+       style="fill:#1a1a1a;stroke:none;stroke-width:0.620639;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       id="rect4064"
+       width="183.85054"
+       height="107.16745"
+       x="376.85181"
+       y="618.2442" />
+    <path
+       style="fill:#73a6c5;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="M 463.20396,975.66471 H 1273.204 l 90,-50 60,-95 35,-125 45,-45 -25,-30 -100,100 -110,40 -270.00004,25 H 678.20397 l -40,-80 -60,-40 h -240 l -20,40 84.99999,220 z"
+       id="path857"
+       sodipodi:nodetypes="ccccccccccccccccc" />
+  </g>
+</svg>

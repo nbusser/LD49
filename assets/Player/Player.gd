@@ -9,8 +9,6 @@ onready var world = get_parent()
 onready var cannon = $ship/cannon
 onready var cannon_sprite = $ship/cannon/cannon
 onready var projectile_origin = $ship/cannon/projectile_origin
-onready var sails = [$ship/sail, $ship/sail2, $ship/sail3, $ship/sail4, $ship/sail5]
-onready var flag = $ship/flag
 
 var can_shoot = true
 var shot_loading = false
@@ -20,14 +18,6 @@ const SHOOT_COOLDOWN = 0.5
 var speed = Globals.PLAYER_DEFAULT_SPEED
 
 var health = Globals.PLAYER_MAX_HEALTH
-
-export var sail_color = Color("dbdbdb")
-export var flag_color = Color("dbc954")
-
-func _ready():
-	for sail in sails:
-		sail.color = sail_color
-	flag.color = flag_color
 
 var accelerating = false
 var decelerating = false

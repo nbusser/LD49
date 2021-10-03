@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cannon.svg-601b091a794d985da295c66a504d72bc.stex"
+path="res://.import/cannon.svg-b971209746064224a1c1c5b850a5abc4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Player/cannon.svg"
-dest_files=[ "res://.import/cannon.svg-601b091a794d985da295c66a504d72bc.stex" ]
+source_file="res://assets/Ship/cannon.svg"
+dest_files=[ "res://.import/cannon.svg-b971209746064224a1c1c5b850a5abc4.stex" ]
 
 [params]
 
