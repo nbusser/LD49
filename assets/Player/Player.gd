@@ -107,7 +107,10 @@ func shoot():
 	var projectile = Projectile.instance()
 	world.emit_signal("spawn_cannonball", projectile, shoot_origin, shoot_velocity)
 	
-	$Camera2D.add_trauma(0.5)
+	var max_added_trauma = 0.2
+	var trauma_value = 0.5 + (loading_time*max_added_trauma)/Globals.MAX_CANNON_CHARGING_TIME
+	trauma_value = clamp(trauma_value, 0.5, 0.7)
+	$Camera2D.add_trauma(trauma_value)
 	
 	animate_cannon()
 	
