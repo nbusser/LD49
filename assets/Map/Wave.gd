@@ -11,7 +11,14 @@ func init(curve):
 	baked.push_back(Vector2(Globals.buffer_size.x, 2000))
 	baked.push_back(Vector2(0, 2000))
 	baked.push_back(Vector2(0, baked[0].y))
-	$Area2D/Polygon2D.set_polygon(baked)
+	$Polygon2D.set_polygon(baked)
+	$Background.set_polygon(baked)
+	$Background2.set_polygon(baked)
+	$Background.position.y += 200
+	$Background2.position.y += 600
+	$Background.position.x -= 0
+	$Background.z_index = 1
+	$Background2.z_index = 2
 	
 	# Costly
 	$WavePath.curve.bake_interval = 50
