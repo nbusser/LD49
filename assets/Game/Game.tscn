@@ -54,7 +54,7 @@ script = ExtResource( 3 )
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="ColorRect" type="ColorRect" parent="Background"]
+[node name="bg" type="ColorRect" parent="Background"]
 material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -62,30 +62,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="time" type="HSlider" parent="Background"]
-margin_left = 12.7136
-margin_top = 52.6985
-margin_right = 209.713
-margin_bottom = 85.6985
-max_value = 1.0
-step = 0.0
-value = 0.5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="weather" type="HSlider" parent="Background"]
-margin_left = 12.7136
-margin_top = 84.6985
-margin_right = 209.713
-margin_bottom = 117.699
-max_value = 1.0
-step = 0.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Particles2D" type="Particles2D" parent="Background"]
+[node name="clouds" type="Particles2D" parent="Background"]
 material = SubResource( 2 )
 position = Vector2( 1237.3, 37.107 )
 amount = 20
@@ -108,6 +85,29 @@ one_shot = true
 [node name="HUD" parent="HudLayer" instance=ExtResource( 6 )]
 mouse_filter = 2
 
+[node name="time" type="HSlider" parent="HudLayer"]
+margin_left = 12.7136
+margin_top = 52.6985
+margin_right = 209.713
+margin_bottom = 85.6985
+max_value = 1.0
+step = 0.0
+value = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="weather" type="HSlider" parent="HudLayer"]
+margin_left = 12.7136
+margin_top = 84.6985
+margin_right = 209.713
+margin_bottom = 117.699
+max_value = 1.0
+step = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Weather" type="CanvasLayer" parent="."]
 
 [node name="rain" type="Particles2D" parent="Weather"]
@@ -118,6 +118,6 @@ amount = 3000
 process_material = SubResource( 4 )
 texture = ExtResource( 7 )
 
-[connection signal="value_changed" from="Background/time" to="." method="_on_time_value_changed"]
-[connection signal="value_changed" from="Background/weather" to="." method="_on_weather_value_changed"]
 [connection signal="timeout" from="CutsceneHint" to="." method="_on_CutsceneHint_timeout"]
+[connection signal="value_changed" from="HudLayer/time" to="." method="_on_time_value_changed"]
+[connection signal="value_changed" from="HudLayer/weather" to="." method="_on_weather_value_changed"]
