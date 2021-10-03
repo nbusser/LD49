@@ -28,7 +28,6 @@ one_shot = true
 position = Vector2( -571.464, -6.34961 )
 
 [node name="Trajectory" type="Line2D" parent="Canon"]
-position = Vector2( 571.464, 6.34961 )
 z_index = 5
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
