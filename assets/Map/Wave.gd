@@ -35,6 +35,9 @@ func init(curve):
 		splash_particles[i].modulate = Color(colors[i])
 		splash_particles[i].emitting = true
 
+func _ready():
+	get_viewport().get_node("Game").connect("update_weather", self, "_on_Game_update_weather")
+
 func get_last_point():
 	return self.get_point(-1)
 
@@ -57,6 +60,10 @@ func set_splash_pos(i):
 	var visibility_size = 1000000
 	splash_particles[i].visibility_rect = Rect2(Vector2(pos.x - visibility_size/2, pos.y - visibility_size/2), Vector2(visibility_size, visibility_size))
 
+func set_splash_amount(i, amount):
+	splash_particles[i].lifetime = 2 + (1 - amount) * 10
+	splash_particles[i].emitting = amount > 0.0
+
 func _process(delta):
 	for i in 3:
 		set_splash_pos(i)
@@ -64,3 +71,7 @@ func _process(delta):
 func _on_Area2D_body_shape_entered(body_id, body, body_shape, local_shape):
 	if body.has_method("_on_hit_water"):
 		body._on_hit_water()
+
+func _on_Game_update_weather(value):
+	for i in 3:
+		set_splash_amount(i, value)

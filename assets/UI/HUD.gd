@@ -1,6 +1,6 @@
 extends Control
 
-onready var player: Node2D = get_viewport().get_node("Level/Map/Player")
+onready var player: Node2D = get_viewport().get_node("Game/Map/Player")
 
 func _ready():
 	player.connect("start_charging_cannon", self, "start")

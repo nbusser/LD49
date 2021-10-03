@@ -1,12 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/Map/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Shaders/sky.gdshader" type="Shader" id=2]
-[ext_resource path="res://assets/Game/Background.gd" type="Script" id=3]
+[ext_resource path="res://assets/Game/Game.gd" type="Script" id=3]
 [ext_resource path="res://assets/Map/cloud.svg" type="Texture" id=4]
 [ext_resource path="res://assets/Shaders/clouds.gdshader" type="Shader" id=5]
 [ext_resource path="res://assets/UI/HUD.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/Game/Level.gd" type="Script" id=7]
+[ext_resource path="res://assets/Map/rain.svg" type="Texture" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -35,12 +35,24 @@ angle_random = 1.0
 scale = 2.0
 scale_random = 1.0
 
-[node name="Level" type="Node"]
-script = ExtResource( 7 )
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 2
+emission_box_extents = Vector3( 550, 0, 0 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 5.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 800.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_random = 1.0
+
+[node name="Game" type="Node"]
+script = ExtResource( 3 )
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
-script = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="Background"]
 material = SubResource( 1 )
@@ -50,7 +62,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HSlider" type="HSlider" parent="Background"]
+[node name="time" type="HSlider" parent="Background"]
 margin_left = 12.7136
 margin_top = 52.6985
 margin_right = 209.713
@@ -58,6 +70,17 @@ margin_bottom = 85.6985
 max_value = 1.0
 step = 0.0
 value = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="weather" type="HSlider" parent="Background"]
+margin_left = 12.7136
+margin_top = 84.6985
+margin_right = 209.713
+margin_bottom = 117.699
+max_value = 1.0
+step = 0.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -85,5 +108,16 @@ one_shot = true
 [node name="HUD" parent="HudLayer" instance=ExtResource( 6 )]
 mouse_filter = 2
 
-[connection signal="value_changed" from="Background/HSlider" to="Background" method="_on_HSlider_value_changed"]
+[node name="Weather" type="CanvasLayer" parent="."]
+
+[node name="rain" type="Particles2D" parent="Weather"]
+modulate = Color( 0.25098, 0.298039, 0.607843, 0.392157 )
+position = Vector2( 512, -50 )
+emitting = false
+amount = 3000
+process_material = SubResource( 4 )
+texture = ExtResource( 7 )
+
+[connection signal="value_changed" from="Background/time" to="." method="_on_time_value_changed"]
+[connection signal="value_changed" from="Background/weather" to="." method="_on_weather_value_changed"]
 [connection signal="timeout" from="CutsceneHint" to="." method="_on_CutsceneHint_timeout"]
