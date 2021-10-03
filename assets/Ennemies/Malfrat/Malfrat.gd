@@ -14,8 +14,6 @@ var speed = MALFRAT_DEFAULT_SPEED
 var current_wave
 var x_in_buffer
 
-var is_aiming = false
-
 var player
 
 var is_accelerating = false
@@ -71,8 +69,7 @@ func _on_Hitbox_body_entered(body):
 			die()
 
 func _process(delta):
-	if is_aiming:
-		self.compute_trajectory()
+	pass
 		
 func shoot():
 	#var shoot_velocity = shoot_dir * 700 * (0.5 + loading_time/Globals.MAX_CANNON_CHARGING_TIME) + Vector2(speed, 0)
@@ -83,12 +80,13 @@ func shoot():
 	get_parent().get_parent().emit_signal("spawn_cannonball", projectile, $Canon.global_position, shoot_velocity)
 
 func _on_ShootCooldownTimer_timeout():
-	is_aiming = true
 	$PrepareShoot.start()
+	$RefreshBalistic.start()
 
 func _on_PrepareShoot_timeout():
-	is_aiming = false
+	$RefreshBalistic.stop()
 	$Canon/Trajectory.clear_points()
+	
 	self.shoot()
 	$ShootCooldownTimer.start()
 
@@ -114,8 +112,11 @@ func parabolic(x, trajectory_minima):
 	return -y
 
 func compute_trajectory():
+	var parabolic_offset = 150
+
 	var maximum = get_node("../../").get_highest_point_between(self)
 	maximum = abs(maximum.y - $Canon.global_position.y)
+	maximum += parabolic_offset
 	
 	var distance_x = abs($Canon.global_position.x - player.global_position.x)
 
@@ -127,3 +128,6 @@ func compute_trajectory():
 				parabolic(x, maximum)
 				)
 		)
+
+func _on_RefreshBalistic_timeout():
+	self.compute_trajectory()
