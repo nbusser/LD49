@@ -62,6 +62,7 @@ color = Color( 0.882353, 0.866667, 0.827451, 1 )
 
 [node name="flag" parent="." instance=ExtResource( 5 )]
 material = SubResource( 2 )
-position = Vector2( -21.5268, -203.771 )
+position = Vector2( -21.5, -203.7 )
 scale = Vector2( 3, 10 )
+z_index = -1
 color = Color( 0.713726, 0.247059, 0.0862745, 1 )

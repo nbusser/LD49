@@ -23,13 +23,32 @@ var health = Globals.PLAYER_MAX_HEALTH
 var accelerating = false
 var decelerating = false
 
+var in_cutscene = false
+
 const DURATION_ACCELERATE = 2
 const DURATION_DECELERATE = 2
 
 var velocity = Vector2(0, 0)
 
+func go_cutscene_mode():
+	in_cutscene = true
+	$Camera2D.zoom = Vector2(0.8, 0.8)
+	$Camera2D.position = Vector2(0, -20)
+	$ship/flag.position = Vector2(-19, -16)
+	self.speed = Globals.PLAYER_MINIMUM_SPEED
+
+func can_control():
+	return not in_cutscene
+
 func is_sailing():
 	return accelerating or decelerating
+	
+func flag_up():
+	var flag_up_pos = Vector2(-21.5, -203.7)
+	$Tween.interpolate_property($ship/flag, "position",
+	$ship/flag.position, flag_up_pos, 4,
+	Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()
 
 func cancel_animations():
 	$Tween.stop_all()
@@ -48,6 +67,12 @@ func update_velocity(v):
 	velocity = v
 
 func _input(event):
+	if in_cutscene and event.is_action_pressed("FlagUp"):
+		flag_up()
+	
+	if not can_control():
+		return
+
 	if event.is_action_pressed("shoot"):
 		shot_pressed = true
 	if event.is_action_released("shoot"):
@@ -136,3 +161,21 @@ func _on_ShotCooldown_timeout():
 		shot_loading = true
 		shot_start_time = OS.get_system_time_msecs()
 		emit_signal("start_charging_cannon")
+
+
+func _on_Tween_tween_completed(object, key):
+	if object == $ship/flag:
+		var normal_zoom = Vector2(3.0, 3.0)
+		$Tween.interpolate_property($Camera2D, "zoom",
+		$Camera2D.zoom, normal_zoom, 2,
+		Tween.TRANS_LINEAR, Tween.EASE_IN)
+		$Tween.start()
+		
+		var normal_position = Vector2(1000, -173.027)
+		$Tween.interpolate_property($Camera2D, "position",
+		$Camera2D.position, normal_position, 2,
+		Tween.TRANS_LINEAR, Tween.EASE_IN)
+		$Tween.start()
+		in_cutscene = false
+		
+		self.speed = Globals.PLAYER_DEFAULT_SPEED
