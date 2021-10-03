@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/Map/WaveGenerator.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/Map/Game.gd" type="Script" id=3]
+[ext_resource path="res://assets/Map/Map.gd" type="Script" id=3]
 [ext_resource path="res://assets/Map/Wave.tscn" type="PackedScene" id=4]
 
 [node name="Map" type="Node2D"]
