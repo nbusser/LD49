@@ -179,7 +179,7 @@ func _on_Tween_tween_completed(object, key):
 	if is_dying:
 		# Step 1: camera finished its simultaneous zoom and position change, go lower flag
 		if object == $Camera2D and key == ":position":
-			self.hide_flag()
+			$DeathTimers/WaitToLowerFlag.start()
 		elif object == $ship/flag and key == ":position":
 			# Step 2: ship has finished to lower its flag, go wait
 			if hidden_flag:
@@ -240,13 +240,16 @@ func die():
 	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
+func _on_WaitToLowerFlag_timeout():
+	self.hide_flag()
+
+func _on_WaitToRaiseWhiteFlagTimer_timeout():
+	$ship/flag.color = Color(1, 1, 1, 1)
+	flag_up(1.0)
+	
 func _on_WaitToSinkTimer_timeout():
 	var rotation_direction = 1 if $ship.rotation > 0 else -1
 	$Tween.interpolate_property($ship, "rotation",
 	$ship.rotation, rotation_direction, 1,
 	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
-
-func _on_WaitToRaiseWhiteFlagTimer_timeout():
-	$ship/flag.color = Color(1, 1, 1, 1)
-	flag_up(1.0)
