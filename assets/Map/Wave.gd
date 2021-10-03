@@ -1,8 +1,14 @@
 extends Node2D
 
+onready var waves = [$wave, $wave2, $wave3]
+onready var splash_particles = [$splash, $splash2, $splash3]
+onready var colors = ["1f2baa", "121c91", "090f4b"]
+
 var curve: Curve2D
 
 func init(curve):
+	self.curve = curve
+	
 	$Area2D/CollisionPolygon2D.disabled = true
 	$WavePath.curve = curve
 	
@@ -11,14 +17,6 @@ func init(curve):
 	baked.push_back(Vector2(Globals.buffer_size.x, 2000))
 	baked.push_back(Vector2(0, 2000))
 	baked.push_back(Vector2(0, baked[0].y))
-	$Polygon2D.set_polygon(baked)
-	$Background.set_polygon(baked)
-	$Background2.set_polygon(baked)
-	$Background.z_index = 1
-	$Background2.z_index = 2
-	$Polygon2D.material.set_shader_param("width", Globals.buffer_size.x)
-	$Background.material.set_shader_param("width", Globals.buffer_size.x)
-	$Background2.material.set_shader_param("width", Globals.buffer_size.x)
 	
 	# Costly
 	$WavePath.curve.bake_interval = 50
@@ -28,7 +26,14 @@ func init(curve):
 	baked.push_back(Vector2(0, baked[0].y))
 	$Area2D/CollisionPolygon2D.set_polygon(baked)
 	$Area2D/CollisionPolygon2D.disabled = false
-	self.curve = curve
+	
+	# VFX
+	for i in 3:
+		waves[i].set_polygon(baked)
+		waves[i].material.set_shader_param("width", Globals.buffer_size.x)
+		waves[i].color = Color(colors[i])
+		splash_particles[i].modulate = Color(colors[i])
+		splash_particles[i].emitting = true
 
 func get_last_point():
 	return self.get_point(-1)
@@ -45,6 +50,16 @@ func get_len():
 func interpolate_baked(x_in_buffer):
 	return self.curve.interpolate_baked(x_in_buffer) + self.global_position
 
+func set_splash_pos(i):
+	var pos = self.get_point(randi() % self.get_len_points()) - self.global_position
+	splash_particles[i].position = pos + waves[i].offset
+	
+	var visibility_size = 1000000
+	splash_particles[i].visibility_rect = Rect2(Vector2(pos.x - visibility_size/2, pos.y - visibility_size/2), Vector2(visibility_size, visibility_size))
+
+func _process(delta):
+	for i in 3:
+		set_splash_pos(i)
 
 func _on_Area2D_body_shape_entered(body_id, body, body_shape, local_shape):
 	if body.has_method("_on_hit_water"):
