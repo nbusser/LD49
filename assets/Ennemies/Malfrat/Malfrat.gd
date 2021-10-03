@@ -103,8 +103,8 @@ func parabolic(x, trajectory_minima):
 	)
 
 func compute_trajectory():
-	# var maximum = self.get_highest_point_between(enemy)
-	var maximum = 8000
+	var maximum = get_node("../../").get_highest_point_between(self)
+	maximum = 8000
 
 	var distance = player.global_position - global_position
 
