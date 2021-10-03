@@ -15,7 +15,7 @@ curve = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 space_override = 4
-linear_damp = 2.0
+linear_damp = 4.0
 monitoring = false
 monitorable = false
 

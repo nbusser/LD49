@@ -5,6 +5,7 @@ var curve: Curve2D
 func init(curve):
 	$Area2D/CollisionPolygon2D.disabled = true
 	$WavePath.curve = curve
+	
 	# Cheap
 	var baked = $WavePath.curve.get_baked_points()
 	baked.push_back(Vector2(Globals.buffer_size.x, 2000))
