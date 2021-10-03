@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/Map/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Shaders/sky.gdshader" type="Shader" id=2]
@@ -8,6 +8,12 @@
 [ext_resource path="res://assets/UI/HUD.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/Map/rain.svg" type="Texture" id=7]
 [ext_resource path="res://assets/Music/calm_before_the_storm.ogg" type="AudioStream" id=8]
+[ext_resource path="res://assets/Music/end_la_valse_des_flots.ogg" type="AudioStream" id=9]
+[ext_resource path="res://assets/Music/end_colere_de_neptune.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/Music/start_colere_de_neptune.ogg" type="AudioStream" id=11]
+[ext_resource path="res://assets/Music/jeune_et_dynamique_pirate.ogg" type="AudioStream" id=12]
+[ext_resource path="res://assets/Music/loop_colere_de_neptune.ogg" type="AudioStream" id=13]
+[ext_resource path="res://assets/Music/loop_la_valse_des_flots.ogg" type="AudioStream" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -123,10 +129,34 @@ texture = ExtResource( 7 )
 
 [node name="Musics" type="Node" parent="."]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Musics"]
+[node name="CalmBeforeTheStorm" type="AudioStreamPlayer" parent="Musics"]
 stream = ExtResource( 8 )
 volume_db = -5.0
 autoplay = true
+
+[node name="StartColereDeNeptune" type="AudioStreamPlayer" parent="Musics"]
+stream = ExtResource( 11 )
+bus = "IntroBus"
+
+[node name="LoopColereDeNeptune" type="AudioStreamPlayer" parent="Musics"]
+stream = ExtResource( 13 )
+bus = "LoopBus"
+
+[node name="EndColereDeNeptune" type="AudioStreamPlayer" parent="Musics"]
+stream = ExtResource( 10 )
+bus = "EndBus"
+
+[node name="LoopLaValseDesFlots" type="AudioStreamPlayer" parent="Musics"]
+stream = ExtResource( 14 )
+bus = "LoopBus"
+
+[node name="EndLaValseDesFlots" type="AudioStreamPlayer" parent="Musics"]
+stream = ExtResource( 9 )
+bus = "EndBus"
+
+[node name="JeuneEtDynamiquePirate" type="AudioStreamPlayer" parent="Musics"]
+stream = ExtResource( 12 )
+bus = "LoopBus"
 
 [connection signal="timeout" from="CutsceneHint" to="." method="_on_CutsceneHint_timeout"]
 [connection signal="value_changed" from="HudLayer/time" to="." method="_on_time_value_changed"]
