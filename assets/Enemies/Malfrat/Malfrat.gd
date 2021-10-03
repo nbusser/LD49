@@ -21,6 +21,16 @@ var is_dying = false
 const MALFRAT_MAX_HEALTH = 3
 var health = MALFRAT_MAX_HEALTH
 
+func set_player(player):
+	self.player = player
+	player.connect("dying", self, "stop_firing")
+
+func stop_firing():
+	$PrepareShoot.stop()
+	$RefreshBalistic.stop()
+	$ShootCooldownTimer.stop()
+	$Canon/Trajectory.clear_points()
+
 func can_move():
 	return not is_dying
 
@@ -55,10 +65,7 @@ func _on_DyingAnimationTimer_timeout():
 func die():
 	is_dying = true
 	
-	$PrepareShoot.stop()
-	$RefreshBalistic.stop()
-	$ShootCooldownTimer.stop()
-	$Canon/Trajectory.clear_points()
+	self.stop_firing()
 
 	$Tween.interpolate_property(self, "rotation",
 	self.rotation, 1, 1,
@@ -81,7 +88,7 @@ func shoot():
 	projectile.collision_layer = 2
 	projectile.collision_mask = 2
 	var shoot_velocity = Vector2(50, 50)
-	get_parent().get_parent().emit_signal("spawn_cannonball", projectile, $Canon.global_position, shoot_velocity)
+	get_parent().get_parent().emit_signal("spawn_cannonball", projectile, player.global_position, shoot_velocity)
 
 func _on_ShootCooldownTimer_timeout():
 	$PrepareShoot.start()

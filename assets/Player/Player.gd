@@ -2,6 +2,7 @@ extends Node2D
 
 signal start_charging_cannon
 signal stop_charging_cannon
+signal dying
 
 onready var Projectile = preload("res://assets/Projectile/Projectile.tscn")
 
@@ -38,16 +39,19 @@ func go_cutscene_mode():
 	$ship/flag.position = Vector2(-19, -16)
 	self.speed = Globals.PLAYER_MINIMUM_SPEED
 
+func can_move():
+	return not is_dying
+
 func can_control():
 	return not in_cutscene and not is_dying
 
 func is_sailing():
 	return accelerating or decelerating
 	
-func flag_up():
+func flag_up(duration=4):
 	var flag_up_pos = Vector2(-21.5, -203.7)
 	$Tween.interpolate_property($ship/flag, "position",
-	$ship/flag.position, flag_up_pos, 4,
+	$ship/flag.position, flag_up_pos, duration,
 	Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.start()
 
@@ -161,10 +165,37 @@ func _on_ShotCooldown_timeout():
 		shot_start_time = OS.get_system_time_msecs()
 		emit_signal("start_charging_cannon")
 
+var hidden_flag = false
+func hide_flag(duration=1.0):
+	hidden_flag = true
+	var hidden_flag_position = Vector2(-19, -16)
+	$Tween.interpolate_property($ship/flag, "position",
+	$ship/flag.position, hidden_flag_position, duration,
+	Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()
 
 func _on_Tween_tween_completed(object, key):
-	# TODO: sink when dying
-	if object == $ship/flag:
+	# Death animation
+	if is_dying:
+		# Step 1: camera finished its simultaneous zoom and position change, go lower flag
+		if object == $Camera2D and key == ":position":
+			self.hide_flag()
+		elif object == $ship/flag and key == ":position":
+			# Step 2: ship has finished to lower its flag, go wait
+			if hidden_flag:
+				hidden_flag = false
+				$DeathTimers/WaitToRaiseWhiteFlagTimer.start()
+			# Step 3: ship has finished to raise its white flag
+			else:
+				$DeathTimers/WaitToSinkTimer.start()
+		# Step 4: ship has finished to sink-rotate, go sink
+		elif object == $ship and key == ":rotation":
+			$Tween.interpolate_property($ship, "position",
+			$ship.position, Vector2($ship.position.x, $ship.position.y + 200), 1.5,
+			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			$Tween.start()
+
+	elif object == $ship/flag:
 		var normal_zoom = Vector2(3.0, 3.0)
 		$Tween.interpolate_property($Camera2D, "zoom",
 		$Camera2D.zoom, normal_zoom, 2,
@@ -182,6 +213,7 @@ func _on_Tween_tween_completed(object, key):
 
 func _on_Hitbox_body_entered(body):
 	if not is_dying:
+		$Camera2D.add_trauma(1.0)
 		self.health -= 1
 		if self.health <= 0:
 			self.die()
@@ -194,8 +226,27 @@ func _on_DyingAnimationTimer_timeout():
 
 func die():
 	is_dying = true
+	emit_signal("dying")
+	
+	$Tween.stop_all()
 
-	$Tween.interpolate_property(self, "rotation",
-	self.rotation, 1, 1,
+	$Tween.interpolate_property($Camera2D, "zoom",
+	$Camera2D.zoom, Vector2(0.8, 0.8), 0.5,
 	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
+	
+	$Tween.interpolate_property($Camera2D, "position",
+	$Camera2D.position, Vector2(0, -21), 0.5,
+	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+func _on_WaitToSinkTimer_timeout():
+	var rotation_direction = 1 if $ship.rotation > 0 else -1
+	$Tween.interpolate_property($ship, "rotation",
+	$ship.rotation, rotation_direction, 1,
+	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+
+func _on_WaitToRaiseWhiteFlagTimer_timeout():
+	$ship/flag.color = Color(1, 1, 1, 1)
+	flag_up(1.0)

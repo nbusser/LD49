@@ -7,7 +7,7 @@ onready var buffer_size = Vector2(
 
 const MAX_CANNON_CHARGING_TIME = 1.0
 
-const PLAYER_MAX_HEALTH = 5
+const PLAYER_MAX_HEALTH = 1
 
 const PLAYER_DEFAULT_SPEED = 150
 const PLAYER_MAXIMUM_SPEED = PLAYER_DEFAULT_SPEED*2.5

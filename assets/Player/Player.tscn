@@ -34,6 +34,18 @@ position = Vector2( -1.49832, -16.4814 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
+[node name="DeathTimers" type="Node" parent="."]
+
+[node name="WaitToSinkTimer" type="Timer" parent="DeathTimers"]
+wait_time = 0.2
+one_shot = true
+
+[node name="WaitToRaiseWhiteFlagTimer" type="Timer" parent="DeathTimers"]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="timeout" from="ShotCooldown" to="." method="_on_ShotCooldown_timeout"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
+[connection signal="timeout" from="DeathTimers/WaitToSinkTimer" to="." method="_on_WaitToSinkTimer_timeout"]
+[connection signal="timeout" from="DeathTimers/WaitToRaiseWhiteFlagTimer" to="." method="_on_WaitToRaiseWhiteFlagTimer_timeout"]
