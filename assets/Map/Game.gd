@@ -44,8 +44,7 @@ func _process(delta):
 	var closest = primary_wave.curve.get_closest_point($Player.position + Vector2(35, 0) - primary_wave.global_position)
 	var rot = closest.angle_to_point($Player.position - primary_wave.global_position)
 	rot = clamp(rot, -1.0, 1.0)
-	$Player/ship.rotation = lerp($Player/ship.rotation, rot, 10*delta)
-	
+	$Player/ship.rotation = lerp($Player/ship.rotation, rot, 3*delta)
 	
 	# TODO: if tempête, caméra bourrée en faisant
 	# $Player.rotation = lerp($Player.rotation, rot, 5*delta)
