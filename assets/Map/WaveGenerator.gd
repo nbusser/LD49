@@ -16,11 +16,11 @@ func get_control(previous, new):
 
 
 func get_shift_x():
-	return 300
+	return 400
 
 
 func get_shift_y():
-	return (randi()%500-250)
+	return (randi()%600-300)
 
 
 func add_point(curve):
@@ -50,7 +50,7 @@ func generate_buffer():
 	curve.add_point(next_buffer_second_point)
 	
 	# 0.96: avoid generating the last point too close to the border
-	while curve.get_point_position(curve.get_point_count() - 1).x < 0.96*Globals.buffer_size.x:
+	while curve.get_point_position(curve.get_point_count() - 1).x < 0.9*Globals.buffer_size.x:
 		add_point(curve)
 	
 	previous_buffer_last_point = curve.get_point_position(curve.get_point_count() - 1)
