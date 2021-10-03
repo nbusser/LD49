@@ -4,7 +4,7 @@ signal spawn_cannonball(projectile, shoot_origin, shoot_velocity)
 
 onready var sight_loss_distance = 1.2*get_viewport_rect().size.x*Globals.MAX_UNZOOM
 
-onready var Malfrat = preload("res://assets/Ennemies/Malfrat/Malfrat.tscn")
+onready var Malfrat = preload("res://assets/Enemies/Malfrat/Malfrat.tscn")
 
 onready var primary_wave = $Wave0
 onready var secondary_wave = $Wave1
