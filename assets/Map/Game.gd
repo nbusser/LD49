@@ -47,7 +47,7 @@ func _process(delta):
 	$Player/ship.rotation = lerp($Player/ship.rotation, rot, 3*delta)
 	
 	# TODO: if tempête, caméra bourrée en faisant
-	# $Player.rotation = lerp($Player.rotation, rot, 5*delta)
+	# $Player.ship.rotation = lerp($Player.ship.rotation, rot, 5*delta)
 
 
 func _on_Map_spawn_cannonball(projectile, shoot_origin, shoot_velocity):
