@@ -47,10 +47,10 @@ __meta__ = {
 }
 
 [node name="HSlider" type="HSlider" parent="Background"]
-margin_left = 9.52438
-margin_top = 559.559
-margin_right = 206.524
-margin_bottom = 592.559
+margin_left = 12.7136
+margin_top = 52.6985
+margin_right = 209.713
+margin_bottom = 85.6985
 max_value = 1.0
 step = 0.0
 value = 0.5
@@ -69,6 +69,7 @@ process_material = SubResource( 3 )
 texture = ExtResource( 4 )
 
 [node name="HUD" parent="Background" instance=ExtResource( 6 )]
+mouse_filter = 2
 
 [node name="Map" parent="." instance=ExtResource( 1 )]
 
