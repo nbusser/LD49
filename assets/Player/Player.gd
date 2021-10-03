@@ -26,6 +26,8 @@ var decelerating = false
 const DURATION_ACCELERATE = 2
 const DURATION_DECELERATE = 2
 
+var velocity = Vector2(0, 0)
+
 func is_sailing():
 	return accelerating or decelerating
 
@@ -41,6 +43,9 @@ func cancel_animations():
 	$Camera2D.zoom, $Camera2D.DEFAULT_ZOOM, 2.0,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
 	$Tween.start()
+
+func update_velocity(v):
+	velocity = v
 
 func _input(event):
 	if event.is_action_pressed("shoot"):
@@ -100,8 +105,7 @@ func shoot():
 	var loading_time = (OS.get_system_time_msecs() - shot_start_time)/1000.0
 	loading_time = clamp(loading_time, 0, Globals.MAX_CANNON_CHARGING_TIME)
 	
-	# TODO Vector2(speed, 0) not ok
-	var shoot_velocity = shoot_dir * 700 * (0.5 + loading_time/Globals.MAX_CANNON_CHARGING_TIME) + Vector2(speed, 0)
+	var shoot_velocity = shoot_dir * 700 * (0.5 + loading_time/Globals.MAX_CANNON_CHARGING_TIME) + velocity
 	var projectile = Projectile.instance()
 	world.emit_signal("spawn_cannonball", projectile, shoot_origin, shoot_velocity)
 	

@@ -61,6 +61,7 @@ func player_move_checks():
 			malfrat.x_in_buffer = 0
 
 func _process(delta):
+	$Player.update_velocity(Vector2(primary_wave.interpolate_baked(x_in_buffer))/delta - $Player.position/delta)
 	$Player.position = Vector2(primary_wave.interpolate_baked(x_in_buffer))
 	x_in_buffer += $Player.speed*delta
 	player_move_checks()
