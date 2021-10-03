@@ -14,8 +14,8 @@ func init(curve):
 	
 	# Cheap
 	var baked = $WavePath.curve.get_baked_points()
-	baked.push_back(Vector2(Globals.buffer_size.x, 2000))
-	baked.push_back(Vector2(0, 2000))
+	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
+	baked.push_back(Vector2(0, 3000))
 	baked.push_back(Vector2(0, baked[0].y))
 	
 	# Costly
