@@ -14,9 +14,6 @@ func init(curve):
 	$Polygon2D.set_polygon(baked)
 	$Background.set_polygon(baked)
 	$Background2.set_polygon(baked)
-	$Background.position.y += 200
-	$Background2.position.y += 600
-	$Background.position.x -= 0
 	$Background.z_index = 1
 	$Background2.z_index = 2
 	$Polygon2D.material.set_shader_param("width", Globals.buffer_size.x)
