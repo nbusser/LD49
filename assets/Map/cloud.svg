@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="199.63763"
-   height="127.61791"
-   viewBox="0 0 52.82079 33.765574"
+   width="213.68149"
+   height="151.25343"
+   viewBox="0 0 56.53656 40.01914"
    version="1.1"
    id="svg5667"
    inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
@@ -24,9 +24,9 @@
      inkscape:document-units="px"
      showgrid="false"
      units="px"
-     inkscape:zoom="2.0712039"
-     inkscape:cx="116.84026"
-     inkscape:cy="32.831148"
+     inkscape:zoom="2.9291246"
+     inkscape:cx="111.63745"
+     inkscape:cy="67.255588"
      inkscape:window-width="1920"
      inkscape:window-height="1080"
      inkscape:window-x="0"
@@ -39,48 +39,11 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-95.925469,-147.32636)">
-    <circle
-       style="fill:#ffffff;stroke:none;stroke-width:0.529167;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+     transform="translate(-91.67992,-142.02122)">
+    <path
        id="path5750"
-       cx="73.550842"
-       cy="182.00027"
-       r="8.5812044"
-       transform="rotate(-10.161645)" />
-    <circle
-       style="fill:#ffffff;stroke:none;stroke-width:0.529167;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
-       id="path5752"
-       cx="83.715012"
-       cy="176.67026"
-       r="9.3572292"
-       transform="rotate(-10.161645)" />
-    <circle
-       style="fill:#ffffff;stroke:none;stroke-width:0.529167;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
-       id="path5754"
-       cx="85.407616"
-       cy="186.85782"
-       r="10.474987"
-       transform="rotate(-10.161645)" />
-    <circle
-       style="fill:#ffffff;stroke:none;stroke-width:0.529167;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
-       id="path5756"
-       cx="97.671005"
-       cy="179.70418"
-       r="12.327271"
-       transform="rotate(-10.161645)" />
-    <circle
-       style="fill:#ffffff;stroke:none;stroke-width:0.529167;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
-       id="path5758"
-       cx="107.12404"
-       cy="185.70813"
-       r="10.538859"
-       transform="rotate(-10.161645)" />
-    <circle
-       style="fill:#ffffff;stroke:none;stroke-width:0.580584;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
-       id="path5760"
-       cx="98.086182"
-       cy="192.76598"
-       r="8.6546383"
-       transform="rotate(-10.161645)" />
+       style="fill:#ffffff;stroke:none;stroke-width:2;stroke-linejoin:round;paint-order:stroke markers fill;stop-color:#000000"
+       d="M 130.55273,0.01367188 A 46.591261,46.591261 0 0 0 127.06836,0.06054687 46.591261,46.591261 0 0 0 99.302734,11.082031 35.365905,35.365905 0 0 0 74.376953,2.4882812 35.365905,35.365905 0 0 0 42.320312,27.640625 32.432898,32.432898 0 0 0 37.179688,27.482422 32.432898,32.432898 0 0 0 7.6699219,50.925781 32.432898,32.432898 0 0 0 0.0703125,69.699219 32.432898,32.432898 0 0 0 15.472656,99.453125 a 32.432898,32.432898 0 0 0 0.976563,5.437495 32.432898,32.432898 0 0 0 39.822265,22.75977 32.432898,32.432898 0 0 0 0.21875,-0.0625 39.590501,39.590501 0 0 0 13.416016,4.63086 39.590501,39.590501 0 0 0 29.308594,9.48437 32.710443,32.710443 0 0 0 20.914066,9.47852 32.710443,32.710443 0 0 0 23.17187,-7.59375 32.710443,32.710443 0 0 0 13.21289,-0.80469 32.710443,32.710443 0 0 0 17.79102,-12.24023 39.831908,39.831908 0 0 0 20.07422,-19.90625 A 39.831908,39.831908 0 0 0 212.2793,66.027344 39.831908,39.831908 0 0 0 200.2168,46.675781 39.831908,39.831908 0 0 0 172.1582,28.078125 46.591261,46.591261 0 0 0 130.55273,0.01367188 Z"
+       transform="matrix(0.26458334,0,0,0.26458334,91.67992,142.02122)" />
   </g>
 </svg>
