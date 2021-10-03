@@ -32,7 +32,13 @@ func spawn_enemy():
 		
 	malfrat.x_in_buffer = malfrat.current_wave.curve.get_closest_point(malfrat.position - malfrat.current_wave.global_position).x
 
+	malfrat.connect("dead", self, "remove_enemy")
+
 	$Malfrats.add_child(malfrat)
+
+func remove_enemy(malfrat):
+	$Malfrats.remove_child(malfrat)
+	malfrat.queue_free()
 
 func player_move_checks():
 	if (!secondary_generated):
@@ -71,8 +77,9 @@ func _process(delta):
 		if abs(malfrat.position.x - $Player.position.x) < malfrat.MALFRAT_DANGER_DISTANCE:
 			malfrat.accelerate()
 		
-		malfrat.position = Vector2(malfrat.current_wave.interpolate_baked(malfrat.x_in_buffer))
-		malfrat.x_in_buffer += malfrat.speed*delta
+		if malfrat.can_move():
+			malfrat.position = Vector2(malfrat.current_wave.interpolate_baked(malfrat.x_in_buffer))
+			malfrat.x_in_buffer += malfrat.speed*delta
 
 func _on_Map_spawn_cannonball(projectile, shoot_origin, shoot_velocity):
 	$Projectiles.add_child(projectile)
