@@ -107,13 +107,13 @@ func spawn_enemy():
 	malfrat.x_in_buffer = malfrat.current_wave.curve.get_closest_point(malfrat.position - malfrat.current_wave.global_position).x
 
 	malfrat.connect("dead", self, "remove_enemy")
-	emit_signal("malfrat_died")
 
 	$Malfrats.add_child(malfrat)
 
 func remove_enemy(malfrat):
 	$Malfrats.remove_child(malfrat)
 	malfrat.queue_free()
+	emit_signal("malfrat_died")
 
 func player_move_checks():
 	if (!secondary_generated):

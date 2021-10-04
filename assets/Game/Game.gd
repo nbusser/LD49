@@ -34,7 +34,8 @@ func increase_dead_enemies():
 		win()
 
 func win():
-	pass
+	$HudLayer/HUD.hide_stats()
+	$HudLayer/VictoryScreen.show()
 
 func _process(delta):
 	WorldEnv.add_time(delta * Globals.TIME_MULTIPLIER)
@@ -79,8 +80,11 @@ func _on_CutsceneHint_timeout():
 		#$HudLayer/HUD.show_hint()
 		pass
 
-func _on_GameOver_restart():
+func restart():
 	get_tree().change_scene("res://assets/Game/Game.tscn")
+
+func _on_GameOver_restart():
+	restart()
 
 
 func _on_WeatherChangeTimer_timeout():
@@ -135,3 +139,7 @@ func _on_WeatherChangeTimer_timeout():
 		$WeatherChangeTimer.start((randf() * 60) + 5 + Globals.TRANSITION)
 	$TweenWeatherChange.start()
 
+
+
+func _on_VictoryScreen_restart():
+	restart()
