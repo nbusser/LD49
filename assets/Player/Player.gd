@@ -30,10 +30,15 @@ var decelerating = false
 
 var in_cutscene = false
 
+onready var aim = $ship/cannon/projectile_origin/aim
+
 const DURATION_ACCELERATE = 2
 const DURATION_DECELERATE = 2
 
 var velocity = Vector2(0, 0)
+
+func _ready():
+	aim.show()
 
 func _process(delta):
 	$ship/cannon.look_at(get_global_mouse_position())
