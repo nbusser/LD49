@@ -211,17 +211,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HintBox" type="CenterContainer" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="HintBox"]
-margin_left = 163.0
-margin_top = 13.0
-margin_right = 163.0
-margin_bottom = 27.0
-
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/sound_button" to="." method="_on_sound_button_toggled"]

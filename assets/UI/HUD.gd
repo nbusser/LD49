@@ -9,7 +9,7 @@ func _ready():
 	player.connect("start_charging_cannon", self, "start")
 	player.connect("stop_charging_cannon", self, "stop")
 	player.connect("health_changes", self, "update_health")
-	$HintBox.modulate = Color(1, 1, 1, 0)
+	$TitleScreen/Hint.modulate = Color(1, 1, 1, 0)
 	sound_button.pressed = Settings.get_is_sound_active()
 	update_health()
 
@@ -30,14 +30,14 @@ func stop():
 	$Tween.start()
 
 func show_hint():
-	$Tween.interpolate_property($HintBox, "modulate",
-	$HintBox.modulate, Color(1, 1, 1, 1), 3, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.interpolate_property($TitleScreen/Hint, "modulate",
+	$TitleScreen/Hint.modulate, Color(1, 1, 1, 1), 3, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.start()
 	
 func hide_hint():
-	$Tween.stop($HintBox, "modulate")
-	$Tween.interpolate_property($HintBox, "modulate",
-	$HintBox.modulate, Color(1, 1, 1, 0), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.stop($TitleScreen/Hint, "modulate")
+	$Tween.interpolate_property($TitleScreen/Hint, "modulate",
+	$TitleScreen/Hint.modulate, Color(1, 1, 1, 0), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.start()
 	
 func update_health():
