@@ -39,7 +39,7 @@ func activate_cutscene():
 func _unhandled_input(event):
 	if cutscene_mode and event.is_action_pressed("FlagUp"):
 		$Musics.scheduleValseDesFlots()
-		player.flag_up()
+		player.start_to_play()
 		cutscene_mode = false
 		$HudLayer/HUD.hide_hint()
 

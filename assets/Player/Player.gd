@@ -52,10 +52,13 @@ func can_control():
 func is_sailing():
 	return accelerating or decelerating
 	
+func start_to_play():
+	$SoundFx/TrumpetSound.play()
+	self.flag_up()
+	
 func flag_up(duration=2):
 	$SoundFx/FlagChangeSound.play()
 	$SoundFx/FlagSound.play()
-	$SoundFx/TrumpetSound.play()
 	var flag_up_pos = Vector2(-21.5, -203.7)
 	$Tween.interpolate_property($ship/flag, "position",
 	$ship/flag.position, flag_up_pos, duration,
