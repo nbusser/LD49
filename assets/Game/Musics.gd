@@ -9,6 +9,8 @@ const COLERE = "colereDeNeptune"
 const VALSE = "laValseDesFlots"
 const DYNAMIQUE = "JeuneEtDynamiquePirate"
 
+const MUSIC_ATTENUATION_STOP = -24
+
 onready var currentIntroMusic = null
 onready var currentLoopMusic = $CalmBeforeTheStorm
 onready var currentEndMusic = null
@@ -20,6 +22,8 @@ onready var currentMusic = null
 onready var currentMusicType = LOOP
 onready var currentMusicName = CALM
 onready var nextMusicName = null
+onready var musicToAttenuate = null
+onready var musicAttenuationStart = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -66,6 +70,7 @@ func changeMusic(next):
 	currentMusic.connect("finished", self, "_on_CurrentMusic_finished")
 
 func changeMusicToNext():
+	musicToAttenuate = null
 	if (nextIntroMusic != null):
 		changeMusic(nextIntroMusic)
 		updateMusicToNext()
@@ -91,6 +96,12 @@ func updateMusicToNext():
 	currentEndMusic = nextEndMusic
 	nextMusicName = null
 	
+func cutCurrentMusic():
+	if (currentMusicName == CALM || currentMusicName == DYNAMIQUE):
+		currentMusic.disconnect("finished", self, "_on_CurrentMusic_finished")
+		musicToAttenuate = currentMusic
+		musicAttenuationStart = currentMusic.get_volume_db()
+	
 func scheduleBeforeTheStorm():
 	if currentMusicName != CALM:
 		currentLoopMusic.stream.set_loop(false)
@@ -106,6 +117,7 @@ func scheduleBeforeTheStorm():
 		nextMusicName = null
 
 func scheduleColereDeNeptune():
+	cutCurrentMusic()
 	if currentMusicName != COLERE:
 		currentLoopMusic.stream.set_loop(false)
 		nextIntroMusic = $StartColereDeNeptune
@@ -120,6 +132,7 @@ func scheduleColereDeNeptune():
 		nextMusicName = null
 	
 func scheduleValseDesFlots():
+	cutCurrentMusic()
 	if currentMusicName != VALSE:
 		currentLoopMusic.stream.set_loop(false)
 		nextIntroMusic = $StartLaValseDesFlots
@@ -134,6 +147,7 @@ func scheduleValseDesFlots():
 		nextMusicName = null
 	
 func scheduleJeuneEtDynamiquePirate():
+	cutCurrentMusic()
 	if currentMusicName != DYNAMIQUE:
 		currentLoopMusic.stream.set_loop(false)
 		nextIntroMusic = null
@@ -162,3 +176,11 @@ func _on_update_weather(value):
 		scheduleValseDesFlots()
 	else:
 		scheduleJeuneEtDynamiquePirate()
+
+func _process(delta):
+	if (musicToAttenuate != null):
+		musicToAttenuate.set_volume_db(musicToAttenuate.get_volume_db() - (delta * 4.0))
+		if (musicToAttenuate.get_volume_db() < MUSIC_ATTENUATION_STOP):
+			musicToAttenuate.set_volume_db(musicAttenuationStart)
+			currentMusic.stop()
+			changeMusicToNext()
