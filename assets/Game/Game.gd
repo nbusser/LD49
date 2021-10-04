@@ -68,14 +68,52 @@ func _on_GameOver_restart():
 
 func _on_WeatherChangeTimer_timeout():
 	if (WorldEnv.get_weather() < Globals.SUNNY_THRESHOLD):
-		WorldEnv.set_weather(rand_range(Globals.SUNNY_THRESHOLD, Globals.LIGHTNING_THRESHOLD))
-		$WeatherChangeTimer.start((randf() * 60) + 10)
+		$TweenWeatherChange.interpolate_method(
+			WorldEnv,
+			"set_weather",
+			WorldEnv.get_weather(),
+			rand_range(Globals.SUNNY_THRESHOLD, Globals.LIGHTNING_THRESHOLD),
+			Globals.TRANSITION,
+			Tween.TRANS_LINEAR,
+			Tween.EASE_IN
+			)
+		$Musics.scheduleJeuneEtDynamiquePirate()
+		$WeatherChangeTimer.start((randf() * 60) + 10 + Globals.TRANSITION)
 	elif (WorldEnv.get_weather() > Globals.LIGHTNING_THRESHOLD):
-		WorldEnv.set_weather(rand_range(Globals.SUNNY_THRESHOLD, Globals.LIGHTNING_THRESHOLD))
-		$WeatherChangeTimer.start((randf() * 60) + 10)
+		$TweenWeatherChange.interpolate_method(
+			WorldEnv,
+			"set_weather",
+			WorldEnv.get_weather(),
+			rand_range(Globals.SUNNY_THRESHOLD, Globals.LIGHTNING_THRESHOLD),
+			Globals.TRANSITION,
+			Tween.TRANS_LINEAR,
+			Tween.EASE_OUT
+			)
+		$Musics.scheduleJeuneEtDynamiquePirate()
+		$WeatherChangeTimer.start((randf() * 60) + 10 + Globals.TRANSITION)
 	elif (randf() > 0.2):
-		WorldEnv.set_weather(rand_range(Globals.LIGHTNING_THRESHOLD, 1.0))
-		$WeatherChangeTimer.start((randf() * 60) + 15)
+		$TweenWeatherChange.interpolate_method(
+			WorldEnv,
+			"set_weather",
+			WorldEnv.get_weather(),
+			rand_range(Globals.LIGHTNING_THRESHOLD, 1.0),
+			Globals.TRANSITION,
+			Tween.TRANS_LINEAR,
+			Tween.EASE_IN
+			)
+		$Musics.scheduleColereDeNeptune()
+		$WeatherChangeTimer.start((randf() * 60) + 15 + Globals.TRANSITION)
 	else:
-		WorldEnv.set_weather(rand_range(0.0, Globals.SUNNY_THRESHOLD))
-		$WeatherChangeTimer.start((randf() * 60) + 5)
+		$TweenWeatherChange.interpolate_method(
+			WorldEnv,
+			"set_weather",
+			WorldEnv.get_weather(),
+			rand_range(Globals.SUNNY_THRESHOLD, Globals.LIGHTNING_THRESHOLD),
+			Globals.TRANSITION,
+			Tween.TRANS_LINEAR,
+			Tween.EASE_OUT
+			)
+		$Musics.scheduleValseDesFlots()
+		$WeatherChangeTimer.start((randf() * 60) + 5 + Globals.TRANSITION)
+	$TweenWeatherChange.start()
+

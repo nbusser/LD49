@@ -169,9 +169,14 @@ volume_db = -4.0
 stream = ExtResource( 17 )
 volume_db = -4.0
 
+[node name="TweenMusicChange" type="Tween" parent="Musics"]
+
 [node name="WeatherChangeTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="TweenWeatherChange" type="Tween" parent="."]
+
 [connection signal="timeout" from="CutsceneHint" to="." method="_on_CutsceneHint_timeout"]
 [connection signal="restart" from="HudLayer/GameOver" to="." method="_on_GameOver_restart"]
+[connection signal="tween_all_completed" from="Musics/TweenMusicChange" to="Musics" method="_on_TweenMusicChange_tween_all_completed"]
 [connection signal="timeout" from="WeatherChangeTimer" to="." method="_on_WeatherChangeTimer_timeout"]
