@@ -117,7 +117,7 @@ one_shot = true
 [node name="HUD" parent="HudLayer" instance=ExtResource( 6 )]
 mouse_filter = 2
 
-[node name="time" type="HSlider" parent="HudLayer"]
+[node name="time_slider" type="HSlider" parent="HudLayer"]
 margin_left = 12.7136
 margin_top = 52.6985
 margin_right = 209.713
@@ -128,7 +128,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="weather" type="HSlider" parent="HudLayer"]
+[node name="weather_slider" type="HSlider" parent="HudLayer"]
 margin_left = 12.7136
 margin_top = 84.6985
 margin_right = 209.713
@@ -175,6 +175,6 @@ stream = ExtResource( 9 )
 stream = ExtResource( 12 )
 
 [connection signal="timeout" from="CutsceneHint" to="." method="_on_CutsceneHint_timeout"]
-[connection signal="value_changed" from="HudLayer/time" to="." method="_on_time_value_changed"]
-[connection signal="value_changed" from="HudLayer/weather" to="." method="_on_weather_value_changed"]
+[connection signal="value_changed" from="HudLayer/time_slider" to="." method="_on_time_value_changed"]
+[connection signal="value_changed" from="HudLayer/weather_slider" to="." method="_on_weather_value_changed"]
 [connection signal="finished" from="Musics/CalmBeforeTheStorm" to="Musics" method="_on_CalmBeforeTheStorm_finished"]
