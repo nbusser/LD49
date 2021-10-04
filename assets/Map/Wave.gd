@@ -27,7 +27,8 @@ func init(curve):
 		var prev_y = target_curve[i-1].y
 		var curr = target_curve[i]
 		var shift_y = randi()%(2*amp_y)-amp_y
-		if (prev_y + shift_y < 50 || prev_y + shift_y > Globals.buffer_size.y - 50):
+		print(prev_y)
+		if (prev_y + shift_y < 50 || prev_y + shift_y > 800):
 			shift_y = -shift_y
 		target_curve[i] = Vector2(curr.x, prev_y + shift_y)
 	
