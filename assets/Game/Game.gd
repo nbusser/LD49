@@ -1,8 +1,8 @@
 extends Node
 
-onready var bg_shader = $Background/bg.material
-onready var rain = $Weather/rain
-onready var clouds = $Background/clouds
+onready var bg_shader = $ViewportContainer/Viewport/Background/bg.material
+onready var rain = $ViewportContainer/Viewport/Weather/rain
+onready var clouds = $ViewportContainer/Viewport/Background/clouds
 onready var viewport_shader = $ViewportContainer.material
 onready var player = $ViewportContainer/Viewport/Map/Player
 

@@ -18,6 +18,11 @@
 [ext_resource path="res://assets/Game/Musics.gd" type="Script" id=16]
 [ext_resource path="res://assets/Music/start_la_valse_des_flots.ogg" type="AudioStream" id=17]
 
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 15 )
+shader_param/time = 0.0
+shader_param/weather = 0.0
+
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/day_color = Vector3( 0.4, 0.6, 1 )
@@ -48,11 +53,6 @@ angle_random = 1.0
 scale = 2.0
 scale_random = 1.0
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 15 )
-shader_param/time = 0.0
-shader_param/weather = 0.0
-
 [sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
 emission_box_extents = Vector3( 550, 0, 0 )
@@ -69,29 +69,6 @@ scale_random = 1.0
 [node name="Game" type="Node"]
 script = ExtResource( 3 )
 
-[node name="Background" type="CanvasLayer" parent="."]
-layer = -1
-
-[node name="bg" type="ColorRect" parent="Background"]
-material = SubResource( 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="clouds" type="Particles2D" parent="Background"]
-material = SubResource( 2 )
-position = Vector2( 1237.3, 37.107 )
-amount = 20
-lifetime = 20.0
-preprocess = 60.0
-speed_scale = 0.4
-visibility_rect = Rect2( -800, -100, 200, 200 )
-local_coords = false
-process_material = SubResource( 3 )
-texture = ExtResource( 4 )
-
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 material = SubResource( 4 )
 anchor_right = 1.0
@@ -107,21 +84,45 @@ transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
 
+[node name="Background" type="CanvasLayer" parent="ViewportContainer/Viewport"]
+layer = -1
+
+[node name="bg" type="ColorRect" parent="ViewportContainer/Viewport/Background"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="clouds" type="Particles2D" parent="ViewportContainer/Viewport/Background"]
+material = SubResource( 2 )
+position = Vector2( 1237.3, 37.107 )
+amount = 20
+lifetime = 20.0
+preprocess = 60.0
+speed_scale = 0.4
+visibility_rect = Rect2( -800, -100, 200, 200 )
+local_coords = false
+process_material = SubResource( 3 )
+texture = ExtResource( 4 )
+
 [node name="Map" parent="ViewportContainer/Viewport" instance=ExtResource( 1 )]
 
-[node name="CutsceneHint" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
+[node name="Weather" type="CanvasLayer" parent="ViewportContainer/Viewport"]
 
-[node name="Weather" type="CanvasLayer" parent="."]
-
-[node name="rain" type="Particles2D" parent="Weather"]
+[node name="rain" type="Particles2D" parent="ViewportContainer/Viewport/Weather"]
 modulate = Color( 0.25098, 0.298039, 0.607843, 0.392157 )
 position = Vector2( 512, -50 )
 emitting = false
 amount = 3000
 process_material = SubResource( 5 )
 texture = ExtResource( 7 )
+
+[node name="CutsceneHint" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 
 [node name="HudLayer" type="CanvasLayer" parent="."]
 layer = 10
