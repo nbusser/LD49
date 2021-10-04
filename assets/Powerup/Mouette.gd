@@ -14,8 +14,6 @@ enum DIRECTION {
 var dir
 var destination_x
 
-var active_bird
-
 const COEF_DIST = 0.4
 var original_offset
 
@@ -32,14 +30,12 @@ func init(player, offset_player_y, direction=DIRECTION.LEFT_TO_RIGHT):
 	match direction:
 		DIRECTION.LEFT_TO_RIGHT:
 			velocity.x = Globals.PLAYER_MAXIMUM_SPEED * 1.2
-			$bird_right.show()
-			$bird_left.hide()
-			active_bird = $bird_right
+			$Birds/bird_right.show()
+			$Birds/bird_left.hide()
 		DIRECTION.RIGHT_TO_LEFT:
 			velocity.x = Globals.PLAYER_DEFAULT_SPEED
-			$bird_left.show()
-			$bird_right.hide()
-			active_bird = $bird_left
+			$Birds/bird_right.hide()
+			$Birds/bird_left.show()
 
 func _ready():
 	$SoundFx/SpawnSound.play()
@@ -73,16 +69,11 @@ func _on_Hitbox_body_entered(body):
 	player.recover_health()
 	$SoundFx/DeathSound.play_sound()
 	
-	$Tween.interpolate_property(self.active_bird, "modulate",
-	self.active_bird.modulate, Color(1, 1, 1, 0), 0.8,
+	$Tween.interpolate_property($Birds, "modulate",
+	$Birds.modulate, Color(1, 1, 1, 0), 0.8,
 	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 	
-	$bird_right.hide()
-	
-	# TODO: tell UI to do anchor animation
-	$anchor.hide()
-
 func _on_Tween_tween_completed(object, key):
-	if object == self.active_bird and key == ":modulate":
+	if object == $Birds and key == ":modulate":
 		queue_free()
