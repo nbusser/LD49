@@ -77,7 +77,7 @@ func changeMusicToNext():
 			"set_volume_db",
 			MUSIC_ATTENUATION_STOP,
 			nextIntroMusic.get_volume_db(),
-			Globals.TRANSITION * 2.0,
+			Globals.TRANSITION * 1.0,
 			Tween.TRANS_LINEAR,
 			Tween.EASE_OUT
 			)

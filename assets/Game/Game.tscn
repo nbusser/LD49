@@ -167,7 +167,7 @@ volume_db = -4.0
 
 [node name="JeuneEtDynamiquePirate" type="AudioStreamPlayer" parent="Musics"]
 stream = ExtResource( 12 )
-volume_db = -4.0
+volume_db = -7.0
 
 [node name="StartLaValseDesFlots" type="AudioStreamPlayer" parent="Musics"]
 stream = ExtResource( 17 )
