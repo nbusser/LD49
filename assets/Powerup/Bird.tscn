@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/Powerup/mouette_1.svg" type="Texture" id=1]
+[ext_resource path="res://assets/Powerup/mouette_2.svg" type="Texture" id=2]
+[ext_resource path="res://assets/Powerup/mouette.svg" type="Texture" id=3]
+[ext_resource path="res://assets/Shaders/wing.gdshader" type="Shader" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 4 )
+
+[node name="bird_right" type="Node2D"]
+
+[node name="mouette_2" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 29.1118, -59.8325 )
+texture = ExtResource( 2 )
+
+[node name="mouette" type="Sprite" parent="."]
+position = Vector2( 16.8369, 0 )
+texture = ExtResource( 3 )
+
+[node name="mouette_1" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( -15.9391, -47.1492 )
+texture = ExtResource( 1 )

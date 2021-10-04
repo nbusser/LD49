@@ -27,9 +27,12 @@ func init(player, global_pos_y, direction=DIRECTION.LEFT_TO_RIGHT):
 	match direction:
 		DIRECTION.LEFT_TO_RIGHT:
 			speed = Globals.PLAYER_MAXIMUM_SPEED + 10
+			$bird_right.show()
+			$bird_left.hide()
 		DIRECTION.RIGHT_TO_LEFT:
 			speed = Globals.PLAYER_DEFAULT_SPEED
-			$MouetteSprite.flip_h = true
+			$bird_left.show()
+			$bird_right.hide()
 
 func _ready():
 	$SoundFx/SpawnSound.play()
@@ -55,13 +58,14 @@ func get_anchor():
 	#TODO To fix
 	var dest = get_tree().get_root().get_node("Game/HudLayer/HUD/CannonChargingBar").rect_global_position
 	$Tween.interpolate_property($AnchorSprite, "position",
-	$AnchorSprite.position, dest, 2.0,
 	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
 func _on_Hitbox_body_entered(body):
 	$SoundFx/DeathSound.play_sound()
-	$MouetteSprite.hide()
+	$bird_left.hide()
+	$bird_right.hide()
+	$anchor.hide()
 	#get_anchor()
 
 func _on_DeathSound_finished():

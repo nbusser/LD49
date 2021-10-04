@@ -9,3 +9,4 @@ shader_param/amplitude = Vector2( 0.2, 0.1 )
 shader_param/anchor_threshold = 0.1
 shader_param/division = Vector2( 1, 1 )
 shader_param/weather = 0.0
+shader_param/anchor_left = true
