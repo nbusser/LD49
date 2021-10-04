@@ -10,6 +10,7 @@ onready var title = $title_screen/Title
 onready var subtitle = $title_screen/Subtitle
 onready var intro = $title_screen/Intro
 onready var hint = $title_screen/Hint
+onready var win_counter = $stats/WinCounter
 
 func _ready():
 	player.connect("start_charging_cannon", self, "start")
@@ -51,6 +52,9 @@ func stop():
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.start()
 	
+func update_win_counter(new_counter, init_win_counter):
+	win_counter.text = str(new_counter) + "/" + str(init_win_counter)
+
 func update_health(value):
 	if value == 0:
 		health_bar.hide()
@@ -61,6 +65,9 @@ func update_health(value):
 func hide_hint():
 	Utils.fade_node_out($title_screen, 1)
 	Utils.fade_node_in($stats, 1, 1)
+
+func hide_stats():
+	Utils.fade_node_out(stats, 1)
 
 
 func _on_sound_button_toggled(button_pressed):

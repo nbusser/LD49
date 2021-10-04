@@ -25,22 +25,22 @@ func _ready():
 	self.activate_cutscene()
 	viewport_shader.set_shader_param("lightning_threshold", Globals.LIGHTNING_THRESHOLD)
 	$ViewportContainer/Viewport/Map.connect("malfrat_died", self, "increase_dead_enemies")
+	$HudLayer/HUD.update_win_counter(0, MALFRATS_TO_KILL)
 
 func increase_dead_enemies():
 	killed_malfrats += 1
-	# TODO: update HUD
+	$HudLayer/HUD.update_win_counter(killed_malfrats, MALFRATS_TO_KILL)
 	if killed_malfrats >= MALFRATS_TO_KILL:
 		win()
 
 func win():
-	# spawn win screen
 	pass
 
 func _process(delta):
 	WorldEnv.add_time(delta * Globals.TIME_MULTIPLIER)
 
 func gameover():
-	$HudLayer/HUD.hide()
+	$HudLayer/HUD.hide_stats()
 	$HudLayer/GameOver.show()
 
 func _on_update_time(value):
