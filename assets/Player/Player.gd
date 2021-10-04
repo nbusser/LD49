@@ -266,7 +266,7 @@ func _on_Hitbox_body_entered(body):
 			$Camera2D.add_trauma(1.0)
 			$SoundFx/DamageSound.play_sound()
 			self.health -= 1
-			emit_signal("health_changes")
+			emit_signal("health_changes", self.health)
 			if self.health <= 0:
 				self.die()
 			else:

@@ -1,9 +1,9 @@
 extends Control
 
 onready var player: Node2D = get_viewport().get_node("Game/ViewportContainer/Viewport/Map/Player")
-onready var sound_button = $VBoxContainer/HBoxContainer/sound_button
-onready var cannon_charging_bar = $VBoxContainer/HBoxContainer/VBoxContainer/CannonChargingBar
-onready var health_label = $VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/HealthLabel
+onready var sound_button = $Control/sound_button
+onready var cannon_charging_bar = $Control/CannonChargingBar
+onready var health_bar = $Control/health_bar
 
 func _ready():
 	player.connect("start_charging_cannon", self, "start")
@@ -11,7 +11,7 @@ func _ready():
 	player.connect("health_changes", self, "update_health")
 	$TitleScreen/Hint.modulate = Color(1, 1, 1, 0)
 	sound_button.pressed = Settings.get_is_sound_active()
-	update_health()
+	update_health(player.health)
 
 func start():
 	$Tween.stop_all()
@@ -40,8 +40,12 @@ func hide_hint():
 	$TitleScreen/Hint.modulate, Color(1, 1, 1, 0), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.start()
 	
-func update_health():
-	health_label.text = str(player.health)
+func update_health(value):
+	if value == 0:
+		health_bar.hide()
+	else:
+		health_bar.rect_size.x = max(0, value * 87)
+		health_bar.show()
 
 
 func _on_sound_button_toggled(button_pressed):
