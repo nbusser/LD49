@@ -18,7 +18,7 @@ shader_param/mul = 10
 shader_param/width = 1.0
 shader_param/offset = 0.0
 
-[sub_resource type="Shader" id=6]
+[sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 
 uniform float time_factor = 4;
@@ -35,17 +35,17 @@ void vertex() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 6 )
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
 shader_param/time_factor = 4.0
 shader_param/amplitude = 10.0
 shader_param/mul = 10
 shader_param/width = 1.0
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=6]
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 90.0
@@ -68,12 +68,12 @@ curve = SubResource( 1 )
 material = SubResource( 2 )
 
 [node name="wave2" type="Polygon2D" parent="."]
-material = SubResource( 3 )
+material = SubResource( 4 )
 z_index = 1
 offset = Vector2( 100, 300 )
 
 [node name="wave3" type="Polygon2D" parent="."]
-material = SubResource( 4 )
+material = SubResource( 5 )
 z_index = 2
 offset = Vector2( -100, 700 )
 
@@ -86,7 +86,6 @@ monitorable = false
 modulate = Color( 0.0666667, 0.0941176, 0.74902, 1 )
 self_modulate = Color( 0.0666667, 0.172549, 0.647059, 1 )
 position = Vector2( 0, 15 )
-build_mode = 1
 one_way_collision = true
 
 [node name="splash" type="Particles2D" parent="."]
@@ -94,7 +93,7 @@ emitting = false
 amount = 1500
 lifetime = 2.0
 local_coords = false
-process_material = SubResource( 5 )
+process_material = SubResource( 6 )
 texture = ExtResource( 5 )
 
 [node name="splash2" type="Particles2D" parent="."]
@@ -103,7 +102,7 @@ emitting = false
 amount = 1500
 lifetime = 2.0
 local_coords = false
-process_material = SubResource( 5 )
+process_material = SubResource( 6 )
 texture = ExtResource( 5 )
 
 [node name="splash3" type="Particles2D" parent="."]
@@ -112,7 +111,7 @@ emitting = false
 amount = 1500
 lifetime = 2.0
 local_coords = false
-process_material = SubResource( 5 )
+process_material = SubResource( 6 )
 texture = ExtResource( 5 )
 
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_Area2D_body_shape_entered"]

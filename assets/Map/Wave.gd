@@ -44,7 +44,7 @@ func init(curve):
 		set_splash_amount(i, WorldEnv.get_weather())
 	
 	# Costly
-	$WavePath.curve.bake_interval = 50
+	$WavePath.curve.bake_interval = 150
 	baked = $WavePath.curve.get_baked_points()
 	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
 	baked.push_back(Vector2(0, 3000))
@@ -128,7 +128,7 @@ func _process(delta):
 		set_splash_amount(i, WorldEnv.get_weather())
 	
 	# Costly
-	$WavePath.curve.bake_interval = 50
+	$WavePath.curve.bake_interval = 150
 	baked = $WavePath.curve.get_baked_points()
 	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
 	baked.push_back(Vector2(0, 3000))
