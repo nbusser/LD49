@@ -126,7 +126,7 @@ func player_move_checks():
 		var tmp_wave = primary_wave
 		primary_wave = secondary_wave
 		secondary_wave = tmp_wave
-		
+	
 	for malfrat in $Malfrats.get_children():
 		if malfrat.current_wave == primary_wave && malfrat.position.x > next_buffer_offset*Globals.buffer_size.x:
 			malfrat.current_wave = secondary_wave
@@ -165,24 +165,25 @@ func _process(delta):
 				malfrat.x_in_buffer = malfrat.current_wave.curve.get_closest_offset(malfrat.position - malfrat.current_wave.global_position) + malfrat.speed*delta
 	
 	elapsed_time += delta
-	if elapsed_time > transition_time:
-		elapsed_time -= (int(elapsed_time/transition_time))*transition_time
-		var vdiff = Vector2(Globals.buffer_size.x, 0)
-		if secondary_generated:
-			primary_wave.update_target_curve_fst()
-			secondary_wave.update_target_curve_snd(
-				primary_wave.target_curve[-2] - vdiff, primary_wave.target_curve[-1] - vdiff,
-				primary_wave.starting_curve[-2] - vdiff, primary_wave.starting_curve[-1] - vdiff
-			)
-		else:
-			secondary_wave.update_target_curve_fst()
-			primary_wave.update_target_curve_snd(
-				secondary_wave.target_curve[-2] - vdiff, secondary_wave.target_curve[-1] - vdiff,
-				secondary_wave.starting_curve[-2] - vdiff, secondary_wave.starting_curve[-1] - vdiff
-			)
 	
-	primary_wave.timer_stage = elapsed_time/transition_time
-	secondary_wave.timer_stage = elapsed_time/transition_time
+#	if elapsed_time > transition_time:
+#		elapsed_time -= (int(elapsed_time/transition_time))*transition_time
+#		var vdiff = Vector2(Globals.buffer_size.x, 0)
+#		if secondary_generated:
+#			primary_wave.update_target_curve_fst()
+#			secondary_wave.update_target_curve_snd(
+#				primary_wave.target_curve[-2] - vdiff, primary_wave.target_curve[-1] - vdiff,
+#				primary_wave.starting_curve[-2] - vdiff, primary_wave.starting_curve[-1] - vdiff
+#			)
+#		else:
+#			secondary_wave.update_target_curve_fst()
+#			primary_wave.update_target_curve_snd(
+#				secondary_wave.target_curve[-2] - vdiff, secondary_wave.target_curve[-1] - vdiff,
+#				secondary_wave.starting_curve[-2] - vdiff, secondary_wave.starting_curve[-1] - vdiff
+#			)
+	
+#	primary_wave.timer_stage = elapsed_time/transition_time
+#	secondary_wave.timer_stage = elapsed_time/transition_time
 
 func _on_Map_spawn_cannonball(projectile, shoot_origin, shoot_velocity):
 	$Projectiles.add_child(projectile)

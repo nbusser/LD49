@@ -28,7 +28,7 @@ func add_point(curve):
 	
 	# Insert new point
 	var shift_y = get_shift_y()
-	if (current.y + shift_y < 50 || current.y + shift_y > Globals.buffer_size.y - 50):
+	if (current.y + shift_y < 50 || current.y + shift_y > 1000):
 		shift_y = -shift_y
 	var new = current + Vector2(get_shift_x(), shift_y)
 	curve.add_point(new)
@@ -67,8 +67,5 @@ func generate_buffer():
 	curve.add_point(nb_first + Vector2(Globals.buffer_size.x, 0), -control, control)
 	control = get_control(nb_first + Vector2(Globals.buffer_size.x, 0), nb_third + Vector2(Globals.buffer_size.x, 0))
 	curve.add_point(nb_second + Vector2(Globals.buffer_size.x, 0), -control, control)
-	
-	for i in range(curve.get_point_count()):
-		print(curve.get_point_position(i))
 	
 	return curve
