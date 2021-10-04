@@ -39,9 +39,11 @@ func _on_update_weather(value):
 	sail_shader.set_shader_param("weather", value)
 	flag_shader.set_shader_param("weather", value)
 	rain.lifetime = 1 + (1 - value) * 10
-	rain.emitting = value > 0.0
+	rain.emitting = value > (Globals.SUNNY_THRESHOLD - 0.05)
 	var lightness = 1 - 0.8 * value
 	clouds.modulate = Color(lightness, lightness, lightness, clouds.modulate.a)
+
+
 
 func activate_cutscene():
 	cutscene_mode = true
@@ -54,6 +56,7 @@ func _unhandled_input(event):
 		player.start_to_play()
 		cutscene_mode = false
 		$HudLayer/HUD.hide_hint()
+		$WeatherChangeTimer.start((randf() * 60) + 5)
 
 func _on_CutsceneHint_timeout():
 	if cutscene_mode:
@@ -61,3 +64,18 @@ func _on_CutsceneHint_timeout():
 
 func _on_GameOver_restart():
 	get_tree().change_scene("res://assets/Game/Game.tscn")
+
+
+func _on_WeatherChangeTimer_timeout():
+	if (WorldEnv.get_weather() < Globals.SUNNY_THRESHOLD):
+		WorldEnv.set_weather(rand_range(Globals.SUNNY_THRESHOLD, Globals.LIGHTNING_THRESHOLD))
+		$WeatherChangeTimer.start((randf() * 60) + 10)
+	elif (WorldEnv.get_weather() > Globals.LIGHTNING_THRESHOLD):
+		WorldEnv.set_weather(rand_range(Globals.SUNNY_THRESHOLD, Globals.LIGHTNING_THRESHOLD))
+		$WeatherChangeTimer.start((randf() * 60) + 10)
+	elif (randf() > 0.2):
+		WorldEnv.set_weather(rand_range(Globals.LIGHTNING_THRESHOLD, 1.0))
+		$WeatherChangeTimer.start((randf() * 60) + 15)
+	else:
+		WorldEnv.set_weather(rand_range(0.0, Globals.SUNNY_THRESHOLD))
+		$WeatherChangeTimer.start((randf() * 60) + 5)

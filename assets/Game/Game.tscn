@@ -169,5 +169,9 @@ volume_db = -4.0
 stream = ExtResource( 17 )
 volume_db = -4.0
 
+[node name="WeatherChangeTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="CutsceneHint" to="." method="_on_CutsceneHint_timeout"]
 [connection signal="restart" from="HudLayer/GameOver" to="." method="_on_GameOver_restart"]
+[connection signal="timeout" from="WeatherChangeTimer" to="." method="_on_WeatherChangeTimer_timeout"]
