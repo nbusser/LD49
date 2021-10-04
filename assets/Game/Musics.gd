@@ -172,9 +172,9 @@ func menuExit():
 func _on_update_weather(value):
 	if (value > Globals.LIGHTNING_THRESHOLD):
 		scheduleColereDeNeptune()
-	elif (value <= 0.2):
+	elif (value <= 0.2 && value != 0):
 		scheduleValseDesFlots()
-	else:
+	elif (value > 0.2):
 		scheduleJeuneEtDynamiquePirate()
 
 func _process(delta):
