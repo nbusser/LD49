@@ -39,7 +39,6 @@ func add_point(curve):
 	curve.set_point_in(points_count - 1, -control)
 	curve.set_point_out(points_count - 1, control)
 
-
 func generate_buffer():
 	var curve = Curve2D.new()
 	
@@ -62,5 +61,6 @@ func generate_buffer():
 	curve.add_point(Vector2(Globals.buffer_size.x, next_y))
 	
 	next_buffer_second_point = Vector2(get_shift_x(), next_y + get_shift_y())
+	curve.add_point(next_buffer_second_point + Vector2(Globals.buffer_size.x, 0))
 	
 	return curve

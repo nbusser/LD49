@@ -97,7 +97,7 @@ func player_move_checks():
 			secondary_generated = true
 			secondary_wave.init($WaveGenerator.generate_buffer())
 			secondary_wave.position.x = next_buffer_offset*Globals.buffer_size.x
-	elif (x_in_buffer > primary_wave.get_len()):
+	elif ($Player.position.x > next_buffer_offset*Globals.buffer_size.x):
 		next_buffer_offset += 1
 		secondary_generated = false
 		x_in_buffer = 0
@@ -107,7 +107,7 @@ func player_move_checks():
 		secondary_wave = tmp_wave
 		
 	for malfrat in $Malfrats.get_children():
-		if malfrat.x_in_buffer > primary_wave.get_len():
+		if malfrat.current_wave == primary_wave && malfrat.position.x > next_buffer_offset*Globals.buffer_size.x:
 			malfrat.current_wave = secondary_wave
 			malfrat.x_in_buffer = 0
 
