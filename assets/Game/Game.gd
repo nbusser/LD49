@@ -45,6 +45,6 @@ func _input(event):
 		cutscene_mode = false
 		$HudLayer/HUD.hide_hint()
 
-
 func _on_CutsceneHint_timeout():
-	$HudLayer/HUD.show_hint()
+	if cutscene_mode:
+		$HudLayer/HUD.show_hint()
