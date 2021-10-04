@@ -18,7 +18,6 @@ func _ready():
 	WorldEnv.set_weather(0.0)
 	self.activate_cutscene()
 
-
 func _on_update_time(value):
 	bg_shader.set_shader_param("time", value)
 	viewport_shader.set_shader_param("time", value)
@@ -38,7 +37,6 @@ func activate_cutscene():
 	cutscene_mode = true
 	player.go_cutscene_mode()
 	$CutsceneHint.start()
-
 
 func _input(event):
 	if cutscene_mode and event.is_action_pressed("FlagUp"):

@@ -22,7 +22,7 @@ func init(curve):
 	for i in range(1, curve.get_point_count() - 1):
 		var prev_y = target_curve[i-1].y
 		var curr = target_curve[i]
-		var shift_y = randi()%800-400
+		var shift_y = randi()%600-300
 		if (prev_y + shift_y < 50 || prev_y + shift_y > Globals.buffer_size.y - 50):
 			shift_y = -shift_y
 		target_curve[i] = Vector2(curr.x, prev_y + shift_y)
@@ -99,7 +99,7 @@ func _process(delta):
 		for i in range(1, curve.get_point_count() - 1):
 			var prev_y = starting_curve[i-1].y
 			var curr = target_curve[i]
-			var shift_y = randi()%800-400
+			var shift_y = randi()%600-300
 			if (prev_y + shift_y < 50 || prev_y + shift_y > Globals.buffer_size.y - 50):
 				shift_y = -shift_y
 			target_curve[i] = Vector2(curr.x, prev_y + shift_y)
