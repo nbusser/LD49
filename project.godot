@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 Globals="*res://src/Globals.gd"
 Utils="*res://src/Utils.gd"
 WorldEnv="*res://src/WorldEnv.gd"
+Settings="*res://src/Settings.gd"
 
 [display]
 

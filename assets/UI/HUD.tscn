@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/UI/HUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/UI/ConvincingPirate.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/UI/sound_on.png" type="Texture" id=3]
+[ext_resource path="res://assets/UI/sound_off.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 26
@@ -63,6 +65,8 @@ text = "Press E to hoist the red flag"
 material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 1.88776
+margin_right = 1.8877
 color = Color( 0, 0, 0, 1 )
 
 [node name="time_slider" type="HSlider" parent="."]
@@ -87,5 +91,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="sound_button" type="TextureButton" parent="."]
+margin_left = 979.638
+margin_top = 10.4053
+margin_right = 1011.64
+margin_bottom = 42.4053
+toggle_mode = true
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="value_changed" from="time_slider" to="." method="_on_time_slider_value_changed"]
 [connection signal="value_changed" from="weather_slider" to="." method="_on_weather_slider_value_changed"]
+[connection signal="toggled" from="sound_button" to="." method="_on_sound_button_toggled"]

@@ -1,11 +1,13 @@
 extends Control
 
 onready var player: Node2D = get_viewport().get_node("Game/ViewportContainer/Viewport/Map/Player")
+onready var sound_button = $sound_button
 
 func _ready():
 	player.connect("start_charging_cannon", self, "start")
 	player.connect("stop_charging_cannon", self, "stop")
 	$CenterContainer/Hint.modulate = Color(1, 1, 1, 0)
+	sound_button.pressed = Settings.get_is_sound_active()
 
 func start():
 	$Tween.stop_all()
@@ -40,3 +42,7 @@ func _on_time_slider_value_changed(value):
 
 func _on_weather_slider_value_changed(value):
 	WorldEnv.set_weather(value)
+
+func _on_sound_button_toggled(button_pressed):
+	# pressed means active sound
+	Settings.set_is_sound_active(button_pressed)
