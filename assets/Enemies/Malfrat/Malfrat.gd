@@ -70,8 +70,9 @@ func die():
 	
 	self.stop_firing()
 
+	var rotation_direction = 1 if $ship.rotation > 0 else -1
 	$Tween.interpolate_property(self, "rotation",
-	self.rotation, 1, 1,
+	self.rotation, rotation_direction, 1,
 	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
