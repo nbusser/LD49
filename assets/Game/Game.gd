@@ -14,8 +14,8 @@ onready var flag_shader = preload("res://assets/Shaders/flag_shader.tres")
 func _ready():
 	WorldEnv.connect("update_time", self, "_on_update_time")
 	WorldEnv.connect("update_weather", self, "_on_update_weather")
-	WorldEnv.set_time(0.0)
-	WorldEnv.set_weather(0.0)
+	WorldEnv.set_time(0.46)
+	WorldEnv.set_weather(0.1)
 #	self.activate_cutscene()
 
 func _on_update_time(value):
