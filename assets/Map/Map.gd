@@ -14,7 +14,7 @@ var next_buffer_offset
 var x_in_buffer
 
 func get_peaks_to_player(enemy: Node2D):
-	var bakeds# quelque chose à redire ?
+	var bakeds # quelque chose à redire ?
 	var waves
 	if primary_wave.position.x < secondary_wave.position.x:
 		bakeds = [primary_wave.get_baked_points(), secondary_wave.get_baked_points()]
@@ -114,8 +114,10 @@ func player_move_checks():
 func _process(delta):
 	if $Player.can_move():
 		$Player.update_velocity(Vector2(primary_wave.interpolate_baked(x_in_buffer))/delta - $Player.position/delta)
+		var new_closest = primary_wave.curve.get_closest_point($Player.position - primary_wave.global_position)
+		var new_shift = primary_wave.curve.get_closest_offset($Player.position - primary_wave.global_position)
+		x_in_buffer = new_shift + $Player.speed*delta
 		$Player.position = Vector2(primary_wave.interpolate_baked(x_in_buffer))
-		x_in_buffer += $Player.speed*delta
 		player_move_checks()
 		
 		var closest = primary_wave.curve.get_closest_point($Player.position + Vector2(35, 0) - primary_wave.global_position)

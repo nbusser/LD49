@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/Map/Wave.gd" type="Script" id=1]
+[ext_resource path="res://assets/Shaders/water3.gdshader" type="Shader" id=2]
 [ext_resource path="res://assets/Shaders/water.gdshader" type="Shader" id=3]
+[ext_resource path="res://assets/Shaders/water2.gdshader" type="Shader" id=4]
 [ext_resource path="res://assets/Projectile/splash.svg" type="Texture" id=5]
 
 [sub_resource type="Curve2D" id=1]
@@ -18,20 +20,14 @@ shader_param/width = 1.0
 shader_param/offset = 0.0
 
 [sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 3 )
+shader = ExtResource( 4 )
 shader_param/time_factor = 4.0
 shader_param/amplitude = 10.0
 shader_param/mul = 10
 shader_param/width = 1.0
-shader_param/offset = 10.0
 
 [sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 3 )
-shader_param/time_factor = 4.0
-shader_param/amplitude = 10.0
-shader_param/mul = 10
-shader_param/width = 1.0
-shader_param/offset = 50.0
+shader = ExtResource( 2 )
 
 [sub_resource type="ParticlesMaterial" id=5]
 flag_disable_z = true
@@ -74,6 +70,8 @@ monitorable = false
 modulate = Color( 0.0666667, 0.0941176, 0.74902, 1 )
 self_modulate = Color( 0.0666667, 0.172549, 0.647059, 1 )
 position = Vector2( 0, 15 )
+build_mode = 1
+one_way_collision = true
 
 [node name="splash" type="Particles2D" parent="."]
 emitting = false
