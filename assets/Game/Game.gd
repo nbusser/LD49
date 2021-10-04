@@ -16,7 +16,7 @@ func _ready():
 	WorldEnv.connect("update_weather", self, "_on_update_weather")
 	WorldEnv.set_time(0.0)
 	WorldEnv.set_weather(0.0)
-	# self.activate_cutscene()
+	self.activate_cutscene()
 
 
 func _on_update_time(value):
@@ -42,6 +42,7 @@ func activate_cutscene():
 
 func _input(event):
 	if cutscene_mode and event.is_action_pressed("FlagUp"):
+		$Musics.scheduleJeuneEtDynamiquePirate()
 		player.flag_up()
 		cutscene_mode = false
 		$HudLayer/HUD.hide_hint()

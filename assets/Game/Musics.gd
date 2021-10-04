@@ -4,6 +4,11 @@ const INTRO = "intro"
 const LOOP = "loop"
 const END = "end"
 
+const CALM = "calmBeforeTheStorm"
+const COLERE = "colereDeNeptune"
+const VALSE = "laValseDesFlots"
+const DYNAMIQUE = "JeuneEtDynamiquePirate"
+
 onready var currentIntroMusic = null
 onready var currentLoopMusic = $CalmBeforeTheStorm
 onready var currentEndMusic = null
@@ -13,10 +18,12 @@ onready var nextEndMusic = $EndColereDeNeptune
 onready var currentMusic = null
 
 onready var currentMusicType = LOOP
+onready var currentMusicName = CALM
+onready var nextMusicName = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$CalmBeforeTheStorm.stream.set_loop(false)
+	$CalmBeforeTheStorm.stream.set_loop(true)
 	$StartColereDeNeptune.stream.set_loop(false)
 	$LoopColereDeNeptune.stream.set_loop(true)
 	$EndColereDeNeptune.stream.set_loop(false)
@@ -72,30 +79,35 @@ func changeMusicToNext():
 		changeMusic(currentMusic)
 
 func updateMusicToNext():
+	currentMusicName = nextMusicName
 	currentIntroMusic = nextIntroMusic
 	currentLoopMusic = nextLoopMusic
 	currentEndMusic = nextEndMusic
 	
 func scheduleBeforeTheStorm():
-	currentLoopMusic.stream.set_loop(false)
-	nextIntroMusic = null
-	nextLoopMusic = $CalmBeforeTheStorm
-	nextEndMusic = null
+	if currentMusicName != CALM:
+		currentLoopMusic.stream.set_loop(false)
+		nextIntroMusic = null
+		nextLoopMusic = $CalmBeforeTheStorm
+		nextEndMusic = null
 
 func scheduleColereDeNeptune():
-	currentLoopMusic.stream.set_loop(false)
-	nextIntroMusic = $StartColereDeNeptune
-	nextLoopMusic = $LoopColereDeNeptune
-	nextEndMusic = $EndColereDeNeptune
+	if currentMusicName != COLERE:
+		currentLoopMusic.stream.set_loop(false)
+		nextIntroMusic = $StartColereDeNeptune
+		nextLoopMusic = $LoopColereDeNeptune
+		nextEndMusic = $EndColereDeNeptune
 	
 func scheduleValseDesFlots():
-	currentLoopMusic.stream.set_loop(false)
-	nextIntroMusic = null
-	nextLoopMusic = $LoopLaValseDesFlots
-	nextEndMusic = $EndLaValseDesFlots
+	if currentMusicName != VALSE:
+		currentLoopMusic.stream.set_loop(false)
+		nextIntroMusic = null
+		nextLoopMusic = $LoopLaValseDesFlots
+		nextEndMusic = $EndLaValseDesFlots
 	
 func scheduleJeuneEtDynamiquePirate():
-	currentLoopMusic.stream.set_loop(false)
-	nextIntroMusic = null
-	nextLoopMusic = $JeuneEtDynamiquePirate
-	nextEndMusic = null
+	if currentMusicName != DYNAMIQUE:
+		currentLoopMusic.stream.set_loop(false)
+		nextIntroMusic = null
+		nextLoopMusic = $JeuneEtDynamiquePirate
+		nextEndMusic = null
