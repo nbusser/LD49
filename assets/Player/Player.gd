@@ -263,7 +263,7 @@ func _on_Tween_tween_completed(object, key):
 
 func recover_health():
 	self.health += 1
-	emit_signal("health_changes")
+	emit_signal("health_changes", self.health)
 
 func _on_Hitbox_body_entered(body):
 	if $InvincibilityTime.time_left <= 0:
