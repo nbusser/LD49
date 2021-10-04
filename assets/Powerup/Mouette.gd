@@ -17,12 +17,14 @@ var destination_x
 
 var active_bird
 
+const COEF_DIST = 0.4
+
 func init(player, global_pos_y, direction=DIRECTION.LEFT_TO_RIGHT):
 	self.player = player
 	self.dir = direction
 
 	global_position = Vector2(
-		player.global_position.x - (Globals.buffer_size.x * direction),
+		player.global_position.x - (Globals.buffer_size.x*COEF_DIST * direction),
 		global_pos_y
 	)
 	
@@ -42,8 +44,7 @@ func _ready():
 	$SoundFx/SpawnSound.play()
 	
 func _process(delta):
-	var destination_x = player.global_position.x + (Globals.buffer_size.x * self.dir)
-	destination_x = player.global_position.x + (600 * self.dir)
+	var destination_x = player.global_position.x + (Globals.buffer_size.x*COEF_DIST * self.dir)
 	if (
 		(
 			dir == DIRECTION.LEFT_TO_RIGHT
