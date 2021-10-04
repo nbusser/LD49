@@ -53,8 +53,8 @@ func is_sailing():
 	return accelerating or decelerating
 	
 func flag_up(duration=4):
-	$FlagChangeSound.play()
-	$FlagSound.play()
+	$SoundFx/FlagChangeSound.play()
+	$SoundFx/FlagSound.play()
 	var flag_up_pos = Vector2(-21.5, -203.7)
 	$Tween.interpolate_property($ship/flag, "position",
 	$ship/flag.position, flag_up_pos, duration,
@@ -172,7 +172,7 @@ func shoot():
 	can_shoot = false
 	$ShotCooldown.start(SHOOT_COOLDOWN - clamp(loading_time, 0.0, SHOOT_COOLDOWN))
 	
-	$CanonSoundPlayer.play_sound()
+	$SoundFx/CanonSound.play_sound()
 	
 func animate_cannon(loading_time):
 	var min_recoil = 40
@@ -194,8 +194,8 @@ func _on_ShotCooldown_timeout():
 
 var hidden_flag = false
 func hide_flag(duration=1.0):
-	$FlagChangeSound.play()
-	$FlagSound.stop()
+	$SoundFx/FlagChangeSound.play()
+	$SoundFx/FlagSound.stop()
 	hidden_flag = true
 	var hidden_flag_position = Vector2(-19, -16)
 	$Tween.interpolate_property($ship/flag, "position",
@@ -243,7 +243,7 @@ func _on_Tween_tween_completed(object, key):
 func _on_Hitbox_body_entered(body):
 	if not is_dying:
 		$Camera2D.add_trauma(1.0)
-		$DamageSound.play_sound()
+		$SoundFx/DamageSound.play_sound()
 		self.health -= 1
 		if self.health <= 0:
 			self.die()

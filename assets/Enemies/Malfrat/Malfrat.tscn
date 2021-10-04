@@ -68,11 +68,13 @@ one_shot = true
 [node name="RefreshBalistic" type="Timer" parent="."]
 wait_time = 0.1
 
-[node name="CanonSoundPlayer" type="AudioStreamPlayer" parent="."]
+[node name="SoundFx" type="Node" parent="."]
+
+[node name="CanonSoundPlayer" type="AudioStreamPlayer" parent="SoundFx"]
 script = ExtResource( 3 )
 sounds = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ) ]
 
-[node name="DamageSoundPlayer" type="AudioStreamPlayer" parent="."]
+[node name="DamageSoundPlayer" type="AudioStreamPlayer" parent="SoundFx"]
 script = ExtResource( 3 )
 sounds = [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 7 ) ]
 
