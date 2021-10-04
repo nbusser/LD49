@@ -78,10 +78,10 @@ func _ready():
 
 func spawn_mouette():
 	var dir = 1 if randi()%2 else -1
-	var offset = randi()%100+300
+	var offset = randi()%300+300
 	
 	var mouette = Mouette.instance()
-	mouette.init($Player, $Player.global_position.y - offset, dir)
+	mouette.init($Player, offset, dir)
 	add_child(mouette)
 
 func spawn_enemy():
