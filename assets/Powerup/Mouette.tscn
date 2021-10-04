@@ -12,7 +12,7 @@
 [ext_resource path="res://assets/Powerup/mouette_flag.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 58.3268, 65.9536 )
+extents = Vector2( 62.0859, 93.9166 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 11 )
@@ -38,6 +38,7 @@ script = ExtResource( 2 )
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( 0, 25 )
 shape = SubResource( 1 )
 
 [node name="SoundFx" type="Node" parent="."]
@@ -62,6 +63,7 @@ texture_scale = Vector2( 346, 54 )
 polygon = PoolVector2Array( 0, 0, 0.1, 0, 0.2, 0, 0.3, 0, 0.4, 0, 0.5, 0, 0.6, 0, 0.7, 0, 0.8, 0, 0.9, 0, 1, 0, 1, 1, 0.9, 1, 0.8, 1, 0.7, 1, 0.6, 1, 0.5, 1, 0.4, 1, 0.3, 1, 0.2, 1, 0.1, 1, 0, 1 )
 
 [node name="bird_left" parent="." instance=ExtResource( 1 )]
+visible = false
 scale = Vector2( -1, 1 )
 
 [node name="flag_left" type="Polygon2D" parent="bird_left"]
