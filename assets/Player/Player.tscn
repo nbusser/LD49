@@ -87,6 +87,7 @@ script = ExtResource( 7 )
 sounds = [ ExtResource( 15 ), ExtResource( 14 ), ExtResource( 17 ), ExtResource( 20 ) ]
 
 [node name="SinkSound" type="AudioStreamPlayer" parent="SoundFx"]
+volume_db = -13.0
 script = ExtResource( 7 )
 sounds = [ ExtResource( 19 ), ExtResource( 18 ), ExtResource( 16 ) ]
 
