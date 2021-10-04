@@ -18,7 +18,7 @@ shader_param/mul = 10
 shader_param/width = 1.0
 shader_param/offset = 0.0
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=7]
 code = "shader_type canvas_item;
 
 uniform float time_factor = 4;
@@ -35,23 +35,23 @@ void vertex() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
 shader_param/time_factor = 4.0
 shader_param/amplitude = 10.0
 shader_param/mul = 10
 shader_param/width = 1.0
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 2 )
 
 [sub_resource type="ParticlesMaterial" id=6]
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 90.0
-gravity = Vector3( 0, 98, 0 )
-initial_velocity = 100.0
-initial_velocity_random = 0.5
+gravity = Vector3( 0, 400, 0 )
+initial_velocity = 250.0
+initial_velocity_random = 1.0
 angular_velocity = 300.0
 angular_velocity_random = 1.0
 orbit_velocity = 0.0
@@ -68,12 +68,12 @@ curve = SubResource( 1 )
 material = SubResource( 2 )
 
 [node name="wave2" type="Polygon2D" parent="."]
-material = SubResource( 4 )
+material = SubResource( 8 )
 z_index = 1
 offset = Vector2( 100, 300 )
 
 [node name="wave3" type="Polygon2D" parent="."]
-material = SubResource( 5 )
+material = SubResource( 9 )
 z_index = 2
 offset = Vector2( -100, 700 )
 

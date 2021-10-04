@@ -91,7 +91,7 @@ func accelerate():
 	$Tween.start()
 	
 	$Tween.interpolate_method(self, "set_vignette",
-	vignette_shader.get_shader_param("vignette"), 1.0, DURATION_ACCELERATE,
+	vignette_shader.get_shader_param("vignette"), 0.7, DURATION_ACCELERATE,
 	Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.start()
 	
