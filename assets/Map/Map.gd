@@ -78,7 +78,7 @@ func spawn_enemy():
 	var malfrat = Malfrat.instance()
 	malfrat.get_node("ship/hull").material.set_shader_param("color", Vector3(randf(), randf(), randf()));
 	var scale = max(randf() * 2, .5)
-	malfrat.scale = Vector2(scale, scale)
+	malfrat.get_node("ship").scale = Vector2(scale, scale)
 	malfrat.health = ceil(scale * 2)
 	malfrat.speed *= 3 - scale
 	
