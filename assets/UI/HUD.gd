@@ -8,6 +8,7 @@ onready var health_bar = $stats/health_bar
 onready var stats = $stats
 onready var title = $title_screen/Title
 onready var subtitle = $title_screen/Subtitle
+onready var credit = $title_screen/Credit
 onready var intro = $title_screen/Intro
 onready var hint = $title_screen/Hint
 onready var win_counter = $stats/WinCounter
@@ -23,14 +24,17 @@ func _ready():
 func start_intro_animation():
 	title.modulate.a = 0
 	subtitle.modulate.a = 0
+	credit.modulate.a = 0
 	intro.modulate.a = 0
 	hint.modulate.a = 0
 	stats.modulate.a = 0
 	
 	Utils.fade_node_in(title, 1, 2)
 	Utils.fade_node_out(title, 1, 11)
-	Utils.fade_node_in(subtitle, 1, 4)
+	Utils.fade_node_in(subtitle, 1, 3)
 	Utils.fade_node_out(subtitle, 1, 10)
+	Utils.fade_node_in(credit, 1, 4)
+	Utils.fade_node_out(credit, 1, 10)
 	Utils.fade_node_in(intro, 1, 12)
 	Utils.fade_node_out(intro, 1, 18)
 	Utils.fade_node_in(hint, 1, 19)
