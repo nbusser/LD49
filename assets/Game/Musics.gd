@@ -9,7 +9,7 @@ const COLERE = "colereDeNeptune"
 const VALSE = "laValseDesFlots"
 const DYNAMIQUE = "JeuneEtDynamiquePirate"
 
-const MUSIC_ATTENUATION_STOP = -24
+const MUSIC_ATTENUATION_STOP = -20
 
 onready var currentIntroMusic = null
 onready var currentLoopMusic = $CalmBeforeTheStorm
@@ -97,7 +97,7 @@ func updateMusicToNext():
 	nextMusicName = null
 	
 func cutCurrentMusic():
-	if (currentMusicName == CALM || currentMusicName == DYNAMIQUE):
+	if (currentMusicName == CALM || currentMusicName == DYNAMIQUE || currentMusicName == VALSE):
 		currentMusic.disconnect("finished", self, "_on_CurrentMusic_finished")
 		musicToAttenuate = currentMusic
 		musicAttenuationStart = currentMusic.get_volume_db()

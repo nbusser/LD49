@@ -139,7 +139,7 @@ script = ExtResource( 16 )
 
 [node name="CalmBeforeTheStorm" type="AudioStreamPlayer" parent="Musics"]
 stream = ExtResource( 8 )
-volume_db = -5.0
+volume_db = -10.0
 
 [node name="StartColereDeNeptune" type="AudioStreamPlayer" parent="Musics"]
 stream = ExtResource( 11 )
@@ -155,15 +155,19 @@ volume_db = -4.0
 
 [node name="LoopLaValseDesFlots" type="AudioStreamPlayer" parent="Musics"]
 stream = ExtResource( 14 )
+volume_db = -4.0
 
 [node name="EndLaValseDesFlots" type="AudioStreamPlayer" parent="Musics"]
 stream = ExtResource( 9 )
+volume_db = -4.0
 
 [node name="JeuneEtDynamiquePirate" type="AudioStreamPlayer" parent="Musics"]
 stream = ExtResource( 12 )
+volume_db = -4.0
 
 [node name="StartLaValseDesFlots" type="AudioStreamPlayer" parent="Musics"]
 stream = ExtResource( 17 )
+volume_db = -4.0
 
 [connection signal="timeout" from="CutsceneHint" to="." method="_on_CutsceneHint_timeout"]
 [connection signal="restart" from="HudLayer/GameOver" to="." method="_on_GameOver_restart"]
