@@ -32,6 +32,9 @@ const DURATION_DECELERATE = 2
 
 var velocity = Vector2(0, 0)
 
+func _process(delta):
+	$ship/cannon.look_at(get_global_mouse_position())
+
 func go_cutscene_mode():
 	in_cutscene = true
 	$Camera2D.zoom = Vector2(0.8, 0.8)
