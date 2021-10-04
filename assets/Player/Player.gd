@@ -22,7 +22,7 @@ var shot_pressed = false
 
 var speed = Globals.PLAYER_DEFAULT_SPEED
 
-var health = Globals.PLAYER_MAX_HEALTH
+var health = Globals.PLAYER_MAX_HEALTH - 1
 var is_dying = false
 
 var accelerating = false
@@ -262,8 +262,9 @@ func _on_Tween_tween_completed(object, key):
 		self.speed = Globals.PLAYER_DEFAULT_SPEED
 
 func recover_health():
-	self.health += 1
-	emit_signal("health_changes", self.health)
+	if self.health < Globals.PLAYER_MAX_HEALTH:
+		self.health += 1
+		emit_signal("health_changes", self.health)
 
 func _on_Hitbox_body_entered(body):
 	if $InvincibilityTime.time_left <= 0:
