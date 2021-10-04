@@ -8,7 +8,7 @@ onready var Malfrat = preload("res://assets/Enemies/Malfrat/Malfrat.tscn")
 
 onready var primary_wave = $Wave0
 onready var secondary_wave = $Wave1
-var secondary_generated: bool
+var secondary_generated = true
 
 var next_buffer_offset
 var x_in_buffer
@@ -152,13 +152,19 @@ func _process(delta):
 	elapsed_time += delta
 	if elapsed_time > transition_time:
 		elapsed_time -= (int(elapsed_time/transition_time))*transition_time
-		print("coucou")
+		var vdiff = Vector2(Globals.buffer_size.x, 0)
 		if secondary_generated:
 			primary_wave.update_target_curve_fst()
-			secondary_wave.update_target_curve_snd(primary_wave.target_curve[0], primary_wave.target_curve[1])
+			secondary_wave.update_target_curve_snd(
+				primary_wave.target_curve[-2] - vdiff, primary_wave.target_curve[-1] - vdiff,
+				primary_wave.starting_curve[-2] - vdiff, primary_wave.starting_curve[-1] - vdiff
+			)
 		else:
 			secondary_wave.update_target_curve_fst()
-			primary_wave.update_target_curve_snd(secondary_wave.target_curve[0], secondary_wave.target_curve[1])
+			primary_wave.update_target_curve_snd(
+				secondary_wave.target_curve[-2] - vdiff, secondary_wave.target_curve[-1] - vdiff,
+				secondary_wave.starting_curve[-2] - vdiff, secondary_wave.starting_curve[-1] - vdiff
+			)
 	
 	primary_wave.timer_stage = elapsed_time/transition_time
 	secondary_wave.timer_stage = elapsed_time/transition_time

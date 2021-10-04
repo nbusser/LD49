@@ -11,7 +11,7 @@ var curve
 var transition_time = 5.0
 var amp_y = 300
 
-var timer_stage
+var timer_stage: float
 
 func init(curve):
 	$Area2D/CollisionPolygon2D.disabled = true
@@ -123,6 +123,8 @@ func _process(delta):
 	$Area2D/CollisionPolygon2D.disabled = false
 
 func update_target_curve_fst():
+	starting_curve = target_curve.duplicate()
+	
 	# First point can remain fixed (offscreen)
 	for i in range(1, curve.get_point_count()):
 		var prev_y = starting_curve[i-1].y
@@ -132,9 +134,14 @@ func update_target_curve_fst():
 			shift_y = -shift_y
 		target_curve[i] = Vector2(curr.x, prev_y + shift_y)
 
-func update_target_curve_snd(p0, p1):
+func update_target_curve_snd(p0, p1, p00, p11):
+	starting_curve = target_curve.duplicate()
+	
 	target_curve[0] = p0
 	target_curve[1] = p1
+	
+	starting_curve[0] = p00
+	starting_curve[1] = p11
 	
 	for i in range(2, curve.get_point_count()):
 		var prev_y = starting_curve[i-1].y
