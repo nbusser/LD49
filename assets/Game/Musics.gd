@@ -12,9 +12,9 @@ const DYNAMIQUE = "JeuneEtDynamiquePirate"
 onready var currentIntroMusic = null
 onready var currentLoopMusic = $CalmBeforeTheStorm
 onready var currentEndMusic = null
-onready var nextIntroMusic = $StartColereDeNeptune
-onready var nextLoopMusic = $LoopColereDeNeptune
-onready var nextEndMusic = $EndColereDeNeptune
+onready var nextIntroMusic = null
+onready var nextLoopMusic = null
+onready var nextEndMusic = null
 onready var currentMusic = null
 
 onready var currentMusicType = LOOP
@@ -27,6 +27,7 @@ func _ready():
 	$StartColereDeNeptune.stream.set_loop(false)
 	$LoopColereDeNeptune.stream.set_loop(true)
 	$EndColereDeNeptune.stream.set_loop(false)
+	$StartLaValseDesFlots.stream.set_loop(false)
 	$LoopLaValseDesFlots.stream.set_loop(true)
 	$EndLaValseDesFlots.stream.set_loop(false)
 	$JeuneEtDynamiquePirate.stream.set_loop(true)
@@ -78,7 +79,10 @@ func changeMusicToNext():
 		updateMusicToNext()
 		currentMusicType = END
 	else:
-		changeMusic(currentMusic)
+		nextIntroMusic = currentIntroMusic
+		nextLoopMusic = currentLoopMusic
+		nextEndMusic = currentEndMusic
+		changeMusicToNext()
 
 func updateMusicToNext():
 	currentMusicName = nextMusicName
@@ -99,6 +103,7 @@ func scheduleBeforeTheStorm():
 		nextIntroMusic = null
 		nextLoopMusic = null
 		nextEndMusic = null
+		nextMusicName = null
 
 func scheduleColereDeNeptune():
 	if currentMusicName != COLERE:
@@ -112,11 +117,12 @@ func scheduleColereDeNeptune():
 		nextIntroMusic = null
 		nextLoopMusic = null
 		nextEndMusic = null
+		nextMusicName = null
 	
 func scheduleValseDesFlots():
 	if currentMusicName != VALSE:
 		currentLoopMusic.stream.set_loop(false)
-		nextIntroMusic = null
+		nextIntroMusic = $StartLaValseDesFlots
 		nextLoopMusic = $LoopLaValseDesFlots
 		nextEndMusic = $EndLaValseDesFlots
 		nextMusicName = VALSE
@@ -125,6 +131,7 @@ func scheduleValseDesFlots():
 		nextIntroMusic = null
 		nextLoopMusic = null
 		nextEndMusic = null
+		nextMusicName = null
 	
 func scheduleJeuneEtDynamiquePirate():
 	if currentMusicName != DYNAMIQUE:
@@ -138,6 +145,7 @@ func scheduleJeuneEtDynamiquePirate():
 		nextIntroMusic = null
 		nextLoopMusic = null
 		nextEndMusic = null
+		nextMusicName = null
 		
 func menuEnter():
 	currentMusic.stream.set_stream_paused(true)
