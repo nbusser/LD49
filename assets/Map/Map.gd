@@ -66,6 +66,8 @@ func get_peaks_to_player(enemy: Node2D):
 
 	return peaks
 
+var Mouette = preload("res://assets/Powerup/Mouette.tscn")
+
 func _ready():
 	primary_wave.init($WaveGenerator.generate_buffer())
 	secondary_wave.init($WaveGenerator.generate_buffer())
@@ -73,6 +75,15 @@ func _ready():
 	secondary_generated = true
 	x_in_buffer = 4000
 	next_buffer_offset = 1
+
+func spawn_mouette():
+	var dir = 1 if randi()%2 else -1
+	var offset = randi()%100+300
+	
+	var mouette = Mouette.instance()
+	mouette.init($Player, $Player.global_position.y - offset, dir)
+	add_child(mouette)
+	
 	
 func spawn_enemy():
 	var malfrat = Malfrat.instance()
