@@ -43,15 +43,11 @@ func generate_buffer():
 	
 	curve.clear_points()
 	
-#	var control = get_control(pb_last - Vector2(Globals.buffer_size.x, 0), nb_second)
-#	curve.add_point(nb_first, control, -control)
-#	control = get_control(nb_first, nb_third)
-#	curve.add_point(nb_second, control, -control)
-#	curve.add_point(nb_third) # Control managed in loop
-
-	var init_control = get_control(pb_last - Vector2(Globals.buffer_size.x, 0), nb_second)
-	curve.add_point(nb_first, -init_control, init_control)
-	curve.add_point(nb_second)
+	var control = get_control(pb_last - Vector2(Globals.buffer_size.x, 0), nb_second)
+	curve.add_point(nb_first, -control, control)
+	control = get_control(nb_first, nb_third)
+	curve.add_point(nb_second, -control, control)
+	curve.add_point(nb_third) # Control managed in loop
 	
 	# 0.9: avoid generating the last point too close to the border
 	while curve.get_point_position(curve.get_point_count() - 1).x < 0.9*Globals.buffer_size.x:
@@ -59,14 +55,14 @@ func generate_buffer():
 	
 	pb_last = curve.get_point_position(curve.get_point_count() - 1)
 	nb_first = Vector2(0, pb_last.y + get_shift_y())
+	nb_second = Vector2(get_shift_x(), get_shift_y()) + nb_first
+	nb_third = Vector2(get_shift_x(), get_shift_y()) + nb_second
 	
-	var control = get_control(pb_last, Vector2(Globals.buffer_size.x, 0) + nb_first)
+	control = get_control(pb_last, Vector2(Globals.buffer_size.x, 0) + nb_first)
 	curve.set_point_in(curve.get_point_count() - 1, -control)
 	curve.set_point_out(curve.get_point_count() - 1, control)
 	
 	curve.add_point(Vector2(Globals.buffer_size.x, 0) + nb_first)
-	
-	nb_second = Vector2(get_shift_x(), get_shift_y()) + nb_first
 	curve.add_point(nb_second + Vector2(Globals.buffer_size.x, 0))
 	
 	return curve
