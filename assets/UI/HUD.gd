@@ -26,31 +26,14 @@ func start_intro_animation():
 	hint.modulate.a = 0
 	stats.modulate.a = 0
 	
-	fade_node_in(title, 1, 2)
-	fade_node_out(title, 1, 11)
-	fade_node_in(subtitle, 1, 4)
-	fade_node_out(subtitle, 1, 10)
-	fade_node_in(intro, 1, 12)
-	fade_node_out(intro, 1, 18)
-	fade_node_in(hint, 1, 19)
-	fade_node_in(hint, 1, 19)
-	
-
-func fade_node_in(node, duration = 1, delay = 0):
-	if (delay > 0):
-		yield(get_tree().create_timer(delay), "timeout")
-	$Tween.interpolate_property(node, "modulate", Color(1, 1, 1, 0), Color(1, 1, 1, 1),
-		duration,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-
-func fade_node_out(node, duration = 1, delay = 0):
-	if (delay > 0):
-		yield(get_tree().create_timer(delay), "timeout")
-	$Tween.interpolate_property(node, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0),
-		duration,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	Utils.fade_node_in(title, 1, 2)
+	Utils.fade_node_out(title, 1, 11)
+	Utils.fade_node_in(subtitle, 1, 4)
+	Utils.fade_node_out(subtitle, 1, 10)
+	Utils.fade_node_in(intro, 1, 12)
+	Utils.fade_node_out(intro, 1, 18)
+	Utils.fade_node_in(hint, 1, 19)
+	Utils.fade_node_in(hint, 1, 19)
 
 func start():
 	$Tween.stop_all()
@@ -76,8 +59,8 @@ func update_health(value):
 		health_bar.show()
 
 func hide_hint():
-	fade_node_out($title_screen, 1)
-	fade_node_in($stats, 1, 1)
+	Utils.fade_node_out($title_screen, 1)
+	Utils.fade_node_in($stats, 1, 1)
 
 
 func _on_sound_button_toggled(button_pressed):
