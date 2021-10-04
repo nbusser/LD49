@@ -117,28 +117,6 @@ one_shot = true
 [node name="HUD" parent="HudLayer" instance=ExtResource( 6 )]
 mouse_filter = 2
 
-[node name="time_slider" type="HSlider" parent="HudLayer"]
-margin_left = 12.7136
-margin_top = 52.6985
-margin_right = 209.713
-margin_bottom = 85.6985
-max_value = 1.0
-step = 0.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="weather_slider" type="HSlider" parent="HudLayer"]
-margin_left = 12.7136
-margin_top = 84.6985
-margin_right = 209.713
-margin_bottom = 117.699
-max_value = 1.0
-step = 0.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Weather" type="CanvasLayer" parent="."]
 
 [node name="rain" type="Particles2D" parent="Weather"]
@@ -175,6 +153,4 @@ stream = ExtResource( 9 )
 stream = ExtResource( 12 )
 
 [connection signal="timeout" from="CutsceneHint" to="." method="_on_CutsceneHint_timeout"]
-[connection signal="value_changed" from="HudLayer/time_slider" to="." method="_on_time_value_changed"]
-[connection signal="value_changed" from="HudLayer/weather_slider" to="." method="_on_weather_value_changed"]
 [connection signal="finished" from="Musics/CalmBeforeTheStorm" to="Musics" method="_on_CalmBeforeTheStorm_finished"]

@@ -1,7 +1,5 @@
 extends Node
 
-onready var time_slider = $HudLayer/time_slider
-onready var weather_slider = $HudLayer/weather_slider
 onready var bg_shader = $Background/bg.material
 onready var rain = $Weather/rain
 onready var clouds = $Background/clouds
@@ -16,8 +14,8 @@ onready var flag_shader = preload("res://assets/Shaders/flag_shader.tres")
 func _ready():
 	WorldEnv.connect("update_time", self, "_on_update_time")
 	WorldEnv.connect("update_weather", self, "_on_update_weather")
-	WorldEnv.set_time(time_slider.value)
-	WorldEnv.set_weather(weather_slider.value)
+	WorldEnv.set_time(0.0)
+	WorldEnv.set_weather(0.0)
 	# self.activate_cutscene()
 
 
@@ -48,12 +46,6 @@ func _input(event):
 		cutscene_mode = false
 		$HudLayer/HUD.hide_hint()
 
-
-func _on_time_value_changed(value):
-	WorldEnv.set_time(value)
-
-func _on_weather_value_changed(value):
-	WorldEnv.set_weather(value)
 
 func _on_CutsceneHint_timeout():
 	$HudLayer/HUD.show_hint()

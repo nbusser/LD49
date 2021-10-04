@@ -64,3 +64,28 @@ material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
+
+[node name="time_slider" type="HSlider" parent="."]
+margin_left = 12.7136
+margin_top = 52.6985
+margin_right = 209.713
+margin_bottom = 85.6985
+max_value = 1.0
+step = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="weather_slider" type="HSlider" parent="."]
+margin_left = 12.7136
+margin_top = 84.6985
+margin_right = 209.713
+margin_bottom = 117.699
+max_value = 1.0
+step = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="value_changed" from="time_slider" to="." method="_on_time_slider_value_changed"]
+[connection signal="value_changed" from="weather_slider" to="." method="_on_weather_slider_value_changed"]

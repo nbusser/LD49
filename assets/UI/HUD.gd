@@ -33,3 +33,10 @@ func hide_hint():
 	$Tween.interpolate_property($CenterContainer/Hint, "modulate",
 	$CenterContainer/Hint.modulate, Color(1, 1, 1, 0), 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$Tween.start()
+
+
+func _on_time_slider_value_changed(value):
+	WorldEnv.set_time(value)
+
+func _on_weather_slider_value_changed(value):
+	WorldEnv.set_weather(value)
