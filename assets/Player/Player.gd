@@ -219,6 +219,7 @@ func _on_Tween_tween_completed(object, key):
 				$DeathTimers/WaitToSinkTimer.start()
 		# Step 4: ship has finished to sink-rotate, go sink
 		elif object == $ship and key == ":rotation":
+			$SoundFx/SinkSound.play_sound()
 			$Tween.interpolate_property($ship, "position",
 			$ship.position, Vector2($ship.position.x, $ship.position.y + 300), 1.0,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -281,8 +282,9 @@ func _on_WaitToLowerFlag_timeout():
 func _on_WaitToRaiseWhiteFlagTimer_timeout():
 	$ship/flag.color = Color(1, 1, 1, 1)
 	flag_up(1.0)
-	
+
 func _on_WaitToSinkTimer_timeout():
+	$SoundFx/SinkRotateSound.play_sound()
 	var rotation_direction = 1 if $ship.rotation > 0 else -1
 	$Tween.interpolate_property($ship, "rotation",
 	$ship.rotation, rotation_direction, 1,

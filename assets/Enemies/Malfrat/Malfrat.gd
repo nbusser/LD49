@@ -60,6 +60,7 @@ func _on_Tween_tween_completed(object, key):
 			emit_signal("dead", self)
 			
 func _on_DyingAnimationTimer_timeout():
+	$SoundFx/SinkSound.play_sound()
 	$Tween.interpolate_property(self, "position",
 	self.position, Vector2(self.position.x, self.position.y + 1000), 4,
 	Tween.TRANS_LINEAR, Tween.EASE_IN)
@@ -70,6 +71,7 @@ func die():
 	
 	self.stop_firing()
 
+	$SoundFx/SinkRotateSound.play_sound()
 	var rotation_direction = 1 if $ship.rotation > 0 else -1
 	$Tween.interpolate_property(self, "rotation",
 	self.rotation, rotation_direction, 1,
