@@ -1,5 +1,8 @@
 extends Node
 
+const MALFRATS_TO_KILL = 30
+var killed_malfrats = 0
+
 onready var bg_shader = $ViewportContainer/Viewport/Background/bg.material
 onready var rain = $ViewportContainer/Viewport/Weather/rain
 onready var clouds = $ViewportContainer/Viewport/Background/clouds
@@ -21,6 +24,17 @@ func _ready():
 	player.connect("dead", self, "gameover")
 	self.activate_cutscene()
 	viewport_shader.set_shader_param("lightning_threshold", Globals.LIGHTNING_THRESHOLD)
+	$ViewportContainer/Viewport/Map.connect("malfrat_died", self, "increase_dead_enemies")
+
+func increase_dead_enemies():
+	killed_malfrats += 1
+	# TODO: update HUD
+	if killed_malfrats >= MALFRATS_TO_KILL:
+		win()
+
+func win():
+	# spawn win screen
+	pass
 
 func _process(delta):
 	WorldEnv.add_time(delta * Globals.TIME_MULTIPLIER)
