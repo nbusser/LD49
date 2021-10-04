@@ -114,9 +114,7 @@ func player_move_checks():
 func _process(delta):
 	if $Player.can_move():
 		$Player.update_velocity(Vector2(primary_wave.interpolate_baked(x_in_buffer))/delta - $Player.position/delta)
-		var new_closest = primary_wave.curve.get_closest_point($Player.position - primary_wave.global_position)
-		var new_shift = primary_wave.curve.get_closest_offset($Player.position - primary_wave.global_position)
-		x_in_buffer = new_shift + $Player.speed*delta
+		x_in_buffer = primary_wave.curve.get_closest_offset($Player.position - primary_wave.global_position) + $Player.speed*delta
 		$Player.position = Vector2(primary_wave.interpolate_baked(x_in_buffer))
 		player_move_checks()
 		
@@ -140,7 +138,8 @@ func _process(delta):
 				malfrat_ship.rotation = lerp(malfrat_ship.rotation, rot, 6*delta)
 				
 				malfrat.position = Vector2(malfrat.current_wave.interpolate_baked(malfrat.x_in_buffer))
-				malfrat.x_in_buffer += malfrat.speed*delta
+				
+				malfrat.x_in_buffer = malfrat.current_wave.curve.get_closest_offset(malfrat.position - malfrat.current_wave.global_position) + malfrat.speed*delta
 
 func _on_Map_spawn_cannonball(projectile, shoot_origin, shoot_velocity):
 	$Projectiles.add_child(projectile)
