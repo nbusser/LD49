@@ -54,15 +54,21 @@ func generate_buffer():
 		add_point(curve)
 	
 	pb_last = curve.get_point_position(curve.get_point_count() - 1)
-	nb_first = Vector2(0, pb_last.y + get_shift_y())
-	nb_second = Vector2(get_shift_x(), get_shift_y()) + nb_first
-	nb_third = Vector2(get_shift_x(), get_shift_y()) + nb_second
+	nb_first = Vector2(0, pb_last.y + 300)
+	nb_second = nb_first + Vector2(get_shift_x(), 300)
+	nb_third = nb_second + Vector2(get_shift_x(), get_shift_y())
 	
-	control = get_control(pb_last, Vector2(Globals.buffer_size.x, 0) + nb_first)
-	curve.set_point_in(curve.get_point_count() - 1, -control)
-	curve.set_point_out(curve.get_point_count() - 1, control)
+	var while_last_id = curve.get_point_count() - 1
+	control = get_control(curve.get_point_position(while_last_id - 1), pb_last)
+	curve.set_point_in(while_last_id, -control)
+	curve.set_point_out(while_last_id, control)
 	
-	curve.add_point(Vector2(Globals.buffer_size.x, 0) + nb_first)
-	curve.add_point(nb_second + Vector2(Globals.buffer_size.x, 0))
+	control = get_control(pb_last, nb_second + Vector2(Globals.buffer_size.x, 0))
+	curve.add_point(nb_first + Vector2(Globals.buffer_size.x, 0), -control, control)
+	control = get_control(nb_first + Vector2(Globals.buffer_size.x, 0), nb_third + Vector2(Globals.buffer_size.x, 0))
+	curve.add_point(nb_second + Vector2(Globals.buffer_size.x, 0), -control, control)
+	
+	for i in range(curve.get_point_count()):
+		print(curve.get_point_position(i))
 	
 	return curve

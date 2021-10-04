@@ -93,7 +93,8 @@ func _process(delta):
 	for i in range(self.curve.get_point_count()):
 		self.curve.set_point_position(
 			i,
-			starting_curve[i]*(1.0 - timer_stage) + target_curve[i]*timer_stage
+#			starting_curve[i]*(1.0 - timer_stage) + target_curve[i]*timer_stage
+			starting_curve[i]
 		)
 	
 	# Cheap
@@ -122,33 +123,35 @@ func _process(delta):
 	$Area2D/CollisionPolygon2D.disabled = false
 
 func update_target_curve_fst():
-	starting_curve = target_curve.duplicate()
-	
-	# First point can remain fixed (offscreen)
-	for i in range(1, curve.get_point_count()):
-		var prev_y = starting_curve[i-1].y
-		var curr = target_curve[i]
-		var shift_y = randi()%(2*amp_y)-amp_y
-		if (prev_y + shift_y < 50 || prev_y + shift_y > Globals.buffer_size.y - 50):
-			shift_y = -shift_y
-		target_curve[i] = Vector2(curr.x, prev_y + shift_y)
+	pass
+#	starting_curve = target_curve.duplicate()
+#
+#	# First point can remain fixed (offscreen)
+#	for i in range(1, curve.get_point_count()):
+#		var prev_y = starting_curve[i-1].y
+#		var curr = target_curve[i]
+#		var shift_y = randi()%(2*amp_y)-amp_y
+#		if (prev_y + shift_y < 50 || prev_y + shift_y > Globals.buffer_size.y - 50):
+#			shift_y = -shift_y
+#		target_curve[i] = Vector2(curr.x, prev_y + shift_y)
 
 func update_target_curve_snd(p0, p1, p00, p11):
-	starting_curve = target_curve.duplicate()
-	
-	target_curve[0] = p0
-	target_curve[1] = p1
-	
-	starting_curve[0] = p00
-	starting_curve[1] = p11
-	
-	for i in range(2, curve.get_point_count()):
-		var prev_y = starting_curve[i-1].y
-		var curr = target_curve[i]
-		var shift_y = randi()%(2*amp_y)-amp_y
-		if (prev_y + shift_y < 50 || prev_y + shift_y > Globals.buffer_size.y - 50):
-			shift_y = -shift_y
-		target_curve[i] = Vector2(curr.x, prev_y + shift_y)
+	pass
+#	starting_curve = target_curve.duplicate()
+#
+#	target_curve[0] = p0
+#	target_curve[1] = p1
+#
+#	starting_curve[0] = p00
+#	starting_curve[1] = p11
+#
+#	for i in range(2, curve.get_point_count()):
+#		var prev_y = starting_curve[i-1].y
+#		var curr = target_curve[i]
+#		var shift_y = randi()%(2*amp_y)-amp_y
+#		if (prev_y + shift_y < 50 || prev_y + shift_y > Globals.buffer_size.y - 50):
+#			shift_y = -shift_y
+#		target_curve[i] = Vector2(curr.x, prev_y + shift_y)
 
 func _on_Area2D_body_shape_entered(body_id, body, body_shape, local_shape):
 	if body.has_method("_on_hit_water"):

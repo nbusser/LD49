@@ -83,8 +83,7 @@ func spawn_mouette():
 	var mouette = Mouette.instance()
 	mouette.init($Player, $Player.global_position.y - offset, dir)
 	add_child(mouette)
-	
-	
+
 func spawn_enemy():
 	var malfrat = Malfrat.instance()
 	malfrat.get_node("ship/hull").material.set_shader_param("color", Vector3(randf(), randf(), randf()));
