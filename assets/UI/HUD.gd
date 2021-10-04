@@ -62,6 +62,9 @@ func hide_hint():
 	Utils.fade_node_out($title_screen, 1)
 	Utils.fade_node_in($stats, 1, 1)
 
+func hide_stats():
+	Utils.fade_node_out(stats, 1)
+
 
 func _on_sound_button_toggled(button_pressed):
 	# pressed means active sound

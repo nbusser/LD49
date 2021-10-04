@@ -40,7 +40,7 @@ func _process(delta):
 	WorldEnv.add_time(delta * Globals.TIME_MULTIPLIER)
 
 func gameover():
-	$HudLayer/HUD.hide()
+	$HudLayer/HUD.hide_stats()
 	$HudLayer/GameOver.show()
 
 func _on_update_time(value):
