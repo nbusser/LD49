@@ -180,6 +180,8 @@ func animate_cannon(loading_time):
 	var max_added_recoil = 60
 	var recoil_value = min_recoil + (loading_time*max_added_recoil)/Globals.MAX_CANNON_CHARGING_TIME
 	
+	cannon.fire()
+	
 	$Tween.interpolate_property(cannon_sprite, "position",
 		Vector2(-recoil_value, 0), Vector2(0, 0), SHOOT_COOLDOWN,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
