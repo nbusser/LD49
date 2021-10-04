@@ -91,36 +91,36 @@ func _process(delta):
 	for i in 3:
 		set_splash_pos(i)
 	
-	for i in range(self.curve.get_point_count()):
-		self.curve.set_point_position(
-			i,
-			starting_curve[i]*(1.0 - timer_stage) + target_curve[i]*timer_stage
-		)
+#	for i in range(self.curve.get_point_count()):
+#		self.curve.set_point_position(
+#			i,
+#			starting_curve[i]*(1.0 - timer_stage) + target_curve[i]*timer_stage
+#		)
 	
-	# Cheap
-	$WavePath.curve.bake_interval = 10
-	var baked = $WavePath.curve.get_baked_points()
-	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
-	baked.push_back(Vector2(0, 3000))
-	baked.push_back(Vector2(0, baked[0].y))
-	
-	# VFX
-	for i in 3:
-		waves[i].set_polygon(baked)
-		waves[i].material.set_shader_param("width", Globals.buffer_size.x)
-		waves[i].color = Color(colors[i])
-		splash_particles[i].modulate = Color(colors[i])
-		splash_particles[i].emitting = true
-		set_splash_amount(i, WorldEnv.get_weather())
-	
-	# Costly
-	$WavePath.curve.bake_interval = 150
-	baked = $WavePath.curve.get_baked_points()
-	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
-	baked.push_back(Vector2(0, 3000))
-	baked.push_back(Vector2(0, baked[0].y))
-	$Area2D/CollisionPolygon2D.set_polygon(baked)
-	$Area2D/CollisionPolygon2D.disabled = false
+#	# Cheap
+#	$WavePath.curve.bake_interval = 10
+#	var baked = $WavePath.curve.get_baked_points()
+#	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
+#	baked.push_back(Vector2(0, 3000))
+#	baked.push_back(Vector2(0, baked[0].y))
+#
+#	# VFX
+#	for i in 3:
+#		waves[i].set_polygon(baked)
+#		waves[i].material.set_shader_param("width", Globals.buffer_size.x)
+#		waves[i].color = Color(colors[i])
+#		splash_particles[i].modulate = Color(colors[i])
+#		splash_particles[i].emitting = true
+#		set_splash_amount(i, WorldEnv.get_weather())
+#
+#	# Costly
+#	$WavePath.curve.bake_interval = 150
+#	baked = $WavePath.curve.get_baked_points()
+#	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
+#	baked.push_back(Vector2(0, 3000))
+#	baked.push_back(Vector2(0, baked[0].y))
+#	$Area2D/CollisionPolygon2D.set_polygon(baked)
+#	$Area2D/CollisionPolygon2D.disabled = false
 
 func update_target_curve_fst():
 	starting_curve = target_curve.duplicate()

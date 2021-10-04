@@ -10,7 +10,7 @@ _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="ShaderMaterial" id=11]
 shader = ExtResource( 3 )
 shader_param/time_factor = 4.0
 shader_param/amplitude = 10.0
@@ -18,7 +18,7 @@ shader_param/mul = 10
 shader_param/width = 1.0
 shader_param/offset = 0.0
 
-[sub_resource type="Shader" id=8]
+[sub_resource type="Shader" id=12]
 code = "shader_type canvas_item;
 
 uniform float time_factor = 4;
@@ -35,8 +35,8 @@ void vertex() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id=9]
-shader = SubResource( 8 )
+[sub_resource type="ShaderMaterial" id=13]
+shader = SubResource( 12 )
 shader_param/time_factor = 4.0
 shader_param/amplitude = 10.0
 shader_param/mul = 10
@@ -65,10 +65,10 @@ script = ExtResource( 1 )
 curve = SubResource( 1 )
 
 [node name="wave" type="Polygon2D" parent="."]
-material = SubResource( 7 )
+material = SubResource( 11 )
 
 [node name="wave2" type="Polygon2D" parent="."]
-material = SubResource( 9 )
+material = SubResource( 13 )
 z_index = 1
 offset = Vector2( 100, 300 )
 

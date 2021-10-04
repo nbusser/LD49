@@ -12,6 +12,7 @@ onready var sail_shader = preload("res://assets/Shaders/sail_shader.tres")
 onready var flag_shader = preload("res://assets/Shaders/flag_shader.tres")
 
 func _ready():
+	randomize()
 	WorldEnv.connect("update_time", self, "_on_update_time")
 	WorldEnv.connect("update_weather", self, "_on_update_weather")
 	WorldEnv.set_time(0)
