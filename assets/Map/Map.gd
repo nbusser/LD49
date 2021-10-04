@@ -76,6 +76,11 @@ func _ready():
 	
 func spawn_enemy():
 	var malfrat = Malfrat.instance()
+	malfrat.get_node("ship/hull").material.set_shader_param("color", Vector3(randf(), randf(), randf()));
+	var scale = max(randf() * 2, .5)
+	malfrat.scale = Vector2(scale, scale)
+	malfrat.health = ceil(scale * 2)
+	malfrat.speed *= 3 - scale
 	
 	malfrat.set_player($Player)
 	
@@ -180,4 +185,4 @@ var difficulty = 1
 
 func _on_SpawnMalfratTimer_timeout():
 	spawn_enemy()
-	$SpawnMalfratTimer.start(randf() * 50 / difficulty)
+	$SpawnMalfratTimer.start(randf() * 35 / difficulty)

@@ -11,6 +11,7 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
 shader_param/blink = false
+shader_param/color = Vector3( 1, 1, 1 )
 
 [node name="ship" type="Node2D"]
 scale = Vector2( 0.8, 0.8 )
