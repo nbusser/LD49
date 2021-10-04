@@ -164,7 +164,7 @@ func shoot():
 	var loading_time = (OS.get_system_time_msecs() - shot_start_time)/1000.0
 	loading_time = clamp(loading_time, 0, Globals.MAX_CANNON_CHARGING_TIME)
 	
-	var shoot_velocity = velocity + shoot_dir * 500 * (0.5 + loading_time/Globals.MAX_CANNON_CHARGING_TIME)
+	var shoot_velocity = velocity + shoot_dir * 500 * (1.17 + loading_time/Globals.MAX_CANNON_CHARGING_TIME)
 	var projectile = Projectile.instance()
 	world.emit_signal("spawn_cannonball", projectile, shoot_origin, shoot_velocity)
 	
