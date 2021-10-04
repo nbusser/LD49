@@ -60,7 +60,11 @@ func _on_update_weather(value):
 	var lightness = 1 - 0.8 * value
 	clouds.modulate = Color(lightness, lightness, lightness, clouds.modulate.a)
 
-
+	if value == 0:
+		$RainSound.stop()
+	else:
+		if not $RainSound.playing:
+			$RainDelay.start()
 
 func activate_cutscene():
 	cutscene_mode = true
@@ -144,3 +148,7 @@ func _on_WeatherChangeTimer_timeout():
 
 func _on_VictoryScreen_restart():
 	restart()
+
+
+func _on_RainDelay_timeout():
+	$RainSound.play()

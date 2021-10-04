@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/Map/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Shaders/sky.gdshader" type="Shader" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/Music/start_la_valse_des_flots.ogg" type="AudioStream" id=17]
 [ext_resource path="res://assets/UI/GameOver.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/UI/VictoryScreen.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/Sound/rain.ogg" type="AudioStream" id=23]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 15 )
@@ -182,9 +183,17 @@ one_shot = true
 
 [node name="TweenWeatherChange" type="Tween" parent="."]
 
+[node name="RainSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 23 )
+volume_db = -4.771
+
+[node name="RainDelay" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="CutsceneHint" to="." method="_on_CutsceneHint_timeout"]
 [connection signal="restart" from="HudLayer/GameOver" to="." method="_on_GameOver_restart"]
 [connection signal="restart" from="HudLayer/VictoryScreen" to="." method="_on_VictoryScreen_restart"]
 [connection signal="tween_all_completed" from="Musics/TweenMusicChange" to="Musics" method="_on_TweenMusicChange_tween_all_completed"]
 [connection signal="tween_all_completed" from="Musics/TweenColereGronde" to="Musics" method="_on_TweenColereGronde_tween_all_completed"]
 [connection signal="timeout" from="WeatherChangeTimer" to="." method="_on_WeatherChangeTimer_timeout"]
+[connection signal="timeout" from="RainDelay" to="." method="_on_RainDelay_timeout"]
