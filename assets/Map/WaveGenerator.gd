@@ -1,6 +1,9 @@
 extends Node2D
 
-onready var previous_buffer_last_point = (2/3)*Globals.buffer_size
+var pb_last = Vector2(-400, 45)
+var nb_first = Vector2(0, 0)
+var nb_second = Vector2(400, 85)
+var nb_third = Vector2(800, 140)
 
 var amp_y = 300
 var next_y = 0
@@ -41,7 +44,7 @@ func generate_buffer():
 	var curve = Curve2D.new()
 	
 	curve.clear_points()
-	var init_control = get_control(previous_buffer_last_point - Vector2(Globals.buffer_size.x, 0), next_buffer_second_point)
+	var init_control = get_control(pb_last - Vector2(Globals.buffer_size.x, 0), next_buffer_second_point)
 	curve.add_point(Vector2(0, next_y), -init_control, init_control)
 	curve.add_point(next_buffer_second_point)
 	
@@ -49,10 +52,10 @@ func generate_buffer():
 	while curve.get_point_position(curve.get_point_count() - 1).x < 0.9*Globals.buffer_size.x:
 		add_point(curve)
 	
-	previous_buffer_last_point = curve.get_point_position(curve.get_point_count() - 1)
-	next_y = previous_buffer_last_point.y + get_shift_y()
+	pb_last = curve.get_point_position(curve.get_point_count() - 1)
+	next_y = pb_last.y + get_shift_y()
 	
-	var control = get_control(previous_buffer_last_point, Vector2(Globals.buffer_size.x, next_y))
+	var control = get_control(pb_last, Vector2(Globals.buffer_size.x, next_y))
 	curve.set_point_in(curve.get_point_count() - 1, -control)
 	curve.set_point_out(curve.get_point_count() - 1, control)
 	
