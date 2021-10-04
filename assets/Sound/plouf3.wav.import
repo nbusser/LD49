@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/plouf3.wav-e68de0f6a0d5dc16fa5b5586a8be7702.sample"
+
+[deps]
+
+source_file="res://assets/Sound/plouf3.wav"
+dest_files=[ "res://.import/plouf3.wav-e68de0f6a0d5dc16fa5b5586a8be7702.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
