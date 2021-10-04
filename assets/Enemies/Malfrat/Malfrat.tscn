@@ -54,7 +54,7 @@ position = Vector2( 0, -75 )
 shape = SubResource( 1 )
 
 [node name="Canon" type="Node2D" parent="."]
-position = Vector2( -91.282, -64.8137 )
+position = Vector2( -94.2251, -59.7683 )
 
 [node name="Trajectory" type="Line2D" parent="Canon"]
 material = SubResource( 3 )
