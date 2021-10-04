@@ -14,14 +14,15 @@ shader = ExtResource( 7 )
 shader_param/vignette = 0.0
 
 [sub_resource type="DynamicFont" id=2]
-size = 50
+size = 100
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=3]
+size = 24
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 26
+size = 48
 font_data = ExtResource( 2 )
 
 [node name="HUD" type="Control"]
@@ -43,72 +44,13 @@ __meta__ = {
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="TitleScreen" type="VBoxContainer" parent="."]
+[node name="stats" type="Control" parent="."]
 anchor_right = 1.0
-anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="TitleScreen"]
-margin_right = 1024.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 0, 100 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen"]
-margin_top = 104.0
-margin_right = 1024.0
-margin_bottom = 192.0
-
-[node name="Title" type="Label" parent="TitleScreen/VBoxContainer"]
-margin_right = 1024.0
-margin_bottom = 63.0
-custom_fonts/font = SubResource( 2 )
-text = "Red Flag"
-align = 1
-
-[node name="Label" type="Label" parent="TitleScreen/VBoxContainer"]
-margin_top = 67.0
-margin_right = 1024.0
-margin_bottom = 88.0
-custom_fonts/font = SubResource( 3 )
-text = "Matthieu Baty, Antoine Brûlé, Nicolas Busser, Valérian Coulon, Louis Mouhat"
-align = 1
-
-[node name="MarginContainer2" type="MarginContainer" parent="TitleScreen"]
-margin_top = 196.0
-margin_right = 1024.0
-margin_bottom = 409.0
-size_flags_vertical = 3
-
-[node name="Hint" type="Label" parent="TitleScreen"]
-margin_top = 413.0
-margin_right = 1024.0
-margin_bottom = 446.0
-size_flags_horizontal = 3
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 4 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Press E to hoist the red flag"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MarginContainer3" type="MarginContainer" parent="TitleScreen"]
-margin_top = 450.0
-margin_right = 1024.0
-margin_bottom = 600.0
-rect_min_size = Vector2( 0, 150 )
-
-[node name="Control" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CannonChargingBar" type="TextureProgress" parent="Control"]
+[node name="CannonChargingBar" type="TextureProgress" parent="stats"]
 margin_left = 14.0
 margin_top = 14.0
 margin_right = 214.0
@@ -125,7 +67,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="health_bar" type="TextureRect" parent="Control"]
+[node name="health_bar" type="TextureRect" parent="stats"]
 margin_left = 14.0
 margin_top = 60.0
 margin_right = 101.0
@@ -137,7 +79,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="sound_button" type="TextureButton" parent="Control"]
+[node name="always_on" type="Control" parent="."]
+anchor_right = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sound_button" type="TextureButton" parent="always_on"]
 margin_left = 978.0
 margin_top = 14.0
 margin_right = 1010.0
@@ -151,4 +99,59 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="toggled" from="Control/sound_button" to="." method="_on_sound_button_toggled"]
+[node name="title_screen" type="Control" parent="."]
+anchor_right = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="title_screen"]
+margin_top = 16.0
+margin_right = 1024.0
+margin_bottom = 142.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.458824, 0.0627451, 0.0627451, 1 )
+text = "Red Flag"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Subtitle" type="Label" parent="title_screen"]
+anchor_right = 1.0
+margin_top = 512.0
+custom_fonts/font = SubResource( 3 )
+text = "A game by the LUDUM DARONS team"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Intro" type="Label" parent="title_screen"]
+margin_top = 417.0
+margin_right = 1024.0
+margin_bottom = 516.0
+custom_fonts/font = SubResource( 3 )
+text = "Yarrr! The sea is no longer quiet...
+
+Enemies are coming! You must now defend yourself."
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hint" type="Label" parent="title_screen"]
+margin_top = 485.0
+margin_right = 1024.0
+margin_bottom = 546.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Press E to hoist the red flag"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="toggled" from="always_on/sound_button" to="." method="_on_sound_button_toggled"]
