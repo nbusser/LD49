@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-onready var particles = $Particles2D
+onready var splash_particles = $splash
 
 func _on_hit_water():
-	particles.emitting = true
+	splash_particles.emitting = true
