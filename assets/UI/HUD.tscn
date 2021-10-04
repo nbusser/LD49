@@ -14,15 +14,15 @@
 shader = ExtResource( 7 )
 shader_param/vignette = 0.0
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=6]
 size = 40
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=7]
 size = 100
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=8]
 size = 24
 font_data = ExtResource( 2 )
 
@@ -101,7 +101,7 @@ margin_left = 100.484
 margin_top = 128.368
 margin_right = 164.484
 margin_bottom = 179.368
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 6 )
 text = "?/?"
 align = 2
 
@@ -135,7 +135,7 @@ __meta__ = {
 margin_top = 16.0
 margin_right = 1024.0
 margin_bottom = 142.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0.458824, 0.0627451, 0.0627451, 1 )
 text = "Red Flag"
 align = 1
@@ -146,7 +146,7 @@ __meta__ = {
 [node name="Subtitle" type="Label" parent="title_screen"]
 anchor_right = 1.0
 margin_top = 512.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 8 )
 text = "A game by the LUDUM DARONS team"
 align = 1
 __meta__ = {
@@ -157,7 +157,7 @@ __meta__ = {
 margin_top = 417.0
 margin_right = 1024.0
 margin_bottom = 516.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 8 )
 text = "Yarrr! The sea is no longer quiet...
 
 Enemies are coming! You must now defend yourself."
