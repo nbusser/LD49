@@ -12,7 +12,7 @@ config_version=4
 
 config/name="Red Flag (Le temps des tempêtes)"
 run/main_scene="res://assets/Game/Game.tscn"
-config/icon="res://assets/UI/mouette.png"
+config/icon="res://icon.png"
 
 [autoload]
 
