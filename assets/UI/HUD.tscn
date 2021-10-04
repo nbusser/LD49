@@ -7,27 +7,41 @@
 [ext_resource path="res://assets/UI/progress_bg.png" type="Texture" id=5]
 [ext_resource path="res://assets/UI/progress_full.png" type="Texture" id=6]
 
-[sub_resource type="DynamicFont" id=1]
-size = 26
-font_data = ExtResource( 2 )
-
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
 
 uniform float vignette = 0.0;
 
 void fragment(){
-	COLOR.a = (pow((UV.x-0.5), 2) + pow((UV.y-0.5), 2)) * (vignette * 2.0);
+	float x = (UV.x*2.0)-1.0;
+	float y = (UV.y*2.0)-1.0;
+	float angle = atan(x, y);
+	float sin_angle = abs(sin(TIME * 10.0 + angle * 120.0));
+	
+	COLOR.a = floor(sin_angle/0.98) * (pow((UV.x-0.5), 2)/2.0 + pow((UV.y-0.5), 2)/2.0) * vignette;
 }"
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
 shader_param/vignette = 0.0
 
+[sub_resource type="DynamicFont" id=1]
+size = 26
+font_data = ExtResource( 2 )
+
 [node name="HUD" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vignette" type="ColorRect" parent="."]
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -68,16 +82,6 @@ size_flags_vertical = 7
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Press E to hoist the red flag"
-
-[node name="Vignette" type="ColorRect" parent="."]
-material = SubResource( 3 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 1
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="time_slider" type="HSlider" parent="."]
 margin_left = 12.7136
