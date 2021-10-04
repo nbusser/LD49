@@ -1,5 +1,6 @@
 extends Node2D
 
+signal pre_dead
 signal dead
 
 const MALFRAT_DANGER_DISTANCE = 600
@@ -68,6 +69,7 @@ func _on_DyingAnimationTimer_timeout():
 	$Tween.start()
 
 func die():
+	emit_signal("pre_dead")
 	is_dying = true
 	
 	self.stop_firing()
