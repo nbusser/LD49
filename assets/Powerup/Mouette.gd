@@ -66,6 +66,7 @@ func _on_Hitbox_body_entered(body):
 	$bird_left.hide()
 	$bird_right.hide()
 	$anchor.hide()
+	player.recover_health()
 	#get_anchor()
 
 func _on_DeathSound_finished():

@@ -256,6 +256,10 @@ func _on_Tween_tween_completed(object, key):
 		
 		self.speed = Globals.PLAYER_DEFAULT_SPEED
 
+func recover_health():
+	self.health += 1
+	emit_signal("health_changes")
+
 func _on_Hitbox_body_entered(body):
 	if $InvincibilityTime.time_left <= 0:
 		if not is_dying:
