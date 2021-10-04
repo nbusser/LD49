@@ -6,6 +6,7 @@ onready var colors = ["1f2baa", "121c91", "090f4b"]
 
 var starting_curve: Array
 var target_curve: Array
+var og: Array
 var curve
 
 var amp_y = 200
@@ -20,10 +21,12 @@ func init(curve):
 	
 	starting_curve.clear()
 	target_curve.clear()
+	og.clear()
 	
 	for i in range($WavePath.curve.get_point_count()):
 		starting_curve.push_back($WavePath.curve.get_point_position(i))
 		target_curve.push_back($WavePath.curve.get_point_position(i))
+		og.push_back($WavePath.curve.get_point_position(i))
 	
 	# Cheap
 	$WavePath.curve.bake_interval = 10
@@ -121,7 +124,7 @@ func update_target_curve_fst():
 	
 	# First point can remain fixed (offscreen)
 	for i in range(1, curve.get_point_count()):
-		var prev_y = starting_curve[i-1].y
+		var prev_y = og[i].y
 		var curr = target_curve[i]
 		var shift_y = randi()%(2*amp_y)-amp_y
 		if (prev_y + shift_y < 50 || prev_y + shift_y > 2000):
@@ -138,7 +141,7 @@ func update_target_curve_snd(p0, p1, p00, p11):
 	starting_curve[1] = p11
 
 	for i in range(2, curve.get_point_count()):
-		var prev_y = starting_curve[i-1].y
+		var prev_y = og[i].y
 		var curr = target_curve[i]
 		var shift_y = randi()%(2*amp_y)-amp_y
 		if (prev_y + shift_y < 50 || prev_y + shift_y > 2000):

@@ -77,6 +77,7 @@ func _ready():
 	x_in_buffer = 4000
 	next_buffer_offset = 1
 	set_amp_y(200)
+	WorldEnv.connect("update_weather", self, "_on_update_weather")
 
 func spawn_mouette():
 	var dir = 1 if randi()%2 else -1
@@ -216,3 +217,24 @@ func set_amp_y(amp):
 	amp_y = amp
 	$Wave0.amp_y = amp
 	$Wave1.amp_y = amp
+
+func _on_update_weather(val):
+	if (val < 0.1):
+		set_amp_y(250)
+		transition_time = 6.0
+	elif (val < 0.3):
+		set_amp_y(300)
+		transition_time = 5.0
+	elif (val < 0.5):
+		set_amp_y(300)
+		transition_time = 4.0
+	elif (val < 0.7):
+		set_amp_y(300)
+		transition_time = 3.5
+	elif (val < 0.9):
+		set_amp_y(300)
+		transition_time = 3.0
+	else:
+		set_amp_y(350)
+		transition_time = 3.0
+
