@@ -81,7 +81,7 @@ func cancel_animations():
 	$Tween.start()
 
 func accelerate():
-	$Tween.stop_all()
+	self.cancel_animations()
 
 	$Tween.interpolate_property(self, "speed",
 	self.speed, Globals.PLAYER_MAXIMUM_SPEED, DURATION_ACCELERATE,
@@ -101,7 +101,7 @@ func accelerate():
 	accelerating = true
 	
 func decelerate():
-	$Tween.stop_all()
+	self.cancel_animations()
 	
 	$Tween.interpolate_property(self, "speed",
 	self.speed, Globals.PLAYER_MINIMUM_SPEED, DURATION_DECELERATE,
