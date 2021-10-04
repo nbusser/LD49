@@ -8,6 +8,7 @@ onready var bg_shader = $Background/bg.material
 onready var rain = $Weather/rain
 onready var clouds = $Background/clouds
 onready var viewport_shader = $ViewportContainer.material
+onready var player = $ViewportContainer/Viewport/Map/Player
 
 var cutscene_mode = false
 
@@ -39,13 +40,13 @@ func update_weather(value):
 
 func activate_cutscene():
 	cutscene_mode = true
-	$Map/Player.go_cutscene_mode()
+	player.go_cutscene_mode()
 	$CutsceneHint.start()
 
 
 func _input(event):
 	if cutscene_mode and event.is_action_pressed("FlagUp"):
-		$Map/Player.flag_up()
+		player.flag_up()
 		cutscene_mode = false
 		$HudLayer/HUD.hide_hint()
 
