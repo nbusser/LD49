@@ -252,6 +252,11 @@ func die():
 	emit_signal("dying")
 	
 	$Tween.stop_all()
+	
+	$Tween.interpolate_method(self, "set_vignette",
+	vignette_shader.get_shader_param("vignette"), 0.0, 0.2,
+	Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()
 
 	$Tween.interpolate_property($Camera2D, "zoom",
 	$Camera2D.zoom, Vector2(0.8, 0.8), 0.5,
