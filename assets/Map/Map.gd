@@ -200,7 +200,8 @@ func _on_SpawnMalfratTimer_timeout():
 	
 	if !first_enemy_spawned:
 		first_enemy_spawned = true
-		_on_SpawnMouetteTimer_timeout()
+		$SpawnMouetteTimer.start(randf() * 35 * (1 + difficulty/2))
 
 func _on_SpawnMouetteTimer_timeout():
+	spawn_mouette()
 	$SpawnMouetteTimer.start(randf() * 35 * (1 + difficulty/2))
