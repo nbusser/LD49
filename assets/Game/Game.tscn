@@ -153,4 +153,3 @@ stream = ExtResource( 9 )
 stream = ExtResource( 12 )
 
 [connection signal="timeout" from="CutsceneHint" to="." method="_on_CutsceneHint_timeout"]
-[connection signal="finished" from="Musics/CalmBeforeTheStorm" to="Musics" method="_on_CalmBeforeTheStorm_finished"]

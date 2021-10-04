@@ -34,6 +34,8 @@ func _ready():
 	currentMusic.play()
 	currentMusic.connect("finished", self, "_on_CurrentMusic_finished")
 	
+	WorldEnv.connect("update_weather", self, "_on_update_weather")
+	
 	
 func _on_CurrentMusic_finished():
 	match currentMusicType:
@@ -83,27 +85,46 @@ func updateMusicToNext():
 	currentIntroMusic = nextIntroMusic
 	currentLoopMusic = nextLoopMusic
 	currentEndMusic = nextEndMusic
+	nextMusicName = null
 	
 func scheduleBeforeTheStorm():
-	if currentMusicName != CALM:
+	if currentMusicName != CALM || nextMusicName != CALM:
 		currentLoopMusic.stream.set_loop(false)
 		nextIntroMusic = null
 		nextLoopMusic = $CalmBeforeTheStorm
 		nextEndMusic = null
+		nextMusicName = CALM
+	elif nextMusicName != null:
+		currentLoopMusic.stream.set_loop(true)
+		nextIntroMusic = null
+		nextLoopMusic = null
+		nextEndMusic = null
 
 func scheduleColereDeNeptune():
-	if currentMusicName != COLERE:
+	if currentMusicName != COLERE || nextMusicName != COLERE:
 		currentLoopMusic.stream.set_loop(false)
 		nextIntroMusic = $StartColereDeNeptune
 		nextLoopMusic = $LoopColereDeNeptune
 		nextEndMusic = $EndColereDeNeptune
+		nextMusicName = COLERE
+	elif nextMusicName != null:
+		currentLoopMusic.stream.set_loop(true)
+		nextIntroMusic = null
+		nextLoopMusic = null
+		nextEndMusic = null
 	
 func scheduleValseDesFlots():
-	if currentMusicName != VALSE:
+	if currentMusicName != VALSE || nextMusicName != VALSE:
 		currentLoopMusic.stream.set_loop(false)
 		nextIntroMusic = null
 		nextLoopMusic = $LoopLaValseDesFlots
 		nextEndMusic = $EndLaValseDesFlots
+		nextMusicName = VALSE
+	elif nextMusicName != null:
+		currentLoopMusic.stream.set_loop(true)
+		nextIntroMusic = null
+		nextLoopMusic = null
+		nextEndMusic = null
 	
 func scheduleJeuneEtDynamiquePirate():
 	if currentMusicName != DYNAMIQUE:
@@ -111,3 +132,23 @@ func scheduleJeuneEtDynamiquePirate():
 		nextIntroMusic = null
 		nextLoopMusic = $JeuneEtDynamiquePirate
 		nextEndMusic = null
+		nextMusicName = DYNAMIQUE
+	elif nextMusicName != null:
+		currentLoopMusic.stream.set_loop(true)
+		nextIntroMusic = null
+		nextLoopMusic = null
+		nextEndMusic = null
+		
+func menuEnter():
+	currentMusic.stop()
+	$CalmBeforeTheStorm.play()
+
+func menuExit():
+	$CalmBeforeTheStorm.stop()
+	currentMusic.play()
+	
+func _on_update_weather(value):
+	if (value > 0.7):
+		scheduleColereDeNeptune()
+	else:
+		scheduleJeuneEtDynamiquePirate()
