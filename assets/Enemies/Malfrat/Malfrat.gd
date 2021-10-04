@@ -23,6 +23,7 @@ var health = MALFRAT_MAX_HEALTH
 
 func _ready():
 	$Canon/Trajectory.clear_points()
+	$ship/hull.material = $ship/hull.material.duplicate()
 
 func set_player(player):
 	self.player = player
