@@ -15,8 +15,8 @@ var x_in_buffer
 
 var elapsed_time = 0.0
 
-var transition_time = 5.0
-var amp_y = 300
+var transition_time = 7.0
+var amp_y = 200
 
 func get_peaks_to_player(enemy: Node2D):
 	var bakeds # quelque chose à redire ?
@@ -75,6 +75,7 @@ func _ready():
 	secondary_generated = true
 	x_in_buffer = 4000
 	next_buffer_offset = 1
+	set_amp_y(200)
 
 func spawn_mouette():
 	var dir = 1 if randi()%2 else -1
@@ -116,6 +117,11 @@ func player_move_checks():
 		if (($Player.position.x - (next_buffer_offset-1)*Globals.buffer_size.x) > 2*sight_loss_distance):
 			secondary_generated = true
 			secondary_wave.init($WaveGenerator.generate_buffer())
+			var vdiff = Vector2(Globals.buffer_size.x, 0)
+			secondary_wave.update_target_curve_snd(
+				primary_wave.target_curve[-2] - vdiff, primary_wave.target_curve[-1] - vdiff,
+				primary_wave.starting_curve[-2] - vdiff, primary_wave.starting_curve[-1] - vdiff
+			)
 			secondary_wave.position.x = next_buffer_offset*Globals.buffer_size.x
 	
 	elif ($Player.position.x > next_buffer_offset*Globals.buffer_size.x):
@@ -166,24 +172,24 @@ func _process(delta):
 	
 	elapsed_time += delta
 	
-#	if elapsed_time > transition_time:
-#		elapsed_time -= (int(elapsed_time/transition_time))*transition_time
-#		var vdiff = Vector2(Globals.buffer_size.x, 0)
-#		if secondary_generated:
-#			primary_wave.update_target_curve_fst()
-#			secondary_wave.update_target_curve_snd(
-#				primary_wave.target_curve[-2] - vdiff, primary_wave.target_curve[-1] - vdiff,
-#				primary_wave.starting_curve[-2] - vdiff, primary_wave.starting_curve[-1] - vdiff
-#			)
-#		else:
-#			secondary_wave.update_target_curve_fst()
-#			primary_wave.update_target_curve_snd(
-#				secondary_wave.target_curve[-2] - vdiff, secondary_wave.target_curve[-1] - vdiff,
-#				secondary_wave.starting_curve[-2] - vdiff, secondary_wave.starting_curve[-1] - vdiff
-#			)
+	if elapsed_time > transition_time:
+		elapsed_time -= (int(elapsed_time/transition_time))*transition_time
+		var vdiff = Vector2(Globals.buffer_size.x, 0)
+		if secondary_generated:
+			primary_wave.update_target_curve_fst()
+			secondary_wave.update_target_curve_snd(
+				primary_wave.target_curve[-2] - vdiff, primary_wave.target_curve[-1] - vdiff,
+				primary_wave.starting_curve[-2] - vdiff, primary_wave.starting_curve[-1] - vdiff
+			)
+		else:
+			secondary_wave.update_target_curve_fst()
+			primary_wave.update_target_curve_snd(
+				secondary_wave.target_curve[-2] - vdiff, secondary_wave.target_curve[-1] - vdiff,
+				secondary_wave.starting_curve[-2] - vdiff, secondary_wave.starting_curve[-1] - vdiff
+			)
 	
-#	primary_wave.timer_stage = elapsed_time/transition_time
-#	secondary_wave.timer_stage = elapsed_time/transition_time
+	primary_wave.timer_stage = elapsed_time/transition_time
+	secondary_wave.timer_stage = elapsed_time/transition_time
 
 func _on_Map_spawn_cannonball(projectile, shoot_origin, shoot_velocity):
 	$Projectiles.add_child(projectile)
@@ -203,3 +209,8 @@ func _on_SpawnMouetteTimer_timeout():
 	if (WorldEnv.get_weather() < Globals.LIGHTNING_THRESHOLD):
 		spawn_mouette()
 		$SpawnMouetteTimer.start(randf() * 35 * (1 + (WorldEnv.get_weather() + difficulty)/2))
+
+func set_amp_y(amp):
+	amp_y = amp
+	$Wave0.amp_y = amp
+	$Wave1.amp_y = amp

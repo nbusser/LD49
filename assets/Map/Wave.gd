@@ -8,19 +8,15 @@ var starting_curve: Array
 var target_curve: Array
 var curve
 
-var transition_time = 5.0
-var amp_y = 300
+var amp_y = 200
 
 var timer_stage: float
-
-func debug():
-	print($WavePath.curve.get_point_position(0), " ", curve.get_point_position(0))
 
 func init(curve):
 	$Area2D/CollisionPolygon2D.disabled = true
 	
-	self.curve = curve.duplicate()
-	$WavePath.curve = curve
+	self.curve = curve
+	$WavePath.curve = self.curve
 	
 	starting_curve.clear()
 	target_curve.clear()
@@ -28,14 +24,6 @@ func init(curve):
 	for i in range($WavePath.curve.get_point_count()):
 		starting_curve.push_back($WavePath.curve.get_point_position(i))
 		target_curve.push_back($WavePath.curve.get_point_position(i))
-	
-#	for i in range(1, curve.get_point_count() - 1):
-#		var prev_y = target_curve[i-1].y
-#		var curr = target_curve[i]
-#		var shift_y = randi()%(2*amp_y)-amp_y
-#		if (prev_y + shift_y < 50 || prev_y + shift_y > 800):
-#			shift_y = -shift_y
-#		target_curve[i] = Vector2(curr.x, prev_y + shift_y)
 	
 	# Cheap
 	$WavePath.curve.bake_interval = 10
@@ -97,67 +85,65 @@ func _process(delta):
 	for i in 3:
 		set_splash_pos(i)
 	
-#	for i in range(self.curve.get_point_count()):
-#		self.curve.set_point_position(
-#			i,
-##			starting_curve[i]*(1.0 - timer_stage) + target_curve[i]*timer_stage
-#			starting_curve[i]
-#		)
-#	# Cheap
-#	$WavePath.curve.bake_interval = 10
-#	var baked = $WavePath.curve.get_baked_points()
-#	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
-#	baked.push_back(Vector2(0, 3000))
-#	baked.push_back(Vector2(0, baked[0].y))
-#
-#	# VFX
-#	for i in 3:
-#		waves[i].set_polygon(baked)
-#		waves[i].material.set_shader_param("width", Globals.buffer_size.x)
-#		waves[i].color = Color(colors[i])
-#		splash_particles[i].modulate = Color(colors[i])
-#		splash_particles[i].emitting = true
-#		set_splash_amount(i, WorldEnv.get_weather())
-#
-#	# Costly
-#	$WavePath.curve.bake_interval = 150
-#	baked = $WavePath.curve.get_baked_points()
-#	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
-#	baked.push_back(Vector2(0, 3000))
-#	baked.push_back(Vector2(0, baked[0].y))
-#	$Area2D/CollisionPolygon2D.set_polygon(baked)
-#	$Area2D/CollisionPolygon2D.disabled = false
+	for i in range(self.curve.get_point_count()):
+		self.curve.set_point_position(
+			i,
+			starting_curve[i]*(1.0 - timer_stage) + target_curve[i]*timer_stage
+		)
+	
+	# Cheap
+	$WavePath.curve.bake_interval = 10
+	var baked = $WavePath.curve.get_baked_points()
+	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
+	baked.push_back(Vector2(0, 3000))
+	baked.push_back(Vector2(0, baked[0].y))
+
+	# VFX
+	for i in 3:
+		waves[i].set_polygon(baked)
+		waves[i].material.set_shader_param("width", Globals.buffer_size.x)
+		waves[i].color = Color(colors[i])
+		splash_particles[i].modulate = Color(colors[i])
+		splash_particles[i].emitting = true
+		set_splash_amount(i, WorldEnv.get_weather())
+
+	# Costly
+	$WavePath.curve.bake_interval = 150
+	baked = $WavePath.curve.get_baked_points()
+	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
+	baked.push_back(Vector2(0, 3000))
+	baked.push_back(Vector2(0, baked[0].y))
+	$Area2D/CollisionPolygon2D.set_polygon(baked)
+	$Area2D/CollisionPolygon2D.disabled = false
 
 func update_target_curve_fst():
-	pass
-#	starting_curve = target_curve.duplicate()
-#
-#	# First point can remain fixed (offscreen)
-#	for i in range(1, curve.get_point_count()):
-#		var prev_y = starting_curve[i-1].y
-#		var curr = target_curve[i]
-#		var shift_y = randi()%(2*amp_y)-amp_y
-#		if (prev_y + shift_y < 50 || prev_y + shift_y > Globals.buffer_size.y - 50):
-#			shift_y = -shift_y
-#		target_curve[i] = Vector2(curr.x, prev_y + shift_y)
+	starting_curve = target_curve.duplicate()
+	
+	# First point can remain fixed (offscreen)
+	for i in range(1, curve.get_point_count()):
+		var prev_y = starting_curve[i-1].y
+		var curr = target_curve[i]
+		var shift_y = randi()%(2*amp_y)-amp_y
+		if (prev_y + shift_y < 50 || prev_y + shift_y > 2000):
+			shift_y = -shift_y
+		target_curve[i] = Vector2(curr.x, prev_y + shift_y)
 
 func update_target_curve_snd(p0, p1, p00, p11):
-	pass
-#	starting_curve = target_curve.duplicate()
-#
-#	target_curve[0] = p0
-#	target_curve[1] = p1
-#
-#	starting_curve[0] = p00
-#	starting_curve[1] = p11
-#
-#	for i in range(2, curve.get_point_count()):
-#		var prev_y = starting_curve[i-1].y
-#		var curr = target_curve[i]
-#		var shift_y = randi()%(2*amp_y)-amp_y
-#		if (prev_y + shift_y < 50 || prev_y + shift_y > Globals.buffer_size.y - 50):
-#			shift_y = -shift_y
-#		target_curve[i] = Vector2(curr.x, prev_y + shift_y)
+	starting_curve = target_curve.duplicate()
+	
+	target_curve[0] = p0
+	target_curve[1] = p1
+	
+	starting_curve[0] = p00
+	starting_curve[1] = p11
+
+	for i in range(2, curve.get_point_count()):
+		var prev_y = starting_curve[i-1].y
+		var curr = target_curve[i]
+		var shift_y = randi()%(2*amp_y)-amp_y
+		if (prev_y + shift_y < 50 || prev_y + shift_y > 2000):
+			shift_y = -shift_y
+		target_curve[i] = Vector2(curr.x, prev_y + shift_y)
 
 func _on_Area2D_body_shape_entered(body_id, body, body_shape, local_shape):
 	if body.has_method("_on_hit_water"):
