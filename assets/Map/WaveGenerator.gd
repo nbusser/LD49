@@ -2,8 +2,6 @@ extends Node2D
 
 onready var previous_buffer_last_point = (2/3)*Globals.buffer_size
 
-var ct_x = 400
-var amp_x = 30
 var amp_y = 300
 var next_y = 0
 var next_buffer_second_point = Vector2(300, 460)
@@ -17,7 +15,7 @@ func get_control(previous, new):
 	return Vector2(strength * cos(angle), strength * sin(angle))
 
 func get_shift_x():
-	return ct_x + randi()%(2*amp_x) - amp_x
+	return 400
 
 func get_shift_y():
 	return (randi()%(2*amp_y) - amp_y)
