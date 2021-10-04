@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/cymbales.wav-3d5395c4c4351e4355797d617ecc81af.sample"
+
+[deps]
+
+source_file="res://assets/Sound/cymbales.wav"
+dest_files=[ "res://.import/cymbales.wav-3d5395c4c4351e4355797d617ecc81af.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

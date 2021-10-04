@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/canon1.wav-457acc23f122a77f6c566e2cca661cc9.sample"
+
+[deps]
+
+source_file="res://assets/Sound/canon1.wav"
+dest_files=[ "res://.import/canon1.wav-457acc23f122a77f6c566e2cca661cc9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
