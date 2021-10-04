@@ -100,10 +100,11 @@ __meta__ = {
 }
 
 [node name="sound_button" type="TextureButton" parent="."]
-margin_left = 979.638
-margin_top = 10.4053
-margin_right = 1011.64
-margin_bottom = 42.4053
+margin_left = 984.0
+margin_top = 8.0
+margin_right = 1016.0
+margin_bottom = 40.0
+mouse_default_cursor_shape = 2
 toggle_mode = true
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 3 )
