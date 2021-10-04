@@ -58,20 +58,20 @@ func _process(delta):
 	
 	position.x += delta*speed*dir
 
-func get_anchor():
-	#TODO To fix
-	var dest = get_tree().get_root().get_node("Game/HudLayer/HUD/CannonChargingBar").rect_global_position
-	$Tween.interpolate_property($AnchorSprite, "position",
+func _on_Hitbox_body_entered(body):
+	player.recover_health()
+	$SoundFx/DeathSound.play_sound()
+	
+	$Tween.interpolate_property(self.active_bird, "modulate",
+	self.active_bird.modulate, Color(1, 1, 1, 0), 0.8,
 	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
-
-func _on_Hitbox_body_entered(body):
-	$SoundFx/DeathSound.play_sound()
-	$bird_left.hide()
+	
 	$bird_right.hide()
+	
+	# TODO: tell UI to do anchor animation
 	$anchor.hide()
-	player.recover_health()
-	#get_anchor()
 
-func _on_DeathSound_finished():
-	queue_free()
+func _on_Tween_tween_completed(object, key):
+	if object == self.active_bird and key == ":modulate":
+		queue_free()

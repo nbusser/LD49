@@ -12,7 +12,7 @@
 [ext_resource path="res://assets/Powerup/mouette_flag.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 62.0859, 93.9166 )
+extents = Vector2( 58.3268, 65.9536 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 11 )
@@ -80,4 +80,4 @@ position = Vector2( 0, 67 )
 texture = ExtResource( 8 )
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
-[connection signal="finished" from="SoundFx/DeathSound" to="." method="_on_DeathSound_finished"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
