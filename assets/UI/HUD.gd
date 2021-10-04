@@ -37,12 +37,6 @@ func hide_hint():
 	$Tween.start()
 
 
-func _on_time_slider_value_changed(value):
-	WorldEnv.set_time(value)
-
-func _on_weather_slider_value_changed(value):
-	WorldEnv.set_weather(value)
-
 func _on_sound_button_toggled(button_pressed):
 	# pressed means active sound
 	Settings.set_is_sound_active(button_pressed)
