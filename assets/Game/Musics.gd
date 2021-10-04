@@ -39,8 +39,6 @@ func _ready():
 	currentMusic.play()
 	currentMusic.connect("finished", self, "_on_CurrentMusic_finished")
 	
-	WorldEnv.connect("update_weather", self, "_on_update_weather")
-	
 	
 func _on_CurrentMusic_finished():
 	match currentMusicType:
@@ -101,6 +99,16 @@ func cutCurrentMusic():
 		currentMusic.disconnect("finished", self, "_on_CurrentMusic_finished")
 		musicToAttenuate = currentMusic
 		musicAttenuationStart = currentMusic.get_volume_db()
+		$TweenMusicChange.interpolate_method(
+			musicToAttenuate,
+			"set_volume_db",
+			musicAttenuationStart,
+			MUSIC_ATTENUATION_STOP,
+			Globals.TRANSITION,
+			Tween.TRANS_LINEAR,
+			Tween.EASE_OUT
+			)
+		$TweenMusicChange.start()
 	
 func scheduleBeforeTheStorm():
 	if currentMusicName != CALM:
@@ -169,18 +177,7 @@ func menuExit():
 	$CalmBeforeTheStorm.stop()
 	currentMusic.stream.set_stream_paused(false)
 	
-func _on_update_weather(value):
-	if (value > Globals.LIGHTNING_THRESHOLD):
-		scheduleColereDeNeptune()
-	elif (value <= 0.2 && value != 0):
-		scheduleValseDesFlots()
-	elif (value > 0.2):
-		scheduleJeuneEtDynamiquePirate()
-
-func _process(delta):
-	if (musicToAttenuate != null):
-		musicToAttenuate.set_volume_db(musicToAttenuate.get_volume_db() - (delta * 4.0))
-		if (musicToAttenuate.get_volume_db() < MUSIC_ATTENUATION_STOP):
-			musicToAttenuate.set_volume_db(musicAttenuationStart)
-			currentMusic.stop()
-			changeMusicToNext()
+func _on_TweenMusicChange_tween_all_completed():
+		currentMusic.stop()
+		musicToAttenuate.set_volume_db(musicAttenuationStart)
+		changeMusicToNext()
