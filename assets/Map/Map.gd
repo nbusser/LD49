@@ -13,6 +13,17 @@ var secondary_generated: bool
 var next_buffer_offset
 var x_in_buffer
 
+var starting_curve_first: Array
+var target_curve_first: Array
+var starting_curve_second: Array
+var target_curve_second: Array
+var elapsed_time = 0.0
+
+var other
+
+var transition_time = 5.0
+var amp_y = 300
+
 func get_peaks_to_player(enemy: Node2D):
 	var bakeds # quelque chose à redire ?
 	var waves
@@ -64,8 +75,6 @@ func get_peaks_to_player(enemy: Node2D):
 func _ready():
 	primary_wave.init($WaveGenerator.generate_buffer())
 	secondary_wave.init($WaveGenerator.generate_buffer())
-	$Wave0.set_other($Wave1)
-	$Wave1.set_other($Wave0)
 	secondary_wave.position.x = Globals.buffer_size.x
 	secondary_generated = true
 	x_in_buffer = 4000
