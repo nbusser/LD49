@@ -40,7 +40,7 @@ func activate_cutscene():
 
 func _input(event):
 	if cutscene_mode and event.is_action_pressed("FlagUp"):
-		$Musics.scheduleJeuneEtDynamiquePirate()
+		$Musics.scheduleValseDesFlots()
 		player.flag_up()
 		cutscene_mode = false
 		$HudLayer/HUD.hide_hint()
