@@ -142,36 +142,37 @@ func player_move_checks():
 			malfrat.x_in_buffer = 0
 
 func _process(delta):
-	if $Player.can_move():
-		var x_in_buffer_before = primary_wave.curve.get_closest_offset($Player.position - primary_wave.global_position)
-		x_in_buffer = x_in_buffer_before + $Player.speed*delta
-		var displacement = Vector2(primary_wave.interpolate_baked(x_in_buffer)) - Vector2(primary_wave.interpolate_baked(x_in_buffer_before))
-		$Player.update_velocity(displacement/delta)
-		$Player.position = Vector2(primary_wave.interpolate_baked(x_in_buffer))
-		player_move_checks()
+	if !$Player.can_move():
+		return
+	var x_in_buffer_before = primary_wave.curve.get_closest_offset($Player.position - primary_wave.global_position)
+	x_in_buffer = x_in_buffer_before + $Player.speed*delta
+	var displacement = Vector2(primary_wave.interpolate_baked(x_in_buffer)) - Vector2(primary_wave.interpolate_baked(x_in_buffer_before))
+	$Player.update_velocity(displacement/delta)
+	$Player.position = Vector2(primary_wave.interpolate_baked(x_in_buffer))
+	player_move_checks()
+	
+	var closest = primary_wave.curve.get_closest_point($Player.position + Vector2(35, 0) - primary_wave.global_position)
+	var rot = closest.angle_to_point($Player.position - primary_wave.global_position)
+	rot = clamp(rot, -1.0, 1.0)
+	$Player/ship.rotation = lerp($Player/ship.rotation, rot, 3*delta)
+
+	# TODO: if tempête, caméra bourrée en faisant
+	# $Player.ship.rotation = lerp($Player.ship.rotation, rot, 5*delta)
+
+	for malfrat in $Malfrats.get_children():
+		if abs(malfrat.position.x - $Player.position.x) < malfrat.MALFRAT_DANGER_DISTANCE:
+			malfrat.accelerate()
 		
-		var closest = primary_wave.curve.get_closest_point($Player.position + Vector2(35, 0) - primary_wave.global_position)
-		var rot = closest.angle_to_point($Player.position - primary_wave.global_position)
-		rot = clamp(rot, -1.0, 1.0)
-		$Player/ship.rotation = lerp($Player/ship.rotation, rot, 3*delta)
-	
-		# TODO: if tempête, caméra bourrée en faisant
-		# $Player.ship.rotation = lerp($Player.ship.rotation, rot, 5*delta)
-	
-		for malfrat in $Malfrats.get_children():
-			if abs(malfrat.position.x - $Player.position.x) < malfrat.MALFRAT_DANGER_DISTANCE:
-				malfrat.accelerate()
+		if malfrat.can_move():
+			closest = malfrat.current_wave.curve.get_closest_point(malfrat.position + Vector2(35, 0) - malfrat.current_wave.global_position)
+			rot = closest.angle_to_point(malfrat.position - malfrat.current_wave.global_position)
+			rot = clamp(rot, -1.0, 1.0)
+			var malfrat_ship = malfrat.get_node("ship")
+			malfrat_ship.rotation = lerp(malfrat_ship.rotation, rot, 6*delta)
 			
-			if malfrat.can_move():
-				closest = malfrat.current_wave.curve.get_closest_point(malfrat.position + Vector2(35, 0) - malfrat.current_wave.global_position)
-				rot = closest.angle_to_point(malfrat.position - malfrat.current_wave.global_position)
-				rot = clamp(rot, -1.0, 1.0)
-				var malfrat_ship = malfrat.get_node("ship")
-				malfrat_ship.rotation = lerp(malfrat_ship.rotation, rot, 6*delta)
-				
-				malfrat.position = Vector2(malfrat.current_wave.interpolate_baked(malfrat.x_in_buffer))
-				
-				malfrat.x_in_buffer = malfrat.current_wave.curve.get_closest_offset(malfrat.position - malfrat.current_wave.global_position) + malfrat.speed*delta
+			malfrat.position = Vector2(malfrat.current_wave.interpolate_baked(malfrat.x_in_buffer))
+			
+			malfrat.x_in_buffer = malfrat.current_wave.curve.get_closest_offset(malfrat.position - malfrat.current_wave.global_position) + malfrat.speed*delta
 	
 	elapsed_time += delta
 	
