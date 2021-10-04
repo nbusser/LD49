@@ -113,8 +113,10 @@ func player_move_checks():
 
 func _process(delta):
 	if $Player.can_move():
-		$Player.update_velocity(Vector2(primary_wave.interpolate_baked(x_in_buffer))/delta - $Player.position/delta)
-		x_in_buffer = primary_wave.curve.get_closest_offset($Player.position - primary_wave.global_position) + $Player.speed*delta
+		var x_in_buffer_before = primary_wave.curve.get_closest_offset($Player.position - primary_wave.global_position)
+		x_in_buffer = x_in_buffer_before + $Player.speed*delta
+		var displacement = Vector2(primary_wave.interpolate_baked(x_in_buffer)) - Vector2(primary_wave.interpolate_baked(x_in_buffer_before))
+		$Player.update_velocity(displacement/delta)
 		$Player.position = Vector2(primary_wave.interpolate_baked(x_in_buffer))
 		player_move_checks()
 		
