@@ -8,20 +8,16 @@ var next_buffer_second_point = Vector2(300, 460)
 func _ready():
 	pass
 
-
 func get_control(previous, new):
 	var angle = (new - previous).angle()
 	var strength = 75 + randi()%20
 	return Vector2(strength * cos(angle), strength * sin(angle))
 
-
 func get_shift_x():
 	return 400
 
-
 func get_shift_y():
 	return (randi()%600-300)
-
 
 func add_point(curve):
 	var points_count = curve.get_point_count()

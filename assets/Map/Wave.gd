@@ -28,7 +28,7 @@ func init(curve):
 		target_curve[i] = Vector2(curr.x, prev_y + shift_y)
 	
 	# Cheap
-	$WavePath.curve.bake_interval = 5
+	$WavePath.curve.bake_interval = 10
 	var baked = $WavePath.curve.get_baked_points()
 	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
 	baked.push_back(Vector2(0, 3000))
@@ -112,7 +112,7 @@ func _process(delta):
 		)
 	
 	# Cheap
-	$WavePath.curve.bake_interval = 5
+	$WavePath.curve.bake_interval = 10
 	var baked = $WavePath.curve.get_baked_points()
 	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
 	baked.push_back(Vector2(0, 3000))
@@ -136,20 +136,6 @@ func _process(delta):
 	$Area2D/CollisionPolygon2D.set_polygon(baked)
 	$Area2D/CollisionPolygon2D.disabled = false
 
-#		# Cheap
-#	var baked = $WavePath.curve.get_baked_points()
-#	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
-#	baked.push_back(Vector2(0, 3000))
-#	baked.push_back(Vector2(0, baked[0].y))
-#
-#	# VFX
-#	for i in 3:
-#		waves[i].set_polygon(baked)
-#		waves[i].material.set_shader_param("width", Globals.buffer_size.x)
-#		waves[i].color = Color(colors[i])
-#		splash_particles[i].modulate = Color(colors[i])
-#		splash_particles[i].emitting = true
-#		set_splash_amount(i, Globals.current_weather)
 
 func _on_Area2D_body_shape_entered(body_id, body, body_shape, local_shape):
 	if body.has_method("_on_hit_water"):
