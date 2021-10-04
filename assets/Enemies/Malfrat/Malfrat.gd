@@ -75,7 +75,7 @@ func die():
 	$SoundFx/SinkRotateSound.play_sound()
 	var rotation_direction = 1 if $ship.rotation > 0 else -1
 	$Tween.interpolate_property(self, "rotation",
-	self.rotation, rotation_direction, 1,
+	self.rotation, rotation_direction+self.rotation, 1,
 	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 

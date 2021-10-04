@@ -322,6 +322,6 @@ func _on_WaitToSinkTimer_timeout():
 	$SoundFx/SinkRotateSound.play_sound()
 	var rotation_direction = 1 if $ship.rotation > 0 else -1
 	$Tween.interpolate_property($ship, "rotation",
-	$ship.rotation, rotation_direction, 1,
+	$ship.rotation, rotation_direction+$ship.rotation, 1,
 	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
