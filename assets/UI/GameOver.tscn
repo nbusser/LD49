@@ -5,6 +5,7 @@
 [ext_resource path="res://assets/UI/Button.tres" type="StyleBox" id=3]
 
 [sub_resource type="DynamicFont" id=1]
+size = 32
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -25,7 +26,7 @@ margin_top = 120.0
 margin_bottom = 205.0
 custom_fonts/font = SubResource( 1 )
 text = "You could not survive the dangers of the sea...
-Try again ! Yo ho !"
+Try again! Yo ho!"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
