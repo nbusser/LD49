@@ -11,6 +11,7 @@
 scale = Vector2( 0.8, 0.8 )
 
 [node name="cannon" parent="." instance=ExtResource( 3 )]
+position = Vector2( 87.0764, -58.1664 )
 
 [node name="hull" type="Sprite" parent="."]
 position = Vector2( 0, -94.568 )
