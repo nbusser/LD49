@@ -245,12 +245,22 @@ func _on_Tween_tween_completed(object, key):
 		self.speed = Globals.PLAYER_DEFAULT_SPEED
 
 func _on_Hitbox_body_entered(body):
-	if not is_dying:
-		$Camera2D.add_trauma(1.0)
-		$SoundFx/DamageSound.play_sound()
-		self.health -= 1
-		if self.health <= 0:
-			self.die()
+	if $InvincibilityTime.time_left <= 0:
+		if not is_dying:
+			$Camera2D.add_trauma(1.0)
+			$SoundFx/DamageSound.play_sound()
+			self.health -= 1
+			if self.health <= 0:
+				self.die()
+			else:
+				start_invincibility_period()
+			
+func start_invincibility_period():
+	$InvincibilityTime.start()
+	$ship/hull.material.set_shader_param("blink", true)
+
+func _on_InvincibilityTime_timeout():
+	$ship/hull.material.set_shader_param("blink", false)
 			
 func _on_DyingAnimationTimer_timeout():
 	$Tween.interpolate_property(self, "position",

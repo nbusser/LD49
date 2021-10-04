@@ -78,13 +78,19 @@ func die():
 	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
 
+func start_blinking():
+	$ship/hull.material.set_shader_param("blink", true)
+	$InvincibilityTime.start()
+
 func _on_Hitbox_body_entered(body):
-	$SoundFx/DamageSoundPlayer.play_sound()
-	if not is_dying:
-		self.health -= 1
-		# TODO: shader take dmg
-		if self.health <= 0:
-			die()
+	if $InvincibilityTime.time_left <= 0:
+		$SoundFx/DamageSoundPlayer.play_sound()
+		if not is_dying:
+			self.health -= 1
+			if self.health <= 0:
+				die()
+			else:
+				start_blinking()
 
 func _process(delta):
 	pass
@@ -171,3 +177,6 @@ func compute_trajectory():
 
 func _on_RefreshBalistic_timeout():
 	self.compute_trajectory()
+
+func _on_InvincibilityTime_timeout():
+	$ship/hull.material.set_shader_param("blink", false)

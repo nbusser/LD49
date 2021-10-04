@@ -75,6 +75,9 @@ one_shot = true
 [node name="RefreshBalistic" type="Timer" parent="."]
 wait_time = 0.1
 
+[node name="InvincibilityTime" type="Timer" parent="."]
+one_shot = true
+
 [node name="SoundFx" type="Node" parent="."]
 
 [node name="CanonSoundPlayer" type="AudioStreamPlayer" parent="SoundFx"]
@@ -99,3 +102,4 @@ sounds = [ ExtResource( 16 ), ExtResource( 15 ), ExtResource( 13 ) ]
 [connection signal="timeout" from="ShootCooldownTimer" to="." method="_on_ShootCooldownTimer_timeout"]
 [connection signal="timeout" from="PrepareShoot" to="." method="_on_PrepareShoot_timeout"]
 [connection signal="timeout" from="RefreshBalistic" to="." method="_on_RefreshBalistic_timeout"]
+[connection signal="timeout" from="InvincibilityTime" to="." method="_on_InvincibilityTime_timeout"]
