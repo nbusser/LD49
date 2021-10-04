@@ -1,17 +1,21 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/UI/ConvincingPirate.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/UI/Button.tres" type="StyleBox" id=2]
 [ext_resource path="res://assets/UI/VictoryScreen.gd" type="Script" id=3]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 70
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=4]
+size = 32
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
 size = 50
 font_data = ExtResource( 1 )
 
@@ -35,8 +39,8 @@ __meta__ = {
 anchor_right = 1.0
 margin_top = 18.2915
 margin_bottom = 107.292
-custom_fonts/font = SubResource( 3 )
-text = "Victory !"
+custom_fonts/font = SubResource( 1 )
+text = "Victory!"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -46,9 +50,9 @@ __meta__ = {
 anchor_right = 1.0
 margin_top = 181.449
 margin_bottom = 266.449
-custom_fonts/font = SubResource( 1 )
-text = "You defeated the privateers and could reach the land of Libertalia !
-Better get your liver ready for litters of rhum !"
+custom_fonts/font = SubResource( 4 )
+text = "You defeated the privateers and could reach the land of Libertalia!
+Better get your liver ready for gallons of rum!"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -58,8 +62,8 @@ __meta__ = {
 anchor_right = 1.0
 margin_top = 456.236
 margin_bottom = 597.236
-custom_fonts/font = SubResource( 1 )
-text = "A game by LUDUM DARONS:
+custom_fonts/font = SubResource( 2 )
+text = "A game by the LUDUM DARONS team
 Matthieu Baty - programming
 Nicolas Busser - programming, sound effects
 Antoine Brûlé - art, shaders, UI, programming
@@ -79,8 +83,8 @@ __meta__ = {
 }
 
 [node name="restart_button" type="Button" parent="CenterContainer"]
-margin_left = 419.0
-margin_right = 605.0
+margin_left = 390.0
+margin_right = 634.0
 margin_bottom = 67.0
 size_flags_horizontal = 0
 custom_styles/hover = ExtResource( 2 )
@@ -88,8 +92,8 @@ custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = ExtResource( 2 )
 custom_styles/disabled = ExtResource( 2 )
 custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Restart"
+text = "Play again"
 
 [connection signal="button_down" from="CenterContainer/restart_button" to="." method="_on_restart_button_button_down"]
