@@ -21,6 +21,9 @@ var is_dying = false
 const MALFRAT_MAX_HEALTH = 3
 var health = MALFRAT_MAX_HEALTH
 
+func _ready():
+	$Canon/Trajectory.clear_points()
+
 func set_player(player):
 	self.player = player
 	player.connect("dying", self, "stop_firing")

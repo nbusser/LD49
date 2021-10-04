@@ -1,10 +1,23 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/Enemies/Malfrat/Malfrat.gd" type="Script" id=1]
 [ext_resource path="res://assets/Ship/Ship2.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 97.7363, 90.7822 )
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+void fragment() {
+	float a = sin(TIME * 10.0 + SCREEN_UV.x * 60.0);
+	if (a < 0.8) {
+		COLOR.a = 0.05;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
 
 [node name="Malfrat" type="Node2D"]
 z_index = -1
@@ -29,7 +42,11 @@ shape = SubResource( 1 )
 position = Vector2( -91.282, -64.8137 )
 
 [node name="Trajectory" type="Line2D" parent="Canon"]
+material = SubResource( 3 )
 z_index = 5
+points = PoolVector2Array( 0, 0, -500, 0 )
+width = 8.0
+default_color = Color( 1, 1, 1, 1 )
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 wait_time = 2.0
