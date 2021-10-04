@@ -6,23 +6,10 @@
 [ext_resource path="res://assets/UI/sound_off.png" type="Texture" id=4]
 [ext_resource path="res://assets/UI/progress_bg.png" type="Texture" id=5]
 [ext_resource path="res://assets/UI/progress_full.png" type="Texture" id=6]
-
-[sub_resource type="Shader" id=2]
-code = "shader_type canvas_item;
-
-uniform float vignette = 0.0;
-
-void fragment(){
-	float x = (UV.x*2.0)-1.0;
-	float y = (UV.y*2.0)-1.0;
-	float angle = atan(x, y);
-	float sin_angle = abs(sin(TIME * 10.0 + angle * 120.0));
-	
-	COLOR.a = floor(sin_angle/0.98) * (pow((UV.x-0.5), 2)/2.0 + pow((UV.y-0.5), 2)/2.0) * vignette;
-}"
+[ext_resource path="res://assets/Shaders/vignette.gdshader" type="Shader" id=7]
 
 [sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+shader = ExtResource( 7 )
 shader_param/vignette = 0.0
 
 [sub_resource type="DynamicFont" id=1]
