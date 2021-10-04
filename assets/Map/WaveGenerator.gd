@@ -21,15 +21,20 @@ func get_shift_x():
 func get_shift_y():
 	return (randi()%(2*amp_y) - amp_y)
 
+func get_shift_y_halal(base):
+	var shift_y = get_shift_y()
+	if (base + shift_y < 50 || base + shift_y > 2000):
+		shift_y = -shift_y
+	return shift_y
+
 func add_point(curve):
 	var points_count = curve.get_point_count()
 	var previous = curve.get_point_position(points_count - 2)
 	var current = curve.get_point_position(points_count - 1)
 	
 	# Insert new point
-	var shift_y = get_shift_y()
-	if (current.y + shift_y < 50 || current.y + shift_y > 1000):
-		shift_y = -shift_y
+	var shift_y = get_shift_y_halal(current.y)
+	
 	var new = current + Vector2(get_shift_x(), shift_y)
 	curve.add_point(new)
 	
@@ -54,9 +59,9 @@ func generate_buffer():
 		add_point(curve)
 	
 	pb_last = curve.get_point_position(curve.get_point_count() - 1)
-	nb_first = Vector2(0, pb_last.y + 300)
-	nb_second = nb_first + Vector2(get_shift_x(), 300)
-	nb_third = nb_second + Vector2(get_shift_x(), get_shift_y())
+	nb_first = Vector2(0, pb_last.y + get_shift_y_halal(pb_last.y))
+	nb_second = nb_first + Vector2(get_shift_x(), get_shift_y_halal(nb_first.y))
+	nb_third = nb_second + Vector2(get_shift_x(), get_shift_y_halal(nb_second.y))
 	
 	var while_last_id = curve.get_point_count() - 1
 	control = get_control(curve.get_point_position(while_last_id - 1), pb_last)
