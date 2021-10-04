@@ -19,10 +19,14 @@ position = Vector2( 1500, 400 )
 
 [node name="Projectiles" type="Node2D" parent="."]
 
+[node name="Malfrats" type="Node2D" parent="."]
+
 [node name="SpawnMalfratTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Malfrats" type="Node2D" parent="."]
+[node name="SpawnMouetteTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="spawn_cannonball" from="." to="." method="_on_Map_spawn_cannonball"]
 [connection signal="timeout" from="SpawnMalfratTimer" to="." method="_on_SpawnMalfratTimer_timeout"]
+[connection signal="timeout" from="SpawnMouetteTimer" to="." method="_on_SpawnMouetteTimer_timeout"]

@@ -192,7 +192,15 @@ func _on_Map_spawn_cannonball(projectile, shoot_origin, shoot_velocity):
 	projectile.queue_free()
 
 var difficulty = 1
+var first_enemy_spawned = false
 
 func _on_SpawnMalfratTimer_timeout():
 	spawn_enemy()
 	$SpawnMalfratTimer.start(randf() * 35 / difficulty)
+	
+	if !first_enemy_spawned:
+		first_enemy_spawned = true
+		_on_SpawnMouetteTimer_timeout()
+
+func _on_SpawnMouetteTimer_timeout():
+	$SpawnMouetteTimer.start(randf() * 35 * (1 + difficulty/2))
