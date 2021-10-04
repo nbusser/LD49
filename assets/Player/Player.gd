@@ -10,6 +10,7 @@ onready var world = get_parent()
 onready var cannon = $ship/cannon
 onready var cannon_sprite = $ship/cannon/cannon
 onready var projectile_origin = $ship/cannon/projectile_origin
+onready var vignette_shader = get_tree().get_root().get_node("./Game/HudLayer/HUD/Vignette").material
 
 var can_shoot = true
 var shot_loading = false
@@ -70,9 +71,52 @@ func cancel_animations():
 	$Camera2D.zoom, $Camera2D.DEFAULT_ZOOM, 2.0,
 	Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
 	$Tween.start()
+	
+	$Tween.interpolate_method(self, "set_vignette",
+	vignette_shader.get_shader_param("vignette"), 0.0, 0.2,
+	Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()
+
+func accelerate():
+	$Tween.stop_all()
+
+	$Tween.interpolate_property(self, "speed",
+	self.speed, Globals.PLAYER_MAXIMUM_SPEED, DURATION_ACCELERATE,
+	Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()
+	
+	$Tween.interpolate_property($Camera2D, "zoom",
+	$Camera2D.zoom, $Camera2D.DEFAULT_ZOOM*0.90, DURATION_ACCELERATE,
+	Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()
+	
+	$Tween.interpolate_method(self, "set_vignette",
+	vignette_shader.get_shader_param("vignette"), 1.0, DURATION_ACCELERATE,
+	Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()
+	
+	accelerating = true
+	
+func decelerate():
+	$Tween.stop_all()
+	
+	$Tween.interpolate_property(self, "speed",
+	self.speed, Globals.PLAYER_MINIMUM_SPEED, DURATION_DECELERATE,
+	Tween.TRANS_LINEAR, Tween.EASE_OUT)
+	$Tween.start()
+	
+	$Tween.interpolate_property($Camera2D, "zoom",
+	$Camera2D.zoom, $Camera2D.DEFAULT_ZOOM*1.5, DURATION_DECELERATE,
+	Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()
+	
+	decelerating = true
 
 func update_velocity(v):
 	velocity = v
+
+func set_vignette(vignette_value):
+	self.vignette_shader.set_shader_param("vignette", vignette_value)
 
 func _input(event):
 	if not can_control():
@@ -93,38 +137,14 @@ func _input(event):
 		emit_signal("stop_charging_cannon")
 	
 	if event.is_action_pressed("Accelerate") and not is_sailing():
-		$Tween.stop_all()
-		
-		$Tween.interpolate_property(self, "speed",
-		self.speed, Globals.PLAYER_MAXIMUM_SPEED, DURATION_ACCELERATE,
-		Tween.TRANS_LINEAR, Tween.EASE_IN)
-		$Tween.start()
-		
-		$Tween.interpolate_property($Camera2D, "zoom",
-		$Camera2D.zoom, $Camera2D.DEFAULT_ZOOM*0.90, DURATION_ACCELERATE,
-		Tween.TRANS_LINEAR, Tween.EASE_IN)
-		$Tween.start()
-		
-		accelerating = true
+		accelerate()
 		
 	if event.is_action_released("Accelerate") and accelerating:
 		cancel_animations()
 		accelerating = false
 		
 	if event.is_action_pressed("Decelerate") and not is_sailing():
-		$Tween.stop_all()
-		
-		$Tween.interpolate_property(self, "speed",
-		self.speed, Globals.PLAYER_MINIMUM_SPEED, DURATION_DECELERATE,
-		Tween.TRANS_LINEAR, Tween.EASE_OUT)
-		$Tween.start()
-		
-		$Tween.interpolate_property($Camera2D, "zoom",
-		$Camera2D.zoom, $Camera2D.DEFAULT_ZOOM*1.5, DURATION_DECELERATE,
-		Tween.TRANS_LINEAR, Tween.EASE_IN)
-		$Tween.start()
-		
-		decelerating = true
+		decelerate()
 		
 	if event.is_action_released("Decelerate") and decelerating:
 		cancel_animations()
