@@ -197,12 +197,9 @@ var first_enemy_spawned = false
 
 func _on_SpawnMalfratTimer_timeout():
 	spawn_enemy()
-	$SpawnMalfratTimer.start(randf() * 35 / difficulty)
-	
-	if !first_enemy_spawned:
-		first_enemy_spawned = true
-		$SpawnMouetteTimer.start(randf() * 35 * (1 + difficulty/2))
+	$SpawnMalfratTimer.start(randf() * 35 / (WorldEnv.get_weather() + difficulty))
 
 func _on_SpawnMouetteTimer_timeout():
-	spawn_mouette()
-	$SpawnMouetteTimer.start(randf() * 35 * (1 + difficulty/2))
+	if (WorldEnv.get_weather() < Globals.LIGHTNING_THRESHOLD):
+		spawn_mouette()
+		$SpawnMouetteTimer.start(randf() * 35 * (1 + (WorldEnv.get_weather() + difficulty)/2))
