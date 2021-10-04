@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/Ship/cannon.svg" type="Texture" id=1]
 [ext_resource path="res://assets/Map/cloud.svg" type="Texture" id=2]
 [ext_resource path="res://assets/Ship/Cannon.gd" type="Script" id=3]
+[ext_resource path="res://assets/Shaders/aim.gdshader" type="Shader" id=4]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.042471, 0.104247, 0.413127, 1 )
@@ -29,6 +30,9 @@ damping_random = 0.5
 scale = 0.2
 color_ramp = SubResource( 2 )
 
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 4 )
+
 [node name="cannon" type="Node2D"]
 scale = Vector2( 0.2, 0.2 )
 script = ExtResource( 3 )
@@ -51,3 +55,13 @@ explosiveness = 0.9
 local_coords = false
 process_material = SubResource( 3 )
 texture = ExtResource( 2 )
+
+[node name="aim" type="ColorRect" parent="projectile_origin"]
+visible = false
+material = SubResource( 4 )
+margin_top = -20.0
+margin_right = 3000.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
