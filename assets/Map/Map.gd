@@ -152,5 +152,8 @@ func _on_Map_spawn_cannonball(projectile, shoot_origin, shoot_velocity):
 	yield(get_tree().create_timer(45), "timeout")
 	projectile.queue_free()
 
+var difficulty = 1
+
 func _on_SpawnMalfratTimer_timeout():
 	spawn_enemy()
+	$SpawnMalfratTimer.start(randf() * 50 / difficulty)
