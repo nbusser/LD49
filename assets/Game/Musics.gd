@@ -170,7 +170,7 @@ func menuExit():
 	currentMusic.stream.set_stream_paused(false)
 	
 func _on_update_weather(value):
-	if (value > 0.7):
+	if (value > Globals.LIGHTNING_THRESHOLD):
 		scheduleColereDeNeptune()
 	elif (value <= 0.2):
 		scheduleValseDesFlots()

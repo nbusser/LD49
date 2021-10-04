@@ -15,6 +15,7 @@ func _ready():
 	WorldEnv.connect("update_time", self, "_on_update_time")
 	WorldEnv.connect("update_weather", self, "_on_update_weather")
 	self.activate_cutscene()
+	viewport_shader.set_shader_param("lightning_threshold", Globals.LIGHTNING_THRESHOLD)
 
 func _on_update_time(value):
 	bg_shader.set_shader_param("time", value)

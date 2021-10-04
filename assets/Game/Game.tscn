@@ -18,12 +18,13 @@
 [ext_resource path="res://assets/Game/Musics.gd" type="Script" id=16]
 [ext_resource path="res://assets/Music/start_la_valse_des_flots.ogg" type="AudioStream" id=17]
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 15 )
 shader_param/time = 0.0
 shader_param/weather = 0.0
+shader_param/lightning_threshold = 0.0
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 2 )
 shader_param/day_color = Vector3( 0.4, 0.6, 1 )
 shader_param/night_color = Vector3( 0.1, 0.05, 0.3 )
@@ -32,10 +33,10 @@ shader_param/bad_weather_color = Vector3( 0.2, 0.25, 0.4 )
 shader_param/time = 0.0
 shader_param/weather = 1.0
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 5 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=4]
 emission_shape = 2
 emission_box_extents = Vector3( 0, 100, 0 )
 flag_disable_z = true
@@ -70,7 +71,7 @@ scale_random = 1.0
 script = ExtResource( 3 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
-material = SubResource( 4 )
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 stretch = true
@@ -88,7 +89,7 @@ render_target_update_mode = 3
 layer = -1
 
 [node name="bg" type="ColorRect" parent="ViewportContainer/Viewport/Background"]
-material = SubResource( 1 )
+material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -97,7 +98,7 @@ __meta__ = {
 }
 
 [node name="clouds" type="Particles2D" parent="ViewportContainer/Viewport/Background"]
-material = SubResource( 2 )
+material = SubResource( 3 )
 position = Vector2( 1237.3, 37.107 )
 amount = 20
 lifetime = 20.0
@@ -105,7 +106,7 @@ preprocess = 60.0
 speed_scale = 0.4
 visibility_rect = Rect2( -800, -100, 200, 200 )
 local_coords = false
-process_material = SubResource( 3 )
+process_material = SubResource( 4 )
 texture = ExtResource( 4 )
 
 [node name="Map" parent="ViewportContainer/Viewport" instance=ExtResource( 1 )]
