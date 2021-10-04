@@ -153,6 +153,15 @@ func _process(delta):
 	if elapsed_time > transition_time:
 		elapsed_time -= (int(elapsed_time/transition_time))*transition_time
 		print("coucou")
+		if secondary_generated:
+			primary_wave.update_target_curve_fst()
+			secondary_wave.update_target_curve_snd(primary_wave.target_curve[0], primary_wave.target_curve[1])
+		else:
+			secondary_wave.update_target_curve_fst()
+			primary_wave.update_target_curve_snd(secondary_wave.target_curve[0], secondary_wave.target_curve[1])
+	
+	primary_wave.timer_stage = elapsed_time/transition_time
+	secondary_wave.timer_stage = elapsed_time/transition_time
 
 func _on_Map_spawn_cannonball(projectile, shoot_origin, shoot_velocity):
 	$Projectiles.add_child(projectile)

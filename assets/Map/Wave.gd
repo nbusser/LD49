@@ -7,10 +7,11 @@ onready var colors = ["1f2baa", "121c91", "090f4b"]
 var starting_curve: Array
 var target_curve: Array
 var curve
-var elapsed_time = 0.0
 
 var transition_time = 5.0
 var amp_y = 300
+
+var timer_stage
 
 func init(curve):
 	$Area2D/CollisionPolygon2D.disabled = true
@@ -90,23 +91,6 @@ func _process(delta):
 	for i in 3:
 		set_splash_pos(i)
 	
-	elapsed_time = elapsed_time + delta
-	
-	if elapsed_time > transition_time:
-		elapsed_time -= (int(elapsed_time/transition_time))*transition_time
-		
-		starting_curve = target_curve
-		target_curve = starting_curve.duplicate()
-		
-		for i in range(1, curve.get_point_count() - 1):
-			var prev_y = starting_curve[i-1].y
-			var curr = target_curve[i]
-			var shift_y = randi()%(2*amp_y)-amp_y
-			if (prev_y + shift_y < 50 || prev_y + shift_y > Globals.buffer_size.y - 50):
-				shift_y = -shift_y
-			target_curve[i] = Vector2(curr.x, prev_y + shift_y)
-	
-	var timer_stage = elapsed_time/transition_time
 	for i in range(self.curve.get_point_count()):
 		self.curve.set_point_position(
 			i,
