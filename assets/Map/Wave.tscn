@@ -81,6 +81,7 @@ offset = Vector2( -100, 700 )
 space_override = 4
 linear_damp = 4.0
 monitorable = false
+collision_layer = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 modulate = Color( 0.0666667, 0.0941176, 0.74902, 1 )
