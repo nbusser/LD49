@@ -62,7 +62,8 @@ func _unhandled_input(event):
 
 func _on_CutsceneHint_timeout():
 	if cutscene_mode:
-		$HudLayer/HUD.show_hint()
+		#$HudLayer/HUD.show_hint()
+		pass
 
 func _on_GameOver_restart():
 	get_tree().change_scene("res://assets/Game/Game.tscn")
