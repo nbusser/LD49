@@ -15,6 +15,8 @@ enum DIRECTION {
 var dir
 var destination_x
 
+var active_bird
+
 func init(player, global_pos_y, direction=DIRECTION.LEFT_TO_RIGHT):
 	self.player = player
 	self.dir = direction
@@ -29,10 +31,12 @@ func init(player, global_pos_y, direction=DIRECTION.LEFT_TO_RIGHT):
 			speed = Globals.PLAYER_MAXIMUM_SPEED + 10
 			$bird_right.show()
 			$bird_left.hide()
+			active_bird = $bird_right
 		DIRECTION.RIGHT_TO_LEFT:
 			speed = Globals.PLAYER_DEFAULT_SPEED
 			$bird_left.show()
 			$bird_right.hide()
+			active_bird = $bird_left
 
 func _ready():
 	$SoundFx/SpawnSound.play()
