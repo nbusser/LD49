@@ -9,6 +9,8 @@ var target_curve: Array
 var curve
 var elapsed_time = 0.0
 
+var other
+
 var transition_time = 5.0
 var amp_y = 300
 
@@ -137,6 +139,9 @@ func _process(delta):
 	baked.push_back(Vector2(0, baked[0].y))
 	$Area2D/CollisionPolygon2D.set_polygon(baked)
 	$Area2D/CollisionPolygon2D.disabled = false
+
+func set_other(other):
+	self.other = other
 
 func _on_Area2D_body_shape_entered(body_id, body, body_shape, local_shape):
 	if body.has_method("_on_hit_water"):

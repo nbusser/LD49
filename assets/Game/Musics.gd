@@ -156,7 +156,6 @@ func menuExit():
 	currentMusic.stream.set_stream_paused(false)
 	
 func _on_update_weather(value):
-	print(value)
 	if (value > 0.7):
 		scheduleColereDeNeptune()
 	elif (value <= 0.2):

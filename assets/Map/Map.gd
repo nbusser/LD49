@@ -64,6 +64,8 @@ func get_peaks_to_player(enemy: Node2D):
 func _ready():
 	primary_wave.init($WaveGenerator.generate_buffer())
 	secondary_wave.init($WaveGenerator.generate_buffer())
+	$Wave0.set_other($Wave1)
+	$Wave1.set_other($Wave0)
 	secondary_wave.position.x = Globals.buffer_size.x
 	secondary_generated = true
 	x_in_buffer = 4000
