@@ -76,6 +76,7 @@ func die():
 	$Tween.start()
 
 func _on_Hitbox_body_entered(body):
+	$DamageSoundPlayer.play_sound()
 	if not is_dying:
 		self.health -= 1
 		# TODO: shader take dmg
@@ -86,6 +87,7 @@ func _process(delta):
 	pass
 		
 func shoot():
+	$CanonSoundPlayer.play_sound()
 	#var shoot_velocity = shoot_dir * 700 * (0.5 + loading_time/Globals.MAX_CANNON_CHARGING_TIME) + Vector2(speed, 0)
 	var projectile = Projectile.instance()
 	projectile.collision_layer = 2

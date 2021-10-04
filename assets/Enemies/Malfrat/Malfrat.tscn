@@ -1,7 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/Enemies/Malfrat/Malfrat.gd" type="Script" id=1]
 [ext_resource path="res://assets/Ship/Ship2.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/AudioBankPlayer.gd" type="Script" id=3]
+[ext_resource path="res://assets/Sound/canon2.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/Sound/canon1.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/Sound/canon0.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/Sound/hit3.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/Sound/hit.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/Sound/hit1.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/Sound/hit2.wav" type="AudioStream" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 97.7363, 90.7822 )
@@ -59,6 +67,14 @@ one_shot = true
 
 [node name="RefreshBalistic" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="CanonSoundPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource( 3 )
+sounds = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ) ]
+
+[node name="DamageSoundPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource( 3 )
+sounds = [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 7 ) ]
 
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="timeout" from="DyingAnimationTimer" to="." method="_on_DyingAnimationTimer_timeout"]
