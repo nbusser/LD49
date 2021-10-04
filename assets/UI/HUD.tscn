@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/UI/HUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/UI/ConvincingPirate.ttf" type="DynamicFontData" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/UI/progress_bg.png" type="Texture" id=5]
 [ext_resource path="res://assets/UI/progress_full.png" type="Texture" id=6]
 [ext_resource path="res://assets/Shaders/vignette.gdshader" type="Shader" id=7]
+[ext_resource path="res://icon.png" type="Texture" id=8]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -14,6 +15,14 @@ shader_param/vignette = 0.0
 
 [sub_resource type="DynamicFont" id=2]
 size = 26
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
 font_data = ExtResource( 2 )
 
 [node name="HUD" type="Control"]
@@ -29,22 +38,6 @@ material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CannonChargingBar" type="TextureProgress" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 328.0
-margin_bottom = 40.0
-texture_under = ExtResource( 5 )
-texture_progress = ExtResource( 6 )
-nine_patch_stretch = true
-stretch_margin_left = 8
-stretch_margin_top = 8
-stretch_margin_right = 8
-stretch_margin_bottom = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -70,11 +63,90 @@ custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Press E to hoist the red flag"
 
-[node name="sound_button" type="TextureButton" parent="."]
-margin_left = 984.0
-margin_top = 8.0
-margin_right = 1016.0
-margin_bottom = 40.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 14.0
+margin_right = 1024.0
+margin_bottom = 126.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 10.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 14.0
+margin_right = 214.0
+margin_bottom = 112.0
+
+[node name="CannonChargingBar" type="TextureProgress" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 200, 30 )
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 6 )
+nine_patch_stretch = true
+stretch_margin_left = 8
+stretch_margin_top = 8
+stretch_margin_right = 8
+stretch_margin_bottom = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 34.0
+margin_right = 200.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 200.0
+margin_bottom = 112.0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 8 )
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 68.0
+margin_top = 19.0
+margin_right = 82.0
+margin_bottom = 45.0
+custom_fonts/font = SubResource( 3 )
+text = "x"
+
+[node name="HealthLabel" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 86.0
+margin_top = 19.0
+margin_right = 96.0
+margin_bottom = 45.0
+custom_fonts/font = SubResource( 4 )
+text = "?"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 218.0
+margin_right = 974.0
+margin_bottom = 112.0
+size_flags_horizontal = 3
+
+[node name="sound_button" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 978.0
+margin_right = 1010.0
+margin_bottom = 112.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 toggle_mode = true
@@ -84,4 +156,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="toggled" from="sound_button" to="." method="_on_sound_button_toggled"]
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 1014.0
+margin_right = 1024.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 10, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/sound_button" to="." method="_on_sound_button_toggled"]

@@ -4,6 +4,7 @@ signal start_charging_cannon
 signal stop_charging_cannon
 signal dying
 signal dead
+signal health_changes
 
 onready var Projectile = preload("res://assets/Projectile/Projectile.tscn")
 
@@ -259,6 +260,7 @@ func _on_Hitbox_body_entered(body):
 			$Camera2D.add_trauma(1.0)
 			$SoundFx/DamageSound.play_sound()
 			self.health -= 1
+			emit_signal("health_changes")
 			if self.health <= 0:
 				self.die()
 			else:
