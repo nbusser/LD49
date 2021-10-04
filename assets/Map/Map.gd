@@ -19,6 +19,12 @@ var elapsed_time = 0.0
 var transition_time = 7.0
 var amp_y = 200
 
+func freeze_win():
+	$SpawnMalfratTimer.stop()
+	$Player.in_cutscene = true
+	for m in $Malfrats.get_children():
+		m.die()
+
 func get_peaks_to_player(enemy: Node2D):
 	var bakeds # quelque chose à redire ?
 	var waves

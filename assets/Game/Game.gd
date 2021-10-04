@@ -30,12 +30,13 @@ func _ready():
 func increase_dead_enemies():
 	killed_malfrats += 1
 	$HudLayer/HUD.update_win_counter(killed_malfrats, MALFRATS_TO_KILL)
-	if killed_malfrats >= MALFRATS_TO_KILL:
+	if killed_malfrats == MALFRATS_TO_KILL:
 		win()
 
 func win():
 	$HudLayer/HUD.hide_stats()
 	$HudLayer/VictoryScreen.show()
+	$ViewportContainer/Viewport/Map.freeze_win()
 
 func _process(delta):
 	WorldEnv.add_time(delta * Globals.TIME_MULTIPLIER)
