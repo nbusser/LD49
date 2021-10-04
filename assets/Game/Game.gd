@@ -38,7 +38,7 @@ func activate_cutscene():
 	player.go_cutscene_mode()
 	$CutsceneHint.start()
 
-func _input(event):
+func _unhandled_input(event):
 	if cutscene_mode and event.is_action_pressed("FlagUp"):
 		$Musics.scheduleValseDesFlots()
 		player.flag_up()
