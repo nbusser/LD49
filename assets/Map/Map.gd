@@ -87,7 +87,7 @@ func _ready():
 
 func spawn_mouette():
 	var dir = 1 if randi()%2 else -1
-	var offset = randi()%300+300
+	var offset = randi()%300+500
 	
 	var mouette = Mouette.instance()
 	mouette.init($Player, offset, dir)

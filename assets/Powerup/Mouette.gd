@@ -60,7 +60,7 @@ func _process(delta):
 	else:
 		velocity.y -= (max_speed_y/2)*delta
 		
-	velocity.y = clamp(velocity.y, 0, max_speed_y)
+	velocity.y = clamp(velocity.y, -max_speed_y, max_speed_y)
 		
 	position.x += delta*velocity.x*dir
 	position.y -= delta*velocity.y
