@@ -8,5 +8,6 @@ void fragment(){
 	float angle = atan(x, y);
 	float sin_angle = abs(sin(TIME * 10.0 + angle * 120.0));
 	
-	COLOR.a = floor(sin_angle/0.98) * (pow((UV.x-0.5), 2)/2.0 + pow((UV.y-0.5), 2)/2.0) * vignette;
+	float dist = pow((UV.x-0.5), 2) + pow((UV.y-0.5), 2);
+	COLOR.a = floor(sin_angle/0.98) * (max(0, dist - 0.15) / 2.0) * vignette;
 }
