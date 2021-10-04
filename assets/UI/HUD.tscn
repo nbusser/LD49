@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/UI/HUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/UI/ConvincingPirate.ttf" type="DynamicFontData" id=2]
@@ -8,20 +8,25 @@
 [ext_resource path="res://assets/UI/progress_full.png" type="Texture" id=6]
 [ext_resource path="res://assets/Shaders/vignette.gdshader" type="Shader" id=7]
 [ext_resource path="res://assets/UI/anchor.svg" type="Texture" id=8]
+[ext_resource path="res://assets/UI/icon_malfrat.png" type="Texture" id=9]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
 shader_param/vignette = 0.0
 
 [sub_resource type="DynamicFont" id=2]
-size = 100
+size = 40
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 24
+size = 100
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
+size = 24
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
 size = 48
 font_data = ExtResource( 2 )
 
@@ -79,6 +84,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Count" type="TextureRect" parent="stats"]
+margin_left = 14.0
+margin_top = 120.736
+margin_right = 662.0
+margin_bottom = 712.736
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 9 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WinCounter" type="Label" parent="stats"]
+margin_left = 100.484
+margin_top = 128.368
+margin_right = 164.484
+margin_bottom = 179.368
+custom_fonts/font = SubResource( 2 )
+text = "?/?"
+align = 2
+
 [node name="always_on" type="Control" parent="."]
 anchor_right = 1.0
 __meta__ = {
@@ -109,7 +135,7 @@ __meta__ = {
 margin_top = 16.0
 margin_right = 1024.0
 margin_bottom = 142.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.458824, 0.0627451, 0.0627451, 1 )
 text = "Red Flag"
 align = 1
@@ -120,7 +146,7 @@ __meta__ = {
 [node name="Subtitle" type="Label" parent="title_screen"]
 anchor_right = 1.0
 margin_top = 512.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "A game by the LUDUM DARONS team"
 align = 1
 __meta__ = {
@@ -131,7 +157,7 @@ __meta__ = {
 margin_top = 417.0
 margin_right = 1024.0
 margin_bottom = 516.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Yarrr! The sea is no longer quiet...
 
 Enemies are coming! You must now defend yourself."
@@ -146,7 +172,7 @@ margin_right = 1024.0
 margin_bottom = 546.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Press E to hoist the red flag"
 align = 1
