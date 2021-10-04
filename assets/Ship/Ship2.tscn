@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/Shaders/sail_shader.tres" type="Material" id=6]
 [ext_resource path="res://assets/Shaders/blink_hit.gdshader" type="Shader" id=7]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
 shader_param/blink = false
 
@@ -20,7 +20,7 @@ position = Vector2( -93.1534, -74.9576 )
 rotation = -2.87979
 
 [node name="hull" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = SubResource( 1 )
 position = Vector2( 0, -94.568 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 1 )

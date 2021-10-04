@@ -14,8 +14,13 @@ onready var flag_shader = preload("res://assets/Shaders/flag_shader.tres")
 func _ready():
 	WorldEnv.connect("update_time", self, "_on_update_time")
 	WorldEnv.connect("update_weather", self, "_on_update_weather")
+	player.connect("dead", self, "gameover")
 	self.activate_cutscene()
 	viewport_shader.set_shader_param("lightning_threshold", Globals.LIGHTNING_THRESHOLD)
+	
+func gameover():
+	$HudLayer/HUD.hide()
+	$HudLayer/GameOver.show()
 
 func _on_update_time(value):
 	bg_shader.set_shader_param("time", value)
@@ -47,3 +52,6 @@ func _unhandled_input(event):
 func _on_CutsceneHint_timeout():
 	if cutscene_mode:
 		$HudLayer/HUD.show_hint()
+
+func _on_GameOver_restart():
+	get_tree().change_scene("res://assets/Game/Game.tscn")

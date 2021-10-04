@@ -3,6 +3,7 @@ extends Node2D
 signal start_charging_cannon
 signal stop_charging_cannon
 signal dying
+signal dead
 
 onready var Projectile = preload("res://assets/Projectile/Projectile.tscn")
 
@@ -230,6 +231,10 @@ func _on_Tween_tween_completed(object, key):
 			$ship.position, Vector2($ship.position.x, $ship.position.y + 300), 1.0,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			$Tween.start()
+		# Step 5: ship is sunk, player is dead now
+		elif object == $ship and key == ":position":
+			emit_signal("dead")
+			self.hide()
 
 	elif object == $ship/flag:
 		var normal_zoom = Vector2(3.0, 3.0)

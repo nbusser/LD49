@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/Map/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Shaders/sky.gdshader" type="Shader" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/Shaders/viewport.gdshader" type="Shader" id=15]
 [ext_resource path="res://assets/Game/Musics.gd" type="Script" id=16]
 [ext_resource path="res://assets/Music/start_la_valse_des_flots.ogg" type="AudioStream" id=17]
+[ext_resource path="res://assets/UI/GameOver.tscn" type="PackedScene" id=18]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 15 )
@@ -130,6 +131,9 @@ layer = 10
 
 [node name="HUD" parent="HudLayer" instance=ExtResource( 6 )]
 
+[node name="GameOver" parent="HudLayer" instance=ExtResource( 18 )]
+visible = false
+
 [node name="Musics" type="Node" parent="."]
 script = ExtResource( 16 )
 
@@ -162,3 +166,4 @@ stream = ExtResource( 12 )
 stream = ExtResource( 17 )
 
 [connection signal="timeout" from="CutsceneHint" to="." method="_on_CutsceneHint_timeout"]
+[connection signal="restart" from="HudLayer/GameOver" to="." method="_on_GameOver_restart"]
