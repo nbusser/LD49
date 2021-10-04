@@ -5,6 +5,7 @@ onready var rain = $ViewportContainer/Viewport/Weather/rain
 onready var clouds = $ViewportContainer/Viewport/Background/clouds
 onready var viewport_shader = $ViewportContainer.material
 onready var player = $ViewportContainer/Viewport/Map/Player
+onready var map = $ViewportContainer/Viewport/Map
 
 var cutscene_mode = false
 
@@ -54,6 +55,7 @@ func _unhandled_input(event):
 	if cutscene_mode and event.is_action_pressed("FlagUp"):
 		$Musics.scheduleValseDesFlots()
 		player.start_to_play()
+		map._on_SpawnMouetteTimer_timeout()
 		cutscene_mode = false
 		$HudLayer/HUD.hide_hint()
 		$WeatherChangeTimer.start((randf() * 60) + 5)
@@ -89,6 +91,7 @@ func _on_WeatherChangeTimer_timeout():
 			Tween.TRANS_LINEAR,
 			Tween.EASE_OUT
 			)
+		map._on_SpawnMouetteTimer_timeout()
 		$Musics.scheduleJeuneEtDynamiquePirate()
 		$WeatherChangeTimer.start((randf() * 60) + 10 + Globals.TRANSITION)
 	elif (randf() > 0.2):
