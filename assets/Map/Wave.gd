@@ -138,7 +138,6 @@ func _process(delta):
 	$Area2D/CollisionPolygon2D.set_polygon(baked)
 	$Area2D/CollisionPolygon2D.disabled = false
 
-
 func _on_Area2D_body_shape_entered(body_id, body, body_shape, local_shape):
 	if body.has_method("_on_hit_water"):
 		body._on_hit_water()
