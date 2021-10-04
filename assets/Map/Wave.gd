@@ -29,7 +29,7 @@ func init(curve):
 		og.push_back($WavePath.curve.get_point_position(i))
 	
 	# Cheap
-	$WavePath.curve.bake_interval = 10
+	$WavePath.curve.bake_interval = 15
 	var baked = $WavePath.curve.get_baked_points()
 	baked.push_back(Vector2(baked[-1].x, 3000))
 	baked.push_back(Vector2(baked[0].x, 3000))
@@ -44,7 +44,7 @@ func init(curve):
 		set_splash_amount(i, WorldEnv.get_weather())
 	
 	# Costly
-	$WavePath.curve.bake_interval = 150
+	$WavePath.curve.bake_interval = 200
 	baked = $WavePath.curve.get_baked_points()
 	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
 	baked.push_back(Vector2(0, 3000))
@@ -95,7 +95,7 @@ func _process(delta):
 		)
 	
 	# Cheap
-	$WavePath.curve.bake_interval = 10
+	$WavePath.curve.bake_interval = 15
 	var baked = $WavePath.curve.get_baked_points()
 	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
 	baked.push_back(Vector2(0, 3000))
@@ -111,7 +111,7 @@ func _process(delta):
 		set_splash_amount(i, WorldEnv.get_weather())
 
 	# Costly
-	$WavePath.curve.bake_interval = 150
+	$WavePath.curve.bake_interval = 200
 	baked = $WavePath.curve.get_baked_points()
 	baked.push_back(Vector2(Globals.buffer_size.x, 3000))
 	baked.push_back(Vector2(0, 3000))
