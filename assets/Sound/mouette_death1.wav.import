@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mouette_death1.wav-9862e8200952190d9ee10545e8938a14.sample"
+
+[deps]
+
+source_file="res://assets/Sound/mouette_death1.wav"
+dest_files=[ "res://.import/mouette_death1.wav-9862e8200952190d9ee10545e8938a14.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
