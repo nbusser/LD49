@@ -40,7 +40,7 @@ func _ready():
 func _on_CurrentMusic_finished():
 	match currentMusicType:
 		INTRO:
-			if (currentLoopMusic != null):
+			if (currentLoopMusic != null && currentLoopMusic.stream.has_loop()):
 				changeMusic(currentLoopMusic)
 				currentMusicType = LOOP
 			elif (currentEndMusic != null):
@@ -88,7 +88,7 @@ func updateMusicToNext():
 	nextMusicName = null
 	
 func scheduleBeforeTheStorm():
-	if currentMusicName != CALM || nextMusicName != CALM:
+	if currentMusicName != CALM:
 		currentLoopMusic.stream.set_loop(false)
 		nextIntroMusic = null
 		nextLoopMusic = $CalmBeforeTheStorm
@@ -101,7 +101,7 @@ func scheduleBeforeTheStorm():
 		nextEndMusic = null
 
 func scheduleColereDeNeptune():
-	if currentMusicName != COLERE || nextMusicName != COLERE:
+	if currentMusicName != COLERE:
 		currentLoopMusic.stream.set_loop(false)
 		nextIntroMusic = $StartColereDeNeptune
 		nextLoopMusic = $LoopColereDeNeptune
@@ -114,7 +114,7 @@ func scheduleColereDeNeptune():
 		nextEndMusic = null
 	
 func scheduleValseDesFlots():
-	if currentMusicName != VALSE || nextMusicName != VALSE:
+	if currentMusicName != VALSE:
 		currentLoopMusic.stream.set_loop(false)
 		nextIntroMusic = null
 		nextLoopMusic = $LoopLaValseDesFlots
@@ -140,15 +140,18 @@ func scheduleJeuneEtDynamiquePirate():
 		nextEndMusic = null
 		
 func menuEnter():
-	currentMusic.stop()
+	currentMusic.stream.set_stream_paused(true)
 	$CalmBeforeTheStorm.play()
 
 func menuExit():
 	$CalmBeforeTheStorm.stop()
-	currentMusic.play()
+	currentMusic.stream.set_stream_paused(false)
 	
 func _on_update_weather(value):
+	print(value)
 	if (value > 0.7):
 		scheduleColereDeNeptune()
+	elif (value <= 0.2):
+		scheduleValseDesFlots()
 	else:
 		scheduleJeuneEtDynamiquePirate()
