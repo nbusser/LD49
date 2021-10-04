@@ -17,7 +17,10 @@ func _ready():
 	player.connect("dead", self, "gameover")
 	self.activate_cutscene()
 	viewport_shader.set_shader_param("lightning_threshold", Globals.LIGHTNING_THRESHOLD)
-	
+
+func _process(delta):
+	WorldEnv.add_time(delta * Globals.TIME_MULTIPLIER)
+
 func gameover():
 	$HudLayer/HUD.hide()
 	$HudLayer/GameOver.show()
