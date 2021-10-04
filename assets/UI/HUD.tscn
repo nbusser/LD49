@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/UI/HUD.gd" type="Script" id=1]
 [ext_resource path="res://assets/UI/ConvincingPirate.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/UI/sound_on.png" type="Texture" id=3]
 [ext_resource path="res://assets/UI/sound_off.png" type="Texture" id=4]
+[ext_resource path="res://assets/UI/progress_bg.png" type="Texture" id=5]
+[ext_resource path="res://assets/UI/progress_full.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 26
@@ -30,11 +32,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CannonChargingBar" type="ProgressBar" parent="."]
-margin_left = 12.7136
-margin_top = 18.0109
-margin_right = 151.714
-margin_bottom = 32.0109
+[node name="CannonChargingBar" type="TextureProgress" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 328.0
+margin_bottom = 40.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 6 )
+nine_patch_stretch = true
+stretch_margin_left = 8
+stretch_margin_top = 8
+stretch_margin_right = 8
+stretch_margin_bottom = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -68,6 +77,9 @@ anchor_bottom = 1.0
 margin_left = 1.88776
 margin_right = 1.8877
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="time_slider" type="HSlider" parent="."]
 margin_left = 12.7136
