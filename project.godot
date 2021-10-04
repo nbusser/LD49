@@ -16,9 +16,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Globals="*res://Globals.gd"
-Utils="*res://Utils.gd"
-WorldEnv="*res://WorldEnv.gd"
+Globals="*res://src/Globals.gd"
+Utils="*res://src/Utils.gd"
+WorldEnv="*res://src/WorldEnv.gd"
 
 [display]
 
