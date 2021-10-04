@@ -56,6 +56,7 @@ func is_sailing():
 func start_to_play():
 	$SoundFx/TrumpetSound.play()
 	self.flag_up()
+	world._on_SpawnMalfratTimer_timeout()
 	
 func flag_up(duration=2):
 	$SoundFx/FlagChangeSound.play()
