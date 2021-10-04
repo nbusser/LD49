@@ -13,13 +13,7 @@ var secondary_generated: bool
 var next_buffer_offset
 var x_in_buffer
 
-var starting_curve_first: Array
-var target_curve_first: Array
-var starting_curve_second: Array
-var target_curve_second: Array
 var elapsed_time = 0.0
-
-var other
 
 var transition_time = 5.0
 var amp_y = 300
@@ -108,6 +102,7 @@ func player_move_checks():
 			secondary_generated = true
 			secondary_wave.init($WaveGenerator.generate_buffer())
 			secondary_wave.position.x = next_buffer_offset*Globals.buffer_size.x
+	
 	elif ($Player.position.x > next_buffer_offset*Globals.buffer_size.x):
 		next_buffer_offset += 1
 		secondary_generated = false
@@ -153,6 +148,11 @@ func _process(delta):
 				malfrat.position = Vector2(malfrat.current_wave.interpolate_baked(malfrat.x_in_buffer))
 				
 				malfrat.x_in_buffer = malfrat.current_wave.curve.get_closest_offset(malfrat.position - malfrat.current_wave.global_position) + malfrat.speed*delta
+	
+	elapsed_time += delta
+	if elapsed_time > transition_time:
+		elapsed_time -= (int(elapsed_time/transition_time))*transition_time
+		print("coucou")
 
 func _on_Map_spawn_cannonball(projectile, shoot_origin, shoot_velocity):
 	$Projectiles.add_child(projectile)
