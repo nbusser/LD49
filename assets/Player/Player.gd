@@ -38,7 +38,10 @@ const DURATION_DECELERATE = 2
 var velocity = Vector2(0, 0)
 
 func _process(delta):
-	$ship/cannon.look_at(get_global_mouse_position())
+	if can_control():
+		$ship/cannon.look_at(get_global_mouse_position())
+	else:
+		$ship/cannon.rotation = -0.2
 	aim.visible = can_shoot and can_control()
 
 func go_cutscene_mode():
