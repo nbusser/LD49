@@ -1,6 +1,6 @@
 extends Node
 
-const MALFRATS_TO_KILL = 30
+const MALFRATS_TO_KILL = 20
 var killed_malfrats = 0
 
 onready var bg_shader = $ViewportContainer/Viewport/Background/bg.material
