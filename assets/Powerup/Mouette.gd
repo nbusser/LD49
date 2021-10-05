@@ -72,9 +72,16 @@ func _on_Hitbox_body_entered(body):
 	$SoundFx/DeathSound.play_sound()
 	$Hitbox.monitoring = false
 	
-	$Tween.interpolate_property($Birds, "modulate",
-	$Birds.modulate, Color(1, 1, 1, 0), 0.8,
+	Utils.fade_node_out(self, 0.5)
+	
+	$Tween.interpolate_property(self, "rotation",
+	self.rotation, deg2rad(dir * 90), 1,
 	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	
+	$Tween.interpolate_property(self, "position",
+	self.position, Vector2(self.position.x + dir * 1500, self.position.y + 3000), 5,
+	Tween.TRANS_LINEAR, Tween.EASE_IN)
+	
 	$Tween.start()
 	
 func _on_Tween_tween_completed(object, key):
