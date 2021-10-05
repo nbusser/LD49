@@ -93,6 +93,7 @@ texture = ExtResource( 8 )
 stream = ExtResource( 3 )
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="SoundFx"]
+volume_db = 4.0
 script = ExtResource( 6 )
 sounds = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ) ]
 
