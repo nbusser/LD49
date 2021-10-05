@@ -70,6 +70,7 @@ func _process(delta):
 func _on_Hitbox_body_entered(body):
 	player.recover_health()
 	$SoundFx/DeathSound.play_sound()
+	$Hitbox.monitoring = false
 	
 	$Tween.interpolate_property($Birds, "modulate",
 	$Birds.modulate, Color(1, 1, 1, 0), 0.8,
