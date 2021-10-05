@@ -12,7 +12,7 @@
 [ext_resource path="res://assets/Powerup/mouette_flag.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 58.3268, 65.9536 )
+extents = Vector2( 249.049, 39.4817 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 11 )
@@ -38,7 +38,7 @@ script = ExtResource( 2 )
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2( 0, 25 )
+position = Vector2( -159.57, -4.96613 )
 shape = SubResource( 1 )
 
 [node name="Birds" type="Node2D" parent="."]
