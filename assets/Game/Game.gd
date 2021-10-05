@@ -118,7 +118,7 @@ func _on_WeatherChangeTimer_timeout():
 		map._on_SpawnMouetteTimer_timeout()
 		$Musics.scheduleJeuneEtDynamiquePirate()
 		$WeatherChangeTimer.start((randf() * 60) + 10 + Globals.TRANSITION)
-	elif (randf() > 0.2):
+	elif (randf() > 0.35):
 		$TweenWeatherChange.interpolate_method(
 			WorldEnv,
 			"set_weather",
