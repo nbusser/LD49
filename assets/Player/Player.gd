@@ -37,9 +37,6 @@ const DURATION_DECELERATE = 2
 
 var velocity = Vector2(0, 0)
 
-func _ready():
-	aim.show()
-
 func _process(delta):
 	$ship/cannon.look_at(get_global_mouse_position())
 
@@ -49,6 +46,7 @@ func go_cutscene_mode():
 	$Camera2D.position = Vector2(0, -20)
 	$ship/flag.position = Vector2(-19, -16)
 	self.speed = Globals.PLAYER_MINIMUM_SPEED
+	aim.hide()
 
 func can_move():
 	return not is_dying
@@ -258,6 +256,7 @@ func _on_Tween_tween_completed(object, key):
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$Tween.start()
 		in_cutscene = false
+		aim.show()
 		
 		self.speed = Globals.PLAYER_DEFAULT_SPEED
 
@@ -311,6 +310,8 @@ func die():
 	$Camera2D.position, Vector2(0, -21), 0.5,
 	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()
+	
+	aim.hide()
 
 func _on_WaitToLowerFlag_timeout():
 	self.hide_flag()
