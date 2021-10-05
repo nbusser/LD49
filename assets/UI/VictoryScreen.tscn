@@ -8,14 +8,14 @@
 size = 70
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 50
 font_data = ExtResource( 1 )
 
@@ -50,7 +50,7 @@ __meta__ = {
 anchor_right = 1.0
 margin_top = 181.449
 margin_bottom = 266.449
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "You defeated the privateers and could reach the land of Libertalia!
 Better get your liver ready for gallons of rum!"
 align = 1
@@ -60,10 +60,10 @@ __meta__ = {
 
 [node name="message3" type="Label" parent="Message"]
 anchor_right = 1.0
-margin_top = 456.236
-margin_bottom = 597.236
-custom_fonts/font = SubResource( 2 )
-text = "A game by the LUDUM DARONS team
+margin_top = 452.236
+margin_bottom = 593.236
+custom_fonts/font = SubResource( 3 )
+text = "A game by the LUDUM DARONS team for Ludum Dare 49
 Matthieu Baty - programming
 Nicolas Busser - programming, sound effects
 Antoine Brûlé - art, shaders, UI, programming
@@ -92,7 +92,7 @@ custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = ExtResource( 2 )
 custom_styles/disabled = ExtResource( 2 )
 custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Play again"
 
