@@ -32,10 +32,12 @@ func init(player, offset_player_y, direction=DIRECTION.LEFT_TO_RIGHT):
 			velocity.x = Globals.PLAYER_MAXIMUM_SPEED * 1.2
 			$Birds/bird_right.show()
 			$Birds/bird_left.hide()
+			$Hitbox/hitbox_left.disabled = true
 		DIRECTION.RIGHT_TO_LEFT:
 			velocity.x = Globals.PLAYER_DEFAULT_SPEED
 			$Birds/bird_right.hide()
 			$Birds/bird_left.show()
+			$Hitbox/hitbox_right.disabled = true
 
 func _ready():
 	$SoundFx/SpawnSound.play()
