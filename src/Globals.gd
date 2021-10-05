@@ -5,6 +5,7 @@ onready var buffer_size = Vector2(
 	MAX_UNZOOM * 6 * get_viewport_rect().size.x, get_viewport_rect().size.y
 )
 
+const MALFRATS_TO_KILL = 25
 const MAX_CANNON_CHARGING_TIME = 1.0
 
 const PLAYER_MAX_HEALTH = 5
