@@ -103,7 +103,7 @@ func spawn_enemy():
 	
 	malfrat.set_player($Player)
 	
-	malfrat.position = Vector2($Player.position.x + sight_loss_distance * 2 + 450, 416)
+	malfrat.position = Vector2($Player.position.x + sight_loss_distance * 2 + 550, 416)
 
 	if malfrat.position.x - primary_wave.position.x < Globals.buffer_size.x:
 		malfrat.current_wave = primary_wave
