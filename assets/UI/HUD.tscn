@@ -76,6 +76,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="health_bar_bg" type="TextureRect" parent="stats"]
+modulate = Color( 1, 1, 1, 0.117647 )
+margin_left = 14.0
+margin_top = 60.0
+margin_right = 101.0
+margin_bottom = 156.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="health_bar" type="TextureRect" parent="stats"]
 margin_left = 14.0
 margin_top = 60.0

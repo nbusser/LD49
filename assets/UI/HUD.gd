@@ -4,6 +4,7 @@ onready var player: Node2D = get_viewport().get_node("Game/ViewportContainer/Vie
 onready var sound_button = $always_on/sound_button
 onready var cannon_charging_bar = $stats/CannonChargingBar
 onready var health_bar = $stats/health_bar
+onready var health_bar_bg = $stats/health_bar_bg
 
 onready var stats = $stats
 onready var title = $title_screen/Title
@@ -18,6 +19,7 @@ func _ready():
 	player.connect("stop_charging_cannon", self, "stop")
 	player.connect("health_changes", self, "update_health")
 	sound_button.pressed = Settings.get_is_sound_active()
+	health_bar_bg.rect_size.x = max(0, Globals.PLAYER_MAX_HEALTH * 87)
 	update_health(player.health)
 	start_intro_animation()
 
