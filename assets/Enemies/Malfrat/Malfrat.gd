@@ -108,7 +108,7 @@ func shoot():
 	get_parent().get_parent().emit_signal("spawn_cannonball", projectile, $Canon.global_position, shoot_velocity)
 
 func _on_ShootCooldownTimer_timeout():
-	$PrepareShoot.start()
+	$PrepareShoot.start(randi()%3+1)
 	$RefreshBalistic.start()
 
 func _on_PrepareShoot_timeout():
