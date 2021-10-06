@@ -134,7 +134,7 @@ func _on_WeatherChangeTimer_timeout():
 			WorldEnv,
 			"set_weather",
 			WorldEnv.get_weather(),
-			rand_range(Globals.SUNNY_THRESHOLD, Globals.LIGHTNING_THRESHOLD),
+			0.0,
 			Globals.TRANSITION,
 			Tween.TRANS_LINEAR,
 			Tween.EASE_OUT
