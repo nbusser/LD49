@@ -4,7 +4,6 @@ onready var player: Node2D = get_viewport().get_node("Game/ViewportContainer/Vie
 onready var sound_button = $always_on/sound_button
 onready var cannon_charging_bar = $stats/CannonChargingBar
 onready var health_bar = $stats/health_bar
-onready var health_bar_bg = $stats/health_bar_bg
 
 onready var stats = $stats
 onready var title = $title_screen/Title
@@ -19,7 +18,7 @@ func _ready():
 	player.connect("stop_charging_cannon", self, "stop")
 	player.connect("health_changes", self, "update_health")
 	sound_button.pressed = Settings.get_is_sound_active()
-	health_bar_bg.rect_size.x = max(0, Globals.PLAYER_MAX_HEALTH * 87)
+	health_bar.set_max(Globals.PLAYER_MAX_HEALTH)
 	update_health(player.health)
 	start_intro_animation()
 
@@ -62,11 +61,7 @@ func update_win_counter(new_counter, init_win_counter):
 	win_counter.text = str(new_counter) + "/" + str(init_win_counter)
 
 func update_health(value):
-	if value == 0:
-		health_bar.hide()
-	else:
-		health_bar.rect_size.x = max(0, value * 87)
-		health_bar.show()
+	health_bar.value = value
 
 func hide_hint():
 	Utils.fade_node_out($title_screen, 1)

@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/UI/progress_bg.png" type="Texture" id=5]
 [ext_resource path="res://assets/UI/progress_full.png" type="Texture" id=6]
 [ext_resource path="res://assets/Shaders/vignette.gdshader" type="Shader" id=7]
-[ext_resource path="res://assets/UI/anchor.svg" type="Texture" id=8]
+[ext_resource path="res://assets/HealthBar/HealthBar.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/UI/icon_malfrat.png" type="Texture" id=9]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -76,30 +76,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="health_bar_bg" type="TextureRect" parent="stats"]
-modulate = Color( 1, 1, 1, 0.117647 )
+[node name="health_bar" parent="stats" instance=ExtResource( 8 )]
 margin_left = 14.0
 margin_top = 60.0
-margin_right = 101.0
-margin_bottom = 156.0
-rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 8 )
-stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="health_bar" type="TextureRect" parent="stats"]
-margin_left = 14.0
-margin_top = 60.0
-margin_right = 101.0
-margin_bottom = 156.0
-rect_scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 8 )
-stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_right = 14.0
+margin_bottom = 60.0
 
 [node name="Count" type="TextureRect" parent="stats"]
 margin_left = 14.0
