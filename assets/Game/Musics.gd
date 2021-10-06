@@ -70,7 +70,6 @@ func changeMusic(next):
 func changeMusicToNext():
 	musicToAttenuate = null
 	if (nextIntroMusic != null):
-		changeMusic(nextIntroMusic)
 		if (nextMusicName == COLERE):
 			$TweenColereGronde.interpolate_method(
 			nextIntroMusic,
@@ -81,7 +80,9 @@ func changeMusicToNext():
 			Tween.TRANS_LINEAR,
 			Tween.EASE_OUT
 			)
-		$TweenColereGronde.start()
+			nextIntroMusic.set_volume_db(MUSIC_ATTENUATION_STOP)
+			$TweenColereGronde.start()
+		changeMusic(nextIntroMusic)
 		updateMusicToNext()
 		currentMusicType = INTRO
 	elif (nextLoopMusic):
