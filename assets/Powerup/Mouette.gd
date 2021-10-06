@@ -14,7 +14,7 @@ enum DIRECTION {
 var dir
 var destination_x
 
-const COEF_DIST = 0.4
+const COEF_DIST = 0.5
 var original_offset
 
 func init(player, offset_player_y, direction=DIRECTION.LEFT_TO_RIGHT):
