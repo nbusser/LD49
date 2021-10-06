@@ -19,12 +19,20 @@ var player
 var is_accelerating = false
 var is_dying = false
 
-const MALFRAT_MAX_HEALTH = 3
-var health = MALFRAT_MAX_HEALTH
+var health = -1 setget set_health
+
+onready var health_bar = $ship/health_bar
 
 func _ready():
 	$Canon/Trajectory.clear_points()
 	$ship/hull.material = $ship/hull.material.duplicate()
+
+func set_health(value):
+	if (health < 0):
+		$ship/health_bar.set_max(value)
+	health = value
+	$ship/health_bar.value = value
+	
 
 func set_player(player):
 	self.player = player

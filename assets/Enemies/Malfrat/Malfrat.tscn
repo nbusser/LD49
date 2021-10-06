@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/Enemies/Malfrat/Malfrat.gd" type="Script" id=1]
 [ext_resource path="res://assets/Ship/Ship2.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/Sound/sink1.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/Sound/sink.wav" type="AudioStream" id=16]
 [ext_resource path="res://assets/Sound/sink_rotate3.wav" type="AudioStream" id=17]
+[ext_resource path="res://assets/HealthBar/HealthBar.tscn" type="PackedScene" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 97.7363, 90.7822 )
@@ -52,6 +53,13 @@ scale = Vector2( 1.25, 1.25 )
 [node name="HitboxPolygon" type="CollisionShape2D" parent="ship/Hitbox"]
 position = Vector2( 0, -75 )
 shape = SubResource( 1 )
+
+[node name="health_bar" parent="ship" instance=ExtResource( 18 )]
+margin_left = -117.253
+margin_top = -38.7397
+margin_right = -117.253
+margin_bottom = -38.7397
+rect_scale = Vector2( 0.5, 0.5 )
 
 [node name="Canon" type="Node2D" parent="."]
 position = Vector2( -94.2251, -59.7683 )
