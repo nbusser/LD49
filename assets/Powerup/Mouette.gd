@@ -4,7 +4,7 @@ onready var player = get_parent().get_node("Player")
 
 var velocity = Vector2(0, 0)
 
-var is_dying = false
+var is_dead = false
 
 enum DIRECTION {
 	LEFT_TO_RIGHT = 1
@@ -66,9 +66,12 @@ func _process(delta):
 	position.y -= delta*velocity.y
 
 func _on_Hitbox_body_entered(body):
+	if is_dead:
+		return
+	
+	is_dead = true
 	player.recover_health()
 	$SoundFx/DeathSound.play_sound()
-	$Hitbox.monitoring = false
 	
 	$Tween.interpolate_property($Birds, "modulate",
 	$Birds.modulate, Color(1, 1, 1, 0), 0.8,
